@@ -13,6 +13,7 @@
     "@anthropic-ai/sdk": "^0.80.0",
     "ai": "^6.0.134",
     "axios": "^1.13.6",
+    "framer-motion": "^12.38.0",
     "next": "16.2.1",
     "next-auth": "^4.24.13",
     "react": "19.2.4",
