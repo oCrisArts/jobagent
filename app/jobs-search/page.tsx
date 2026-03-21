@@ -1,0 +1,27 @@
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import Buscador from "@/components/Buscador";
+import LoginButton from "@/components/LoginButton";
+
+export default async function JobsSearchPage() {
+  const session = await getServerSession();
+  if (!session) redirect("/");
+
+  return (
+    <div className="min-h-screen bg-surface-base flex flex-col">
+      <header className="sticky top-0 z-10 flex items-center justify-between px-5 py-3 border-b border-white/8 bg-surface-default">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-brand-gradient flex items-center justify-center text-xs font-bold text-white">
+            JA
+          </div>
+          <span className="font-semibold text-white">JobAgent</span>
+          <span className="text-[10px] bg-white/5 border border-white/10 text-white/40 px-2 py-0.5 rounded-full">
+            Beta
+          </span>
+        </div>
+        <LoginButton />
+      </header>
+      <Buscador />
+    </div>
+  );
+}
