@@ -1,25 +1,14 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import DescriptionIcon from "@mui/icons-material/Description";
-import SearchIcon from "@mui/icons-material/Search";
-import BoltIcon from "@mui/icons-material/Bolt";
-import MicIcon from "@mui/icons-material/Mic";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
-import AllInclusiveIcon from "@mui/icons-material/AllInclusive";
-import AutorenewIcon from "@mui/icons-material/Autorenew";
-import FlashOnIcon from "@mui/icons-material/FlashOn";
-import TrackChangesIcon from "@mui/icons-material/TrackChanges";
-import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 
 const features = [
-  { icon: <DescriptionIcon sx={{ fontSize: 28, color: "#818CF8" }} />, title: "CV adaptado para cada vaga", items: ["Currículo reescrito com palavras-chave da vaga", "Tom e formato alinhados ao que o recrutador busca", "Destaque automático das suas melhores experiências"] },
-  { icon: <SearchIcon sx={{ fontSize: 28, color: "#34D399" }} />, title: "Busca inteligente de vagas", items: ["Vagas do LinkedIn, Indeed, Glassdoor em um lugar", "Filtro por nível, local e modalidade", "Score de compatibilidade com seu perfil"] },
-  { icon: <BoltIcon sx={{ fontSize: 28, color: "#FBBF24" }} />, title: "Decisões mais rápidas", items: ["Resumo da vaga em segundos", "Pontos fortes e fracos da sua candidatura", "Priorize onde vale mais a pena aplicar"] },
-  { icon: <MicIcon sx={{ fontSize: 28, color: "#F472B6" }} />, title: "Preparação para entrevistas", items: ["Perguntas prováveis baseadas na vaga", "Respostas modelo com sua experiência real", "Dicas específicas para cada empresa"] },
-  { icon: <LinkedInIcon sx={{ fontSize: 28, color: "#60A5FA" }} />, title: "LinkedIn otimizado", items: ["Sugestões de headline e about", "Palavras-chave que recrutadores buscam", "Alinhamento entre CV e perfil público"] },
-  { icon: <PictureAsPdfIcon sx={{ fontSize: 28, color: "#FB923C" }} />, title: "PDF profissional gerado", items: ["Layout limpo e compatível com ATS", "Download em segundos", "Histórico de versões por vaga"] },
+  { icon: "📄", color: "text-violet-400", title: "CV adaptado para cada vaga", items: ["Currículo reescrito com palavras-chave da vaga", "Tom e formato alinhados ao que o recrutador busca", "Destaque automático das suas melhores experiências"] },
+  { icon: "🔍", color: "text-emerald-400", title: "Busca inteligente de vagas", items: ["Vagas do LinkedIn, Indeed, Glassdoor em um lugar", "Filtro por nível, local e modalidade", "Score de compatibilidade com seu perfil"] },
+  { icon: "⚡", color: "text-yellow-400", title: "Decisões mais rápidas", items: ["Resumo da vaga em segundos", "Pontos fortes e fracos da sua candidatura", "Priorize onde vale mais a pena aplicar"] },
+  { icon: "🎤", color: "text-pink-400", title: "Preparação para entrevistas", items: ["Perguntas prováveis baseadas na vaga", "Respostas modelo com sua experiência real", "Dicas específicas para cada empresa"] },
+  { icon: "💼", color: "text-blue-400", title: "LinkedIn otimizado", items: ["Sugestões de headline e about", "Palavras-chave que recrutadores buscam", "Alinhamento entre CV e perfil público"] },
+  { icon: "📑", color: "text-orange-400", title: "PDF profissional gerado", items: ["Layout limpo e compatível com ATS", "Download em segundos", "Histórico de versões por vaga"] },
 ];
 
 const faqs = [
@@ -94,7 +83,7 @@ export default function LandingPage() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 }}>
           {features.map((f, i) => (
             <div key={i} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 12, padding: "24px" }}>
-              <div style={{ marginBottom: 12 }}>{f.icon}</div>
+              <div style={{ marginBottom: 12 }} className="text-2xl">{f.icon}</div>
               <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 14, color: "#F1F5F9" }}>{f.title}</div>
               {f.items.map((item, j) => (
                 <div key={j} style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-start" }}>
@@ -112,9 +101,9 @@ export default function LandingPage() {
         <div style={{ border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14, padding: "32px", textAlign: "center", background: "rgba(124,58,237,0.04)" }}>
           <h3 style={{ fontSize: 20, fontWeight: 600, marginBottom: 24 }}>Acesso e <span style={{ color: "#A78BFA" }}>Benefícios</span></h3>
           <div style={{ display: "flex", justifyContent: "center", gap: 40, flexWrap: "wrap" }}>
-            {[{ icon: <AllInclusiveIcon sx={{ fontSize: 20, color: "#A78BFA" }} />, label: "Acesso vitalício" }, { icon: <AutorenewIcon sx={{ fontSize: 20, color: "#34D399" }} />, label: "Base atualizada diariamente" }, { icon: <FlashOnIcon sx={{ fontSize: 20, color: "#FBBF24" }} />, label: "Uso contínuo ilimitado" }].map((b, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, color: "#CBD5E1" }}>
-                {b.icon} {b.label}
+            {[{ icon: "♾️", label: "Acesso vitalício" }, { icon: "🔄", label: "Base atualizada diariamente" }, { icon: "⚡", label: "Uso contínuo ilimitado" }].map((b, i) => (
+              <div key={i} className="flex items-center gap-2 text-sm text-white/70">
+                <span className="text-lg">{b.icon}</span> {b.label}
               </div>
             ))}
           </div>

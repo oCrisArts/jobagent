@@ -1,63 +1,60 @@
 "use client";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Chip from "@mui/material/Chip";
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import WifiOffIcon from "@mui/icons-material/WifiOff";
 
 interface Job {
   id: string; title: string; company: string; location: string;
   description: string; url: string; logo?: string; remote: boolean; postedAt: string;
 }
 
-export default function JobCard({ job, onAdaptResume }: { job: Job; onAdaptResume: (job: Job) => void }) {
+interface JobCardProps { job: Job; onAdaptResume: (job: Job) => void; }
+
+const JobCard = ({ job, onAdaptResume }: JobCardProps) => {
   const postedDate = job.postedAt
     ? new Date(job.postedAt).toLocaleDateString("pt-BR", { day: "2-digit", month: "short" })
     : "";
 
   return (
-    <Card variant="outlined" sx={{ borderRadius: 3, "&:hover": { borderColor: "primary.main", boxShadow: 2 }, transition: "all 0.2s" }}>
-      <CardContent sx={{ pb: 1 }}>
-        <Box sx={{ display: "flex", gap: 1.5, alignItems: "flex-start" }}>
-          <Avatar
-            src={job.logo}
-            variant="rounded"
-            sx={{ width: 42, height: 42, bgcolor: "primary.50", color: "primary.main", fontSize: 14, fontWeight: 600, border: "1px solid", borderColor: "divider" }}
-          >
+    <div className="bg-surface-card border border-white/8 rounded-2xl p-4 hover:border-brand-600/60 transition-all group">
+      <div className="flex gap-3 items-start">
+        {job.logo ? (
+          <img src={job.logo} alt={job.company} className="w-10 h-10 rounded-xl object-contain bg-white p-1 shrink-0" />
+        ) : (
+          <div className="w-10 h-10 rounded-xl bg-brand-600/20 border border-brand-600/30 flex items-center justify-center text-sm font-bold text-brand-400 shrink-0">
             {job.company.charAt(0)}
-          </Avatar>
-          <Box sx={{ flex: 1, minWidth: 0 }}>
-            <Typography variant="subtitle2" sx={{ fontWeight: 600, lineHeight: 1.3 }} noWrap>{job.title}</Typography>
-            <Typography variant="caption" color="text.secondary">{job.company}</Typography>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mt: 0.5, flexWrap: "wrap" }}>
-              <LocationOnOutlinedIcon sx={{ fontSize: 12, color: "text.disabled" }} />
-              <Typography variant="caption" color="text.disabled">{job.location || "Não informado"}</Typography>
-              {job.remote && <Chip label="Remoto" size="small" color="success" variant="outlined" sx={{ height: 18, fontSize: 10 }} />}
-              {postedDate && <Typography variant="caption" color="text.disabled" sx={{ ml: "auto" }}>{postedDate}</Typography>}
-            </Box>
-          </Box>
-        </Box>
-        {job.description && (
-          <Typography variant="caption" color="text.secondary" sx={{ mt: 1.5, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", lineHeight: 1.5 }}>
-            {job.description}
-          </Typography>
+          </div>
         )}
-      </CardContent>
-      <CardActions sx={{ px: 2, pb: 2, pt: 0, gap: 1 }}>
-        <Button fullWidth variant="outlined" size="small" startIcon={<DescriptionOutlinedIcon />} onClick={() => onAdaptResume(job)} sx={{ borderRadius: 2, textTransform: "none", fontSize: 12 }}>
+        <div className="flex-1 min-w-0">
+          <p className="font-semibold text-white text-sm leading-tight truncate">{job.title}</p>
+          <p className="text-white/50 text-xs mt-0.5">{job.company}</p>
+          <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+            <span className="text-xs text-white/30">📍 {job.location || "Não informado"}</span>
+            {job.remote && (
+              <span className="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full">Remoto</span>
+            )}
+            {postedDate && <span className="text-xs text-white/20 ml-auto">{postedDate}</span>}
+          </div>
+        </div>
+      </div>
+
+      {job.description && (
+        <p className="text-white/40 text-xs mt-3 line-clamp-2 leading-relaxed">{job.description}</p>
+      )}
+
+      <div className="flex gap-2 mt-3">
+        <button
+          onClick={() => onAdaptResume(job)}
+          className="flex-1 text-xs border border-brand-600/40 hover:border-brand-600 text-brand-400 hover:text-brand-300 py-2 rounded-lg transition-colors font-medium"
+        >
           Adaptar CV
-        </Button>
-        <Button fullWidth variant="contained" size="small" endIcon={<OpenInNewIcon />} href={job.url} target="_blank" sx={{ borderRadius: 2, textTransform: "none", fontSize: 12 }}>
+        </button>
+        <a
+          href={job.url} target="_blank" rel="noopener noreferrer"
+          className="flex-1 text-center text-xs bg-brand-600 hover:bg-brand-500 text-white py-2 rounded-lg transition-colors font-medium"
+        >
           Ver vaga
-        </Button>
-      </CardActions>
-    </Card>
+        </a>
+      </div>
+    </div>
   );
-}
+};
+
+export default JobCard;

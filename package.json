@@ -11,10 +11,6 @@
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.63",
     "@anthropic-ai/sdk": "^0.80.0",
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.3.9",
-    "@mui/material": "^7.3.9",
     "ai": "^6.0.134",
     "axios": "^1.13.6",
     "next": "16.2.1",

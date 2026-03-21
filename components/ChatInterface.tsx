@@ -1,20 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import Button from "@mui/material/Button";
-import Chip from "@mui/material/Chip";
-import CircularProgress from "@mui/material/CircularProgress";
-import SendIcon from "@mui/icons-material/Send";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
 import JobCard from "./JobCard";
 
 interface Job { id: string; title: string; company: string; location: string; description: string; url: string; logo?: string; remote: boolean; postedAt: string; }
@@ -22,7 +8,19 @@ interface Message { role: "user" | "assistant"; content: string; jobs?: Job[]; }
 
 const SUGGESTIONS = ["UX Designer Sênior", "Product Designer Remoto", "UI Designer Pleno"];
 
-export default function ChatInterface() {
+const SendIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+  </svg>
+);
+
+const AttachIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+  </svg>
+);
+
+const ChatInterface = () => {
   const { data: session } = useSession();
   const firstName = session?.user?.name?.split(" ")[0] || "";
   const [messages, setMessages] = useState<Message[]>([{
@@ -32,13 +30,13 @@ export default function ChatInterface() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [resume, setResume] = useState("");
-  const [resumeModalOpen, setResumeModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
 
-  async function sendMessage(text?: string) {
+  const sendMessage = async (text?: string) => {
     const msg = text || input;
     if (!msg.trim() || loading) return;
     const userMsg: Message = { role: "user", content: msg };
@@ -62,10 +60,10 @@ export default function ChatInterface() {
     } catch {
       setMessages([...newMessages, { role: "assistant", content: "Desculpe, ocorreu um erro. Tente novamente." }]);
     } finally { setLoading(false); }
-  }
+  };
 
-  async function adaptResume(job: Job) {
-    if (!resume) { setSelectedJob(job); setResumeModalOpen(true); return; }
+  const adaptResume = async (job: Job) => {
+    if (!resume) { setSelectedJob(job); setModalOpen(true); return; }
     setLoading(true);
     try {
       const res = await fetch("/api/resume", {
@@ -77,74 +75,89 @@ export default function ChatInterface() {
     } catch {
       setMessages(prev => [...prev, { role: "assistant", content: "Erro ao adaptar currículo." }]);
     } finally { setLoading(false); }
-  }
+  };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", height: "calc(100vh - 65px)" }}>
-      <Box sx={{ flex: 1, overflowY: "auto", px: 2, py: 3, display: "flex", flexDirection: "column", gap: 2, maxWidth: 768, width: "100%", mx: "auto" }}>
+    <div className="flex flex-col h-[calc(100vh-56px)]">
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto px-4 py-6 flex flex-col gap-4 max-w-3xl w-full mx-auto">
         {messages.map((msg, i) => (
-          <Box key={i} sx={{ display: "flex", flexDirection: "column", alignItems: msg.role === "user" ? "flex-end" : "flex-start", gap: 1 }}>
+          <div key={i} className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"} gap-1`}>
             {msg.role === "assistant" && (
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <Avatar sx={{ width: 26, height: 26, bgcolor: "primary.main", fontSize: 10, fontWeight: 700, borderRadius: 1.5 }}>JA</Avatar>
-                <Typography variant="caption" color="text.disabled">JobAgent</Typography>
-              </Box>
+              <div className="flex items-center gap-2 mb-1">
+                <div className="w-6 h-6 rounded-lg bg-brand-600 flex items-center justify-center text-[10px] font-bold text-white">JA</div>
+                <span className="text-xs text-white/30">JobAgent</span>
+              </div>
             )}
-            <Box sx={{ maxWidth: "85%", bgcolor: msg.role === "user" ? "primary.main" : "background.paper", color: msg.role === "user" ? "white" : "text.primary", borderRadius: msg.role === "user" ? "16px 4px 16px 16px" : "4px 16px 16px 16px", px: 2, py: 1.5, border: msg.role === "assistant" ? "1px solid" : "none", borderColor: "divider" }}>
-              <Typography variant="body2" sx={{ whiteSpace: "pre-wrap", lineHeight: 1.6 }}>{msg.content}</Typography>
-            </Box>
+            <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${msg.role === "user" ? "bg-brand-600 text-white rounded-tr-sm" : "bg-surface-card border border-white/8 text-white/80 rounded-tl-sm"}`}>
+              {msg.content}
+            </div>
             {msg.jobs && msg.jobs.length > 0 && (
-              <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" }, gap: 1.5, width: "100%", maxWidth: 680 }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2 w-full max-w-2xl">
                 {msg.jobs.map(job => <JobCard key={job.id} job={job} onAdaptResume={adaptResume} />)}
-              </Box>
+              </div>
             )}
-          </Box>
+          </div>
         ))}
         {loading && (
-          <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-            <Avatar sx={{ width: 26, height: 26, bgcolor: "primary.main", fontSize: 10, fontWeight: 700, borderRadius: 1.5 }}>JA</Avatar>
-            <Box sx={{ bgcolor: "background.paper", border: "1px solid", borderColor: "divider", borderRadius: "4px 16px 16px 16px", px: 2, py: 1.5 }}>
-              <CircularProgress size={16} />
-            </Box>
-          </Box>
+          <div className="flex items-start gap-2">
+            <div className="w-6 h-6 rounded-lg bg-brand-600 flex items-center justify-center text-[10px] font-bold text-white">JA</div>
+            <div className="bg-surface-card border border-white/8 rounded-2xl rounded-tl-sm px-4 py-3 flex gap-1">
+              {[0, 150, 300].map(d => <span key={d} className="w-2 h-2 bg-white/30 rounded-full animate-bounce" style={{ animationDelay: `${d}ms` }} />)}
+            </div>
+          </div>
         )}
         {messages.length === 1 && (
-          <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
-            {SUGGESTIONS.map(s => <Chip key={s} label={s} variant="outlined" color="primary" size="small" onClick={() => sendMessage(s)} sx={{ cursor: "pointer" }} />)}
-          </Box>
+          <div className="flex gap-2 flex-wrap">
+            {SUGGESTIONS.map(s => (
+              <button key={s} onClick={() => sendMessage(s)} className="text-xs border border-brand-600/40 hover:border-brand-600 text-brand-400 hover:text-brand-300 px-3 py-1.5 rounded-full transition-colors">
+                {s}
+              </button>
+            ))}
+          </div>
         )}
         <div ref={bottomRef} />
-      </Box>
+      </div>
 
-      <Box sx={{ borderTop: "1px solid", borderColor: "divider", px: 2, py: 2, bgcolor: "background.paper" }}>
-        <Box sx={{ maxWidth: 768, mx: "auto", display: "flex", gap: 1, alignItems: "flex-end" }}>
-          <IconButton size="small" onClick={() => setResumeModalOpen(true)} title="Adicionar currículo" sx={{ border: "1px solid", borderColor: "divider", borderRadius: 2 }}>
-            <AttachFileIcon fontSize="small" />
-          </IconButton>
-          <TextField fullWidth multiline maxRows={4} size="small" value={input} onChange={e => setInput(e.target.value)}
+      {/* Input */}
+      <div className="border-t border-white/8 px-4 py-3 bg-surface-default">
+        <div className="max-w-3xl mx-auto flex gap-2 items-end">
+          <button onClick={() => setModalOpen(true)} className="p-2.5 border border-white/10 hover:border-white/30 text-white/40 hover:text-white rounded-xl transition-colors shrink-0">
+            <AttachIcon />
+          </button>
+          <textarea
+            value={input} onChange={e => setInput(e.target.value)} rows={1}
             onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); } }}
             placeholder="Ex: Buscar vagas de UX Designer em São Paulo..."
-            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 3 } }}
+            className="flex-1 bg-surface-card border border-white/8 focus:border-brand-600/60 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 resize-none outline-none transition-colors"
           />
-          <IconButton color="primary" onClick={() => sendMessage()} disabled={loading || !input.trim()} sx={{ bgcolor: "primary.main", color: "white", borderRadius: 2, "&:hover": { bgcolor: "primary.dark" }, "&.Mui-disabled": { bgcolor: "action.disabledBackground" } }}>
-            <SendIcon fontSize="small" />
-          </IconButton>
-        </Box>
-      </Box>
+          <button onClick={() => sendMessage()} disabled={loading || !input.trim()}
+            className="p-2.5 bg-brand-600 hover:bg-brand-500 disabled:opacity-30 disabled:cursor-not-allowed text-white rounded-xl transition-colors shrink-0">
+            <SendIcon />
+          </button>
+        </div>
+      </div>
 
-      <Dialog open={resumeModalOpen} onClose={() => setResumeModalOpen(false)} fullWidth maxWidth="sm" PaperProps={{ sx: { borderRadius: 3 } }}>
-        <DialogTitle sx={{ pb: 0.5 }}>Seu currículo</DialogTitle>
-        <DialogContent>
-          <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>Cole o texto do seu currículo para que eu possa adaptá-lo às vagas.</Typography>
-          <TextField fullWidth multiline rows={10} value={resume} onChange={e => setResume(e.target.value)} placeholder="Cole seu currículo aqui..." variant="outlined" sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }} />
-        </DialogContent>
-        <DialogActions sx={{ px: 3, pb: 2, gap: 1 }}>
-          <Button variant="outlined" onClick={() => setResumeModalOpen(false)} sx={{ borderRadius: 2, textTransform: "none" }}>Cancelar</Button>
-          <Button variant="contained" onClick={() => { setResumeModalOpen(false); if (selectedJob) { adaptResume(selectedJob); setSelectedJob(null); } }} sx={{ borderRadius: 2, textTransform: "none" }}>
-            Salvar{selectedJob ? " e adaptar" : ""}
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Box>
+      {/* Resume Modal */}
+      {modalOpen && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-surface-card border border-white/10 rounded-2xl p-6 w-full max-w-lg">
+            <h2 className="text-lg font-semibold text-white mb-1">Seu currículo</h2>
+            <p className="text-sm text-white/40 mb-4">Cole o texto do seu currículo para adaptar às vagas.</p>
+            <textarea value={resume} onChange={e => setResume(e.target.value)} rows={10} placeholder="Cole seu currículo aqui..."
+              className="w-full bg-surface-default border border-white/8 focus:border-brand-600/60 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 resize-none outline-none mb-4 transition-colors" />
+            <div className="flex gap-3">
+              <button onClick={() => setModalOpen(false)} className="flex-1 py-2.5 border border-white/10 hover:border-white/30 text-white/60 hover:text-white rounded-xl text-sm transition-colors">Cancelar</button>
+              <button onClick={() => { setModalOpen(false); if (selectedJob) { adaptResume(selectedJob); setSelectedJob(null); } }}
+                className="flex-1 py-2.5 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-sm font-medium transition-colors">
+                Salvar{selectedJob ? " e adaptar" : ""}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
-}
+};
+
+export default ChatInterface;
