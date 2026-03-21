@@ -1,14 +1,25 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import DescriptionIcon from "@mui/icons-material/Description";
+import SearchIcon from "@mui/icons-material/Search";
+import BoltIcon from "@mui/icons-material/Bolt";
+import MicIcon from "@mui/icons-material/Mic";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import AllInclusiveIcon from "@mui/icons-material/AllInclusive";
+import AutorenewIcon from "@mui/icons-material/Autorenew";
+import FlashOnIcon from "@mui/icons-material/FlashOn";
+import TrackChangesIcon from "@mui/icons-material/TrackChanges";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 
 const features = [
-  { icon: "📄", title: "CV adaptado para cada vaga", items: ["Currículo reescrito com palavras-chave da vaga", "Tom e formato alinhados ao que o recrutador busca", "Destaque automático das suas melhores experiências"] },
-  { icon: "🔍", title: "Busca inteligente de vagas", items: ["Vagas do LinkedIn, Indeed, Glassdoor em um lugar", "Filtro por nível, local e modalidade", "Score de compatibilidade com seu perfil"] },
-  { icon: "⚡", title: "Decisões mais rápidas", items: ["Resumo da vaga em segundos", "Pontos fortes e fracos da sua candidatura", "Priorize onde vale mais a pena aplicar"] },
-  { icon: "💬", title: "Preparação para entrevistas", items: ["Perguntas prováveis baseadas na vaga", "Respostas modelo com sua experiência real", "Dicas específicas para cada empresa"] },
-  { icon: "🔗", title: "LinkedIn otimizado", items: ["Sugestões de headline e about", "Palavras-chave que recrutadores buscam", "Alinhamento entre CV e perfil público"] },
-  { icon: "📁", title: "PDF profissional gerado", items: ["Layout limpo e compatível com ATS", "Download em segundos", "Histórico de versões por vaga"] },
+  { icon: <DescriptionIcon sx={{ fontSize: 28, color: "#818CF8" }} />, title: "CV adaptado para cada vaga", items: ["Currículo reescrito com palavras-chave da vaga", "Tom e formato alinhados ao que o recrutador busca", "Destaque automático das suas melhores experiências"] },
+  { icon: <SearchIcon sx={{ fontSize: 28, color: "#34D399" }} />, title: "Busca inteligente de vagas", items: ["Vagas do LinkedIn, Indeed, Glassdoor em um lugar", "Filtro por nível, local e modalidade", "Score de compatibilidade com seu perfil"] },
+  { icon: <BoltIcon sx={{ fontSize: 28, color: "#FBBF24" }} />, title: "Decisões mais rápidas", items: ["Resumo da vaga em segundos", "Pontos fortes e fracos da sua candidatura", "Priorize onde vale mais a pena aplicar"] },
+  { icon: <MicIcon sx={{ fontSize: 28, color: "#F472B6" }} />, title: "Preparação para entrevistas", items: ["Perguntas prováveis baseadas na vaga", "Respostas modelo com sua experiência real", "Dicas específicas para cada empresa"] },
+  { icon: <LinkedInIcon sx={{ fontSize: 28, color: "#60A5FA" }} />, title: "LinkedIn otimizado", items: ["Sugestões de headline e about", "Palavras-chave que recrutadores buscam", "Alinhamento entre CV e perfil público"] },
+  { icon: <PictureAsPdfIcon sx={{ fontSize: 28, color: "#FB923C" }} />, title: "PDF profissional gerado", items: ["Layout limpo e compatível com ATS", "Download em segundos", "Histórico de versões por vaga"] },
 ];
 
 const faqs = [
@@ -52,8 +63,8 @@ export default function LandingPage() {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 4, marginBottom: 36, fontSize: 14, color: "#FBBF24" }}>
           {"★★★★★"} <span style={{ color: "#94A3B8", marginLeft: 6 }}>5/5 — primeiros usuários</span>
         </div>
-        <Link href="/" style={{ display: "inline-block", background: "linear-gradient(135deg,#7C3AED,#4F46E5)", color: "#fff", padding: "16px 36px", borderRadius: 10, fontSize: 16, fontWeight: 600, textDecoration: "none", boxShadow: "0 0 40px rgba(124,58,237,0.35)" }}>
-          🎯 Começar gratuitamente
+        <Link href="/" style={{ display: "inline-block", background: "linear-gradient(135deg,#7C3AED,#4F46E5)", color: "#fff", padding: "16px 36px", borderRadius: 10, fontSize: 16, fontWeight: 600, textDecoration: "none", boxShadow: "0 0 40px rgba(124,58,237,0.35)", display: "inline-flex", alignItems: "center", gap: 8 }}>
+          <TrackChangesIcon sx={{ fontSize: 20 }} /> Começar gratuitamente
         </Link>
         <p style={{ marginTop: 14, fontSize: 12, color: "#475569" }}>Faça login com o LinkedIn — sem cadastro extra</p>
       </section>
@@ -83,7 +94,7 @@ export default function LandingPage() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 }}>
           {features.map((f, i) => (
             <div key={i} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 12, padding: "24px" }}>
-              <div style={{ fontSize: 24, marginBottom: 12 }}>{f.icon}</div>
+              <div style={{ marginBottom: 12 }}>{f.icon}</div>
               <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 14, color: "#F1F5F9" }}>{f.title}</div>
               {f.items.map((item, j) => (
                 <div key={j} style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-start" }}>
@@ -101,9 +112,9 @@ export default function LandingPage() {
         <div style={{ border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14, padding: "32px", textAlign: "center", background: "rgba(124,58,237,0.04)" }}>
           <h3 style={{ fontSize: 20, fontWeight: 600, marginBottom: 24 }}>Acesso e <span style={{ color: "#A78BFA" }}>Benefícios</span></h3>
           <div style={{ display: "flex", justifyContent: "center", gap: 40, flexWrap: "wrap" }}>
-            {[{ icon: "♾️", label: "Acesso vitalício" }, { icon: "🔄", label: "Base atualizada diariamente" }, { icon: "⚡", label: "Uso contínuo ilimitado" }].map((b, i) => (
+            {[{ icon: <AllInclusiveIcon sx={{ fontSize: 20, color: "#A78BFA" }} />, label: "Acesso vitalício" }, { icon: <AutorenewIcon sx={{ fontSize: 20, color: "#34D399" }} />, label: "Base atualizada diariamente" }, { icon: <FlashOnIcon sx={{ fontSize: 20, color: "#FBBF24" }} />, label: "Uso contínuo ilimitado" }].map((b, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, color: "#CBD5E1" }}>
-                <span style={{ fontSize: 18 }}>{b.icon}</span> {b.label}
+                {b.icon} {b.label}
               </div>
             ))}
           </div>
@@ -131,8 +142,8 @@ export default function LandingPage() {
           R$ <span style={{ color: "#A78BFA" }}>57</span>
         </div>
         <p style={{ fontSize: 12, color: "#7C3AED", marginBottom: 28 }}>🔥 60% off para fechar agora essa tela</p>
-        <Link href="/" style={{ display: "block", background: "linear-gradient(135deg,#7C3AED,#4F46E5)", color: "#fff", padding: "16px", borderRadius: 10, fontSize: 16, fontWeight: 600, textDecoration: "none", marginBottom: 12 }}>
-          🎯 Garantir Minha Vaga
+        <Link href="/" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, background: "linear-gradient(135deg,#7C3AED,#4F46E5)", color: "#fff", padding: "16px", borderRadius: 10, fontSize: 16, fontWeight: 600, textDecoration: "none", marginBottom: 12 }}>
+          <TrackChangesIcon sx={{ fontSize: 20 }} /> Garantir Minha Vaga
         </Link>
         <p style={{ fontSize: 12, color: "#475569", marginBottom: 4 }}>Acesso imediato após a confirmação do pagamento</p>
         <p style={{ fontSize: 12, color: "#475569" }}>🛡 7 dias de garantia</p>
@@ -156,8 +167,8 @@ export default function LandingPage() {
       <section style={{ padding: "80px 24px", textAlign: "center" }}>
         <h2 style={{ fontSize: 28, fontWeight: 700, marginBottom: 12 }}>Pare de adivinhar o que o mercado quer</h2>
         <p style={{ color: "#64748B", fontSize: 15, marginBottom: 32 }}>Use um agente de IA para evoluir sua carreira com clareza e estratégia</p>
-        <Link href="/" style={{ display: "inline-block", background: "linear-gradient(135deg,#7C3AED,#4F46E5)", color: "#fff", padding: "16px 36px", borderRadius: 10, fontSize: 16, fontWeight: 600, textDecoration: "none" }}>
-          🚀 Começar Agora por R$ 57
+        <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "linear-gradient(135deg,#7C3AED,#4F46E5)", color: "#fff", padding: "16px 36px", borderRadius: 10, fontSize: 16, fontWeight: 600, textDecoration: "none" }}>
+          <RocketLaunchIcon sx={{ fontSize: 20 }} /> Começar Agora por R$ 57
         </Link>
       </section>
 
