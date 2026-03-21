@@ -1,4 +1,9 @@
 import { getServerSession } from "next-auth";
+import Box from "@mui/material/Box";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Chip from "@mui/material/Chip";
 import ChatInterface from "@/components/ChatInterface";
 import LoginButton from "@/components/LoginButton";
 
@@ -6,37 +11,34 @@ export default async function Home() {
   const session = await getServerSession();
 
   return (
-    <main className="flex flex-col h-full">
-      {/* Header */}
-      <header className="flex items-center justify-between px-6 py-4 border-b border-gray-800 bg-gray-950">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-sm font-bold">
-            JA
-          </div>
-          <span className="font-semibold text-white">JobAgent</span>
-          <span className="text-xs text-gray-500 bg-gray-800 px-2 py-0.5 rounded-full">Beta</span>
-        </div>
-        <LoginButton />
-      </header>
+    <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+      <AppBar position="static" color="default" elevation={0} sx={{ borderBottom: "1px solid", borderColor: "divider", bgcolor: "background.paper" }}>
+        <Toolbar sx={{ justifyContent: "space-between", minHeight: "56px !important" }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <Box sx={{ width: 32, height: 32, bgcolor: "primary.main", borderRadius: 1.5, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <Typography sx={{ color: "white", fontSize: 11, fontWeight: 700 }}>JA</Typography>
+            </Box>
+            <Typography variant="subtitle1" fontWeight={600}>JobAgent</Typography>
+            <Chip label="Beta" size="small" sx={{ height: 18, fontSize: 10 }} />
+          </Box>
+          <LoginButton />
+        </Toolbar>
+      </AppBar>
 
-      {/* Content */}
       {session ? (
         <ChatInterface />
       ) : (
-        <div className="flex flex-1 flex-col items-center justify-center gap-6 px-4 text-center">
-          <div className="w-16 h-16 rounded-2xl bg-blue-600 flex items-center justify-center text-2xl">
+        <Box sx={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 3, px: 2, textAlign: "center" }}>
+          <Box sx={{ width: 72, height: 72, bgcolor: "primary.light", borderRadius: 4, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 32 }}>
             🎯
-          </div>
-          <h1 className="text-3xl font-bold text-white">
-            Encontre sua vaga ideal com IA
-          </h1>
-          <p className="max-w-md text-gray-400">
-            Faça login com o LinkedIn e deixe o JobAgent buscar vagas,
-            adaptar seu currículo e preparar sua candidatura automaticamente.
-          </p>
+          </Box>
+          <Typography variant="h4" fontWeight={600}>Encontre sua vaga ideal com IA</Typography>
+          <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 480 }}>
+            Faça login com o LinkedIn e deixe o JobAgent buscar vagas, adaptar seu currículo e preparar sua candidatura automaticamente.
+          </Typography>
           <LoginButton large />
-        </div>
+        </Box>
       )}
-    </main>
+    </Box>
   );
 }
