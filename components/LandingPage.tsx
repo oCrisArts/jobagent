@@ -1,6 +1,7 @@
 "use client";
-import { signIn } from "next-auth/react";
+import { useState } from "react";
 import { motion } from "framer-motion";
+import AuthModal from "./AuthModal";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -35,7 +36,8 @@ const DocumentIcon = () => (
 );
 
 const LandingPage = () => {
-  const handleLogin = () => signIn("linkedin");
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
 
   return (
     <div className="bg-[#0A0A0F] text-white font-sans overflow-x-hidden">
@@ -49,6 +51,7 @@ const LandingPage = () => {
         <button
           onClick={handleLogin}
           className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 text-sm font-medium transition-all"
+          onClick={openModal}
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z"/></svg>
           Login
@@ -86,7 +89,7 @@ const LandingPage = () => {
           </motion.p>
 
           <motion.div variants={fadeUp} initial="hidden" animate="show" custom={3} className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <button onClick={handleLogin}
+            <button onClick={openModal}
               className="flex items-center gap-2 px-7 py-4 rounded-xl text-base font-bold bg-gradient-to-r from-orange-500 to-brand-600 hover:opacity-90 transition-all shadow-glow text-white">
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 4.8 5.3.8-3.85 3.75.9 5.25L12 14.1l-4.75 2.5.9-5.25L4.3 7.6l5.3-.8z"/></svg>
               Começar de Graça (3 Créditos)
@@ -177,7 +180,7 @@ const LandingPage = () => {
           <p className="text-[#94A3B8] leading-relaxed mb-8">
             A IA não inventa mentiras, ela apenas traduz a sua experiência real para a linguagem exata que o sistema de recrutamento (ATS) da empresa foi programado para aprovar.
           </p>
-          <button onClick={handleLogin}
+          <button onClick={openModal}
             className="px-6 py-3 rounded-xl bg-brand-gradient text-sm font-semibold text-white hover:opacity-90 transition-all shadow-glow-sm">
             Adaptar meu Currículo
           </button>
@@ -254,7 +257,7 @@ const LandingPage = () => {
                 <div key={f} className="flex items-center gap-2 text-sm text-white/50"><CheckIcon />{f}</div>
               ))}
             </div>
-            <button onClick={handleLogin} className="w-full py-3 rounded-xl border border-white/10 text-sm font-semibold text-white/60 hover:bg-white/5 transition-all">
+            <button onClick={openModal} className="w-full py-3 rounded-xl border border-white/10 text-sm font-semibold text-white/60 hover:bg-white/5 transition-all">
               Começar Grátis
             </button>
           </motion.div>
@@ -275,7 +278,7 @@ const LandingPage = () => {
                 <div key={f} className="flex items-center gap-2 text-sm text-white"><CheckIcon />{f}</div>
               ))}
             </div>
-            <button onClick={handleLogin}
+            <button onClick={openModal}
               className="w-full py-3.5 rounded-xl bg-brand-gradient text-sm font-bold text-white hover:opacity-90 transition-all shadow-glow-sm">
               Assinar Plano Pro
             </button>
@@ -287,7 +290,7 @@ const LandingPage = () => {
       <footer className="border-t border-white/8 py-16 px-6 text-center">
         <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
           <h3 className="text-2xl font-bold mb-6">Sua próxima oportunidade está esperando.</h3>
-          <button onClick={handleLogin}
+          <button onClick={openModal}
             className="px-8 py-4 rounded-xl bg-brand-gradient text-sm font-bold text-white hover:opacity-90 transition-all shadow-glow mb-10">
             Começar de Graça
           </button>
@@ -300,6 +303,7 @@ const LandingPage = () => {
       </footer>
 
     </div>
+    <AuthModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
   );
 };
 
