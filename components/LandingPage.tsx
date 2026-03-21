@@ -40,8 +40,8 @@ const LandingPage = () => {
   const openModal = () => setModalOpen(true);
 
   return (
+    <>
     <div className="bg-[#0A0A0F] text-white font-sans overflow-x-hidden">
-
       {/* ── NAV ── */}
       <nav className="sticky top-0 z-50 flex items-center justify-between px-6 md:px-12 py-4 border-b border-white/8 bg-[#0A0A0F]/80 backdrop-blur-md">
         <div className="flex items-center gap-2.5">
@@ -304,6 +304,7 @@ const LandingPage = () => {
 
     </div>
     <AuthModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+    </>
   );
 };
 
