@@ -1,14 +1,18 @@
+import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
-import Box from "@mui/material/Box";
+import LandingPage from "@/components/LandingPage";
+import ChatInterface from "@/components/ChatInterface";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
-import ChatInterface from "@/components/ChatInterface";
 import LoginButton from "@/components/LoginButton";
 
 export default async function Home() {
   const session = await getServerSession();
+
+  if (!session) return <LandingPage />;
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
@@ -24,21 +28,7 @@ export default async function Home() {
           <LoginButton />
         </Toolbar>
       </AppBar>
-
-      {session ? (
-        <ChatInterface />
-      ) : (
-        <Box sx={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 3, px: 2, textAlign: "center" }}>
-          <Box sx={{ width: 72, height: 72, bgcolor: "primary.light", borderRadius: 4, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 32 }}>
-            🎯
-          </Box>
-          <Typography variant="h4" fontWeight={600}>Encontre sua vaga ideal com IA</Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 480 }}>
-            Faça login com o LinkedIn e deixe o JobAgent buscar vagas, adaptar seu currículo e preparar sua candidatura automaticamente.
-          </Typography>
-          <LoginButton large />
-        </Box>
-      )}
+      <ChatInterface />
     </Box>
   );
 }
