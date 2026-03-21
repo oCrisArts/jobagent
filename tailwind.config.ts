@@ -3,9 +3,9 @@ import type { Config } from "tailwindcss";
 const config: Config = {
   darkMode: "class",
   content: [
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./pages/**/*.{ts,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -28,15 +28,18 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["Google Sans", "Roboto", "sans-serif"],
+        sans: ["Google Sans", "Roboto", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        glow:   "0 0 40px rgba(124,58,237,0.35)",
+        glow:      "0 0 40px rgba(124,58,237,0.35)",
         "glow-sm": "0 0 20px rgba(124,58,237,0.2)",
       },
       backgroundImage: {
         "brand-gradient": "linear-gradient(135deg, #7C3AED, #4F46E5)",
-        "hero-glow": "radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%)",
+        "hero-glow":      "radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%)",
+      },
+      borderColor: {
+        DEFAULT: "rgba(255,255,255,0.08)",
       },
     },
   },

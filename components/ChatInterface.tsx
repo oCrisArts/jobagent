@@ -14,12 +14,6 @@ const SendIcon = () => (
   </svg>
 );
 
-const AttachIcon = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-  </svg>
-);
-
 const ChatInterface = () => {
   const { data: session } = useSession();
   const firstName = session?.user?.name?.split(" ")[0] || "";
@@ -40,15 +34,12 @@ const ChatInterface = () => {
     const msg = text || input;
     if (!msg.trim() || loading) return;
     const userMsg: Message = { role: "user", content: msg };
-    const newMessages = [...messages, userMsg];
-    setMessages(newMessages);
+    const next = [...messages, userMsg];
+    setMessages(next);
     setInput("");
     setLoading(true);
     try {
-      const agentRes = await fetch("/api/agent", {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: newMessages, userProfile: session?.user }),
-      });
+      const agentRes = await fetch("/api/agent", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: next, userProfile: session?.user }) });
       const agentData = await agentRes.json();
       let jobs: Job[] = [];
       if (agentData.action === "search_jobs" && agentData.params) {
@@ -56,9 +47,9 @@ const ChatInterface = () => {
         const jobsData = await jobsRes.json();
         jobs = jobsData.jobs || [];
       }
-      setMessages([...newMessages, { role: "assistant", content: agentData.message, jobs }]);
+      setMessages([...next, { role: "assistant", content: agentData.message, jobs }]);
     } catch {
-      setMessages([...newMessages, { role: "assistant", content: "Desculpe, ocorreu um erro. Tente novamente." }]);
+      setMessages([...next, { role: "assistant", content: "Desculpe, ocorreu um erro. Tente novamente." }]);
     } finally { setLoading(false); }
   };
 
@@ -66,10 +57,7 @@ const ChatInterface = () => {
     if (!resume) { setSelectedJob(job); setModalOpen(true); return; }
     setLoading(true);
     try {
-      const res = await fetch("/api/resume", {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ resume, job }),
-      });
+      const res = await fetch("/api/resume", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ resume, job }) });
       const data = await res.json();
       setMessages(prev => [...prev, { role: "assistant", content: `✅ Currículo adaptado para **${job.title}** na **${job.company}**!\n\n${data.adaptedResume}` }]);
     } catch {
@@ -78,22 +66,22 @@ const ChatInterface = () => {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-56px)]">
+    <div className="flex flex-col h-[calc(100vh-57px)]">
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-4 py-6 flex flex-col gap-4 max-w-3xl w-full mx-auto">
+      <div className="flex-1 overflow-y-auto px-4 py-6 space-y-4 max-w-3xl w-full mx-auto">
         {messages.map((msg, i) => (
           <div key={i} className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"} gap-1`}>
             {msg.role === "assistant" && (
               <div className="flex items-center gap-2 mb-1">
-                <div className="w-6 h-6 rounded-lg bg-brand-600 flex items-center justify-center text-[10px] font-bold text-white">JA</div>
+                <div className="w-6 h-6 rounded-md bg-brand-600 flex items-center justify-center text-[9px] font-bold text-white">JA</div>
                 <span className="text-xs text-white/30">JobAgent</span>
               </div>
             )}
-            <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${msg.role === "user" ? "bg-brand-600 text-white rounded-tr-sm" : "bg-surface-card border border-white/8 text-white/80 rounded-tl-sm"}`}>
+            <div className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${msg.role === "user" ? "bg-brand-600 text-white rounded-tr-sm" : "bg-surface-card border border-white/8 text-white/80 rounded-tl-sm"}`}>
               {msg.content}
             </div>
             {msg.jobs && msg.jobs.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2 w-full max-w-2xl">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-2xl mt-2">
                 {msg.jobs.map(job => <JobCard key={job.id} job={job} onAdaptResume={adaptResume} />)}
               </div>
             )}
@@ -101,16 +89,16 @@ const ChatInterface = () => {
         ))}
         {loading && (
           <div className="flex items-start gap-2">
-            <div className="w-6 h-6 rounded-lg bg-brand-600 flex items-center justify-center text-[10px] font-bold text-white">JA</div>
+            <div className="w-6 h-6 rounded-md bg-brand-600 flex items-center justify-center text-[9px] font-bold text-white">JA</div>
             <div className="bg-surface-card border border-white/8 rounded-2xl rounded-tl-sm px-4 py-3 flex gap-1">
-              {[0, 150, 300].map(d => <span key={d} className="w-2 h-2 bg-white/30 rounded-full animate-bounce" style={{ animationDelay: `${d}ms` }} />)}
+              {[0,1,2].map(i => <span key={i} className="w-1.5 h-1.5 bg-white/30 rounded-full animate-bounce" style={{ animationDelay: `${i * 150}ms` }} />)}
             </div>
           </div>
         )}
         {messages.length === 1 && (
           <div className="flex gap-2 flex-wrap">
             {SUGGESTIONS.map(s => (
-              <button key={s} onClick={() => sendMessage(s)} className="text-xs border border-brand-600/40 hover:border-brand-600 text-brand-400 hover:text-brand-300 px-3 py-1.5 rounded-full transition-colors">
+              <button key={s} onClick={() => sendMessage(s)} className="text-xs px-3 py-1.5 rounded-full border border-brand-600/40 text-brand-400 hover:bg-brand-600/10 transition-all">
                 {s}
               </button>
             ))}
@@ -119,20 +107,21 @@ const ChatInterface = () => {
         <div ref={bottomRef} />
       </div>
 
-      {/* Input */}
+      {/* Input bar */}
       <div className="border-t border-white/8 px-4 py-3 bg-surface-default">
         <div className="max-w-3xl mx-auto flex gap-2 items-end">
-          <button onClick={() => setModalOpen(true)} className="p-2.5 border border-white/10 hover:border-white/30 text-white/40 hover:text-white rounded-xl transition-colors shrink-0">
-            <AttachIcon />
+          <button onClick={() => setModalOpen(true)} className="p-2.5 rounded-xl border border-white/10 text-white/40 hover:text-white hover:border-white/20 transition-all flex-shrink-0" title="Adicionar currículo">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" /></svg>
           </button>
           <textarea
-            value={input} onChange={e => setInput(e.target.value)} rows={1}
+            value={input} onChange={e => setInput(e.target.value)}
             onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); } }}
             placeholder="Ex: Buscar vagas de UX Designer em São Paulo..."
-            className="flex-1 bg-surface-card border border-white/8 focus:border-brand-600/60 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 resize-none outline-none transition-colors"
+            rows={1}
+            className="flex-1 bg-surface-card border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 resize-none focus:outline-none focus:border-brand-600/60 transition-colors"
           />
           <button onClick={() => sendMessage()} disabled={loading || !input.trim()}
-            className="p-2.5 bg-brand-600 hover:bg-brand-500 disabled:opacity-30 disabled:cursor-not-allowed text-white rounded-xl transition-colors shrink-0">
+            className="p-2.5 bg-brand-600 hover:bg-brand-700 disabled:opacity-30 disabled:cursor-not-allowed text-white rounded-xl transition-all flex-shrink-0">
             <SendIcon />
           </button>
         </div>
@@ -143,13 +132,13 @@ const ChatInterface = () => {
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <div className="bg-surface-card border border-white/10 rounded-2xl p-6 w-full max-w-lg">
             <h2 className="text-lg font-semibold text-white mb-1">Seu currículo</h2>
-            <p className="text-sm text-white/40 mb-4">Cole o texto do seu currículo para adaptar às vagas.</p>
-            <textarea value={resume} onChange={e => setResume(e.target.value)} rows={10} placeholder="Cole seu currículo aqui..."
-              className="w-full bg-surface-default border border-white/8 focus:border-brand-600/60 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 resize-none outline-none mb-4 transition-colors" />
+            <p className="text-sm text-white/40 mb-4">Cole o texto do seu currículo para adaptação com IA.</p>
+            <textarea value={resume} onChange={e => setResume(e.target.value)} placeholder="Cole seu currículo aqui..." rows={10}
+              className="w-full bg-surface-default border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 resize-none focus:outline-none focus:border-brand-600/60 mb-4" />
             <div className="flex gap-3">
-              <button onClick={() => setModalOpen(false)} className="flex-1 py-2.5 border border-white/10 hover:border-white/30 text-white/60 hover:text-white rounded-xl text-sm transition-colors">Cancelar</button>
+              <button onClick={() => setModalOpen(false)} className="flex-1 py-2.5 border border-white/10 text-white/50 hover:text-white rounded-xl text-sm transition-all">Cancelar</button>
               <button onClick={() => { setModalOpen(false); if (selectedJob) { adaptResume(selectedJob); setSelectedJob(null); } }}
-                className="flex-1 py-2.5 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-sm font-medium transition-colors">
+                className="flex-1 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-medium transition-all">
                 Salvar{selectedJob ? " e adaptar" : ""}
               </button>
             </div>
