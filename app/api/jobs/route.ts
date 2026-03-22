@@ -10,40 +10,72 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Query obrigatória" }, { status: 400 });
   }
 
-  // Monta a query — só adiciona localização se for diferente de "Brazil" (default genérico)
-  const fullQuery = location && location !== "Brazil"
-    ? `${query} ${location}`
-    : query;
+  const jobs = await fetchAdzuna(query, location)
+    || await fetchJSearch(query, location)
+    || [];
+
+  return NextResponse.json({ jobs });
+}
+
+// ── Adzuna (melhor cobertura BR) ────────────────────────────────────────────
+async function fetchAdzuna(query: string, location: string) {
+  const appId = process.env.ADZUNA_APP_ID;
+  const appKey = process.env.ADZUNA_APP_KEY;
+  if (!appId || !appKey) return null;
 
   try {
-    const response = await axios.get("https://jsearch.p.rapidapi.com/search", {
-      params: {
-        query: fullQuery,
-        page: "1",
-        num_pages: "2",
-        date_posted: "all",
-        language: "pt",
-      },
+    const where = location && location !== "Brazil" ? location : "brasil";
+    const res = await axios.get(
+      `https://api.adzuna.com/v1/api/jobs/br/search/1`,
+      {
+        params: {
+          app_id: appId,
+          app_key: appKey,
+          results_per_page: 20,
+          what: query,
+          where,
+          content_type: "application/json",
+        },
+      }
+    );
+
+    return (res.data.results || []).map((job: any) => ({
+      id: job.id,
+      title: job.title,
+      company: job.company?.display_name || "Empresa não informada",
+      location: job.location?.display_name || "Não informado",
+      description: job.description?.slice(0, 500),
+      url: job.redirect_url,
+      logo: null,
+      remote: job.title?.toLowerCase().includes("remot") || false,
+      postedAt: job.created,
+      source: "Adzuna",
+    }));
+  } catch (e: any) {
+    console.error("Adzuna error:", e?.response?.status, e?.response?.data?.display);
+    return null;
+  }
+}
+
+// ── JSearch / RapidAPI (fallback) ───────────────────────────────────────────
+async function fetchJSearch(query: string, location: string) {
+  const apiKey = process.env.RAPIDAPI_KEY;
+  if (!apiKey) return null;
+
+  try {
+    const fullQuery = location && location !== "Brazil"
+      ? `${query} ${location}`
+      : query;
+
+    const res = await axios.get("https://jsearch.p.rapidapi.com/search", {
+      params: { query: fullQuery, page: "1", num_pages: "2", date_posted: "all" },
       headers: {
-        "X-RapidAPI-Key": process.env.RAPIDAPI_KEY!,
+        "X-RapidAPI-Key": apiKey,
         "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
       },
     });
 
-    // Se não retornou nada com localização, tenta sem
-    let data = response.data.data || [];
-    if (data.length === 0 && location && location !== "Brazil") {
-      const fallback = await axios.get("https://jsearch.p.rapidapi.com/search", {
-        params: { query, page: "1", num_pages: "2", date_posted: "all" },
-        headers: {
-          "X-RapidAPI-Key": process.env.RAPIDAPI_KEY!,
-          "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
-        },
-      });
-      data = fallback.data.data || [];
-    }
-
-    const jobs = data.map((job: any) => ({
+    return (res.data.data || []).map((job: any) => ({
       id: job.job_id,
       title: job.job_title,
       company: job.employer_name,
@@ -55,11 +87,10 @@ export async function GET(req: NextRequest) {
       logo: job.employer_logo,
       remote: job.job_is_remote,
       postedAt: job.job_posted_at_datetime_utc,
+      source: "JSearch",
     }));
-
-    return NextResponse.json({ jobs });
-  } catch (error: any) {
-    console.error("Erro ao buscar vagas:", error?.response?.data || error.message);
-    return NextResponse.json({ error: "Erro ao buscar vagas" }, { status: 500 });
+  } catch (e: any) {
+    console.error("JSearch error:", e?.response?.status);
+    return null;
   }
 }
