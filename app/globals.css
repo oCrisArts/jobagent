@@ -1,6 +1,24 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #f0ebff;
+  --color-brand-100: #d9ccff;
+  --color-brand-200: #b89dfc;
+  --color-brand-400: #a78bfa;
+  --color-brand-500: #8b5cf6;
+  --color-brand-600: #7c3aed;
+  --color-brand-700: #6d28d9;
+  --color-brand-900: #2e1065;
+
+  --color-surface-base: #0A0A0F;
+  --color-surface-default: #13141A;
+  --color-surface-card: #1A1D27;
+
+  --font-family-sans: "Google Sans", Roboto, ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-glow: 0 0 40px rgba(124,58,237,0.35);
+  --shadow-glow-sm: 0 0 20px rgba(124,58,237,0.2);
+}
 
 @layer base {
   * { box-sizing: border-box; }
@@ -8,6 +26,15 @@
 }
 
 @layer utilities {
+  .bg-brand-gradient {
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  }
+  .shadow-glow {
+    box-shadow: 0 0 40px rgba(124,58,237,0.35);
+  }
+  .shadow-glow-sm {
+    box-shadow: 0 0 20px rgba(124,58,237,0.2);
+  }
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
