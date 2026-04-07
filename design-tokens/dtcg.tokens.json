@@ -1,0 +1,82 @@
+{
+  "$description": "JobAgent design tokens in DTCG-style format (MVP, single theme).",
+  "color": {
+    "brand": {
+      "50": { "$type": "color", "$value": "#f0ebff" },
+      "100": { "$type": "color", "$value": "#d9ccff" },
+      "200": { "$type": "color", "$value": "#b89dfc" },
+      "400": { "$type": "color", "$value": "#a78bfa" },
+      "500": { "$type": "color", "$value": "#8b5cf6" },
+      "600": { "$type": "color", "$value": "#7c3aed" },
+      "700": { "$type": "color", "$value": "#6d28d9" },
+      "900": { "$type": "color", "$value": "#2e1065" }
+    },
+    "surface": {
+      "base": { "$type": "color", "$value": "#0A0A0F" },
+      "default": { "$type": "color", "$value": "#13141A" },
+      "card": { "$type": "color", "$value": "#1A1D27" }
+    },
+    "text": {
+      "primary": { "$type": "color", "$value": "#FFFFFF" },
+      "secondary": { "$type": "color", "$value": "#94A3B8" }
+    },
+    "semantic": {
+      "bg": {
+        "app": { "$type": "color", "$value": "{color.surface.base}" },
+        "surface": { "$type": "color", "$value": "{color.surface.default}" },
+        "card": { "$type": "color", "$value": "{color.surface.card}" }
+      },
+      "fg": {
+        "primary": { "$type": "color", "$value": "{color.text.primary}" },
+        "muted": { "$type": "color", "$value": "{color.text.secondary}" }
+      },
+      "action": {
+        "primary": { "$type": "color", "$value": "{color.brand.600}" },
+        "primary-hover": { "$type": "color", "$value": "{color.brand.700}" },
+        "accent": { "$type": "color", "$value": "{color.brand.400}" }
+      }
+    }
+  },
+  "space": {
+    "space-4": { "$type": "dimension", "$value": "4px" },
+    "space-8": { "$type": "dimension", "$value": "8px" },
+    "space-12": { "$type": "dimension", "$value": "12px" },
+    "space-16": { "$type": "dimension", "$value": "16px" },
+    "space-20": { "$type": "dimension", "$value": "20px" },
+    "space-24": { "$type": "dimension", "$value": "24px" },
+    "space-32": { "$type": "dimension", "$value": "32px" },
+    "space-40": { "$type": "dimension", "$value": "40px" },
+    "space-48": { "$type": "dimension", "$value": "48px" }
+  },
+  "radius": {
+    "sm": { "$type": "dimension", "$value": "8px" },
+    "md": { "$type": "dimension", "$value": "12px" },
+    "lg": { "$type": "dimension", "$value": "16px" },
+    "xl": { "$type": "dimension", "$value": "24px" }
+  },
+  "typography": {
+    "font-family": {
+      "sans": {
+        "$type": "fontFamily",
+        "$value": [
+          "Google Sans",
+          "Roboto",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif"
+        ]
+      }
+    },
+    "font-size": {
+      "xs": { "$type": "dimension", "$value": "12px" },
+      "sm": { "$type": "dimension", "$value": "14px" },
+      "base": { "$type": "dimension", "$value": "16px" },
+      "lg": { "$type": "dimension", "$value": "18px" },
+      "xl": { "$type": "dimension", "$value": "20px" },
+      "2xl": { "$type": "dimension", "$value": "24px" },
+      "3xl": { "$type": "dimension", "$value": "30px" },
+      "4xl": { "$type": "dimension", "$value": "36px" },
+      "5xl": { "$type": "dimension", "$value": "48px" }
+    }
+  }
+}

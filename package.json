@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sync-tokens": "node scripts/sync-figma-tokens.js",
+    "figma:fetch": "node scripts/sync-figma-tokens.js --fetch"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.63",

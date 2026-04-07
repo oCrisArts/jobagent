@@ -13,6 +13,19 @@
   --color-surface-base: #0A0A0F;
   --color-surface-default: #13141A;
   --color-surface-card: #1A1D27;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #94A3B8;
+
+  /* Semantic aliases (MVP, single theme) */
+  --color-bg-app: var(--color-surface-base);
+  --color-bg-surface: var(--color-surface-default);
+  --color-bg-card: var(--color-surface-card);
+  --color-fg-primary: var(--color-text-primary);
+  --color-fg-muted: var(--color-text-secondary);
+  --color-border-subtle: color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+  --color-action-primary: var(--color-brand-600);
+  --color-action-primary-hover: var(--color-brand-700);
+  --color-action-accent: var(--color-brand-400);
 
   --font-family-sans: "Google Sans", Roboto, ui-sans-serif, system-ui, sans-serif;
 
