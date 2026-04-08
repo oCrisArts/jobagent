@@ -186,10 +186,22 @@ export default function Navigation() {
           <div className="navbar-end">
             {/* ✅ Dropdown Perfil */}
             <div className="navbar-item has-dropdown is-hoverable">
-              <a className="navbar-link">
-                <span className="icon">
-                  <i className="fas fa-user-circle"></i>
-                </span>
+              <a className="navbar-link" style={{ alignItems: 'center', gap: '0.5rem' }}>
+                {session.user?.image ? (
+                  <figure className="image is-32x32" style={{ margin: 0, flexShrink: 0 }}>
+                    <img
+                      className="is-rounded"
+                      src={session.user.image}
+                      alt={session.user.name ?? 'Avatar'}
+                      referrerPolicy="no-referrer"
+                      style={{ objectFit: 'cover', width: '32px', height: '32px' }}
+                    />
+                  </figure>
+                ) : (
+                  <span className="icon">
+                    <i className="fas fa-user-circle"></i>
+                  </span>
+                )}
                 <span>{session.user?.name || t('profile')}</span>
               </a>
               <div className="navbar-dropdown is-right">
@@ -254,10 +266,23 @@ export default function Navigation() {
               className="button is-white is-small"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={t('profile')}
+              style={{ padding: '2px', borderRadius: '50%' }}
             >
-              <span className="icon">
-                <i className="fas fa-user-circle"></i>
-              </span>
+              {session.user?.image ? (
+                <figure className="image is-32x32" style={{ margin: 0 }}>
+                  <img
+                    className="is-rounded"
+                    src={session.user.image}
+                    alt={session.user.name ?? 'Avatar'}
+                    referrerPolicy="no-referrer"
+                    style={{ objectFit: 'cover', width: '32px', height: '32px' }}
+                  />
+                </figure>
+              ) : (
+                <span className="icon">
+                  <i className="fas fa-user-circle"></i>
+                </span>
+              )}
             </button>
           </div>
         </div>
