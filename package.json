@@ -12,14 +12,19 @@
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.63",
-    "@anthropic-ai/sdk": "^0.80.0",
+    "@anthropic-ai/sdk": "^0.84.0",
+    "@google/generative-ai": "^0.19.0",
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
+    "@supabase/supabase-js": "^2.38.0",
     "ai": "^6.0.134",
     "axios": "^1.13.6",
     "framer-motion": "^12.38.0",
     "next": "16.2.1",
     "next-auth": "^4.24.13",
+    "pdf-parse": "^1.1.1",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "stripe": "^15.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
