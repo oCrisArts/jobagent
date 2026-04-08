@@ -1,41 +1,46 @@
-import { NextRequest, NextResponse } from "next/server";
-import Anthropic from "@anthropic-ai/sdk";
+import { NextRequest, NextResponse } from 'next/server';
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-
-export async function POST(req: NextRequest) {
-  const { resume, job } = await req.json();
-
-  if (!resume || !job) {
-    return NextResponse.json({ error: "Currículo e vaga são obrigatórios" }, { status: 400 });
-  }
-
+/**
+ * POST /api/resume
+ * Upload PDF → Gemini (Extract) → Claude (Adapt) → Download optimized resume
+ * 
+ * Body (FormData):
+ *   - file: File (PDF)
+ *   - jobDescription: string (job to optimize for)
+ */
+export async function POST(request: NextRequest) {
   try {
-    const response = await anthropic.messages.create({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 2048,
-      messages: [{
-        role: "user",
-        content: `Você é um especialista em RH e redação de currículos.
-        
-Adapte o currículo abaixo para a vaga indicada. Mantenha as informações verídicas, mas reorganize e enfatize as experiências e habilidades mais relevantes para a vaga. Use linguagem profissional em português do Brasil.
+    const formData = await request.formData();
+    const file = formData.get('file') as File;
+    const jobDescription = formData.get('jobDescription') as string;
 
-VAGA:
-Título: ${job.title}
-Empresa: ${job.company}
-Descrição: ${job.description}
+    if (!file || !jobDescription) {
+      return NextResponse.json(
+        { error: 'Missing file or jobDescription' },
+        { status: 400 }
+      );
+    }
 
-CURRÍCULO ORIGINAL:
-${resume}
+    // TODO: Implementar fluxo:
+    // 1. Parse PDF com pdf-parse
+    // 2. Google Gemini: Extrair informações do CV (JSON estruturado)
+    // 3. Claude 3.5 Sonnet: Adaptar CV para a vaga específica
+    // 4. Retornar CV otimizado em texto/PDF
 
-Retorne apenas o currículo adaptado, sem explicações adicionais.`,
-      }],
-    });
+    const mockResponse = {
+      success: true,
+      message: 'Resume optimization API placeholder',
+      originalFileName: file.name,
+      jobTitle: 'Job to optimize for',
+      optimizedResume: 'Optimized resume content will be here...',
+      downloadUrl: '/api/resume/download'
+    };
 
-    const adaptedResume = response.content[0].type === "text" ? response.content[0].text : "";
-    return NextResponse.json({ adaptedResume });
+    return NextResponse.json(mockResponse);
   } catch (error) {
-    console.error("Erro ao adaptar currículo:", error);
-    return NextResponse.json({ error: "Erro ao adaptar currículo" }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to optimize resume' },
+      { status: 500 }
+    );
   }
 }

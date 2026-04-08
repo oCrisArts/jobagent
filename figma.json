@@ -1,0 +1,70 @@
+{
+  "colors": {
+    "primary": {
+      "$value": "#2563eb",
+      "$type": "color",
+      "$description": "Primary brand color"
+    },
+    "secondary": {
+      "$value": "#1e40af",
+      "$type": "color",
+      "$description": "Secondary brand color"
+    },
+    "neutral-50": {
+      "$value": "#f9fafb",
+      "$type": "color"
+    },
+    "neutral-100": {
+      "$value": "#f3f4f6",
+      "$type": "color"
+    },
+    "neutral-900": {
+      "$value": "#111827",
+      "$type": "color"
+    }
+  },
+  "typography": {
+    "heading-lg": {
+      "$value": "32px",
+      "$type": "fontSizes"
+    },
+    "heading-md": {
+      "$value": "24px",
+      "$type": "fontSizes"
+    },
+    "body-md": {
+      "$value": "16px",
+      "$type": "fontSizes"
+    },
+    "body-sm": {
+      "$value": "14px",
+      "$type": "fontSizes"
+    },
+    "caption": {
+      "$value": "12px",
+      "$type": "fontSizes"
+    }
+  },
+  "spacing": {
+    "xs": {
+      "$value": "4px",
+      "$type": "spacing"
+    },
+    "sm": {
+      "$value": "8px",
+      "$type": "spacing"
+    },
+    "md": {
+      "$value": "16px",
+      "$type": "spacing"
+    },
+    "lg": {
+      "$value": "24px",
+      "$type": "spacing"
+    },
+    "xl": {
+      "$value": "32px",
+      "$type": "spacing"
+    }
+  }
+}

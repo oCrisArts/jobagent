@@ -1,0 +1,50 @@
+// ============================================
+// DESIGN TOKENS (Gerado automaticamente)
+// DO NOT EDIT MANUALLY
+// Regenerate com: npm run sync-tokens
+// ============================================
+
+$color-brand-50: #f0ebff;
+$color-brand-100: #d9ccff;
+$color-brand-200: #b89dfc;
+$color-brand-400: #a78bfa;
+$color-brand-500: #8b5cf6;
+$color-brand-600: #7c3aed;
+$color-brand-700: #6d28d9;
+$color-brand-900: #2e1065;
+$color-surface-base: #0A0A0F;
+$color-surface-default: #13141A;
+$color-surface-card: #1A1D27;
+$color-text-primary: #FFFFFF;
+$color-text-secondary: #94A3B8;
+$color-semantic-bg-app: {color.surface.base};
+$color-semantic-bg-surface: {color.surface.default};
+$color-semantic-bg-card: {color.surface.card};
+$color-semantic-fg-primary: {color.text.primary};
+$color-semantic-fg-muted: {color.text.secondary};
+$color-semantic-action-primary: {color.brand.600};
+$color-semantic-action-primary-hover: {color.brand.700};
+$color-semantic-action-accent: {color.brand.400};
+$space-space-4: 4px;
+$space-space-8: 8px;
+$space-space-12: 12px;
+$space-space-16: 16px;
+$space-space-20: 20px;
+$space-space-24: 24px;
+$space-space-32: 32px;
+$space-space-40: 40px;
+$space-space-48: 48px;
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 24px;
+$typography-font-family-sans: Google Sans,Roboto,ui-sans-serif,system-ui,sans-serif;
+$typography-font-size-xs: 12px;
+$typography-font-size-sm: 14px;
+$typography-font-size-base: 16px;
+$typography-font-size-lg: 18px;
+$typography-font-size-xl: 20px;
+$typography-font-size-2xl: 24px;
+$typography-font-size-3xl: 30px;
+$typography-font-size-4xl: 36px;
+$typography-font-size-5xl: 48px;

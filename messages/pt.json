@@ -1,0 +1,48 @@
+{
+  "common": {
+    "appName": "Sync.IA",
+    "tagline": "Otimize seu CV com IA para cada vaga, globalmente",
+    "language": "Português"
+  },
+  "nav": {
+    "home": "Início",
+    "pricing": "Preços",
+    "dashboard": "Painel",
+    "logout": "Sair"
+  },
+  "landing": {
+    "hero": {
+      "title": "Seu Assistente de Carreira Powered by IA",
+      "subtitle": "Adapte seu currículo para cada vaga com Claude AI"
+    },
+    "cta": {
+      "start": "Começar Grátis",
+      "signin": "Entrar"
+    }
+  },
+  "pricing": {
+    "free": "Gratuito",
+    "pro": "Pro",
+    "monthly": "/mês"
+  },
+  "dashboard": {
+    "welcome": "Bem-vindo ao Sync.IA",
+    "searchJobs": "Buscar Vagas",
+    "uploadResume": "Enviar Currículo",
+    "myConnections": "Minhas Conexões"
+  },
+  "jobs": {
+    "search": "Procurar vagas",
+    "results": "Resultados",
+    "noResults": "Nenhuma vaga encontrada"
+  },
+  "resume": {
+    "upload": "Envie seu currículo",
+    "optimize": "Otimizar com IA",
+    "downloading": "Baixando currículo otimizado..."
+  },
+  "errors": {
+    "notFound": "Página não encontrada",
+    "unauthorized": "Você precisa estar conectado"
+  }
+}

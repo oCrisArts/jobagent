@@ -1,0 +1,48 @@
+{
+  "common": {
+    "appName": "Sync.IA",
+    "tagline": "Optimize your CV with AI for every job, globally",
+    "language": "English"
+  },
+  "nav": {
+    "home": "Home",
+    "pricing": "Pricing",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+  "landing": {
+    "hero": {
+      "title": "Your AI-Powered Career Assistant",
+      "subtitle": "Tailor your resume for every job application with Claude AI"
+    },
+    "cta": {
+      "start": "Get Started Free",
+      "signin": "Sign In"
+    }
+  },
+  "pricing": {
+    "free": "Free",
+    "pro": "Pro",
+    "monthly": "/month"
+  },
+  "dashboard": {
+    "welcome": "Welcome to Sync.IA",
+    "searchJobs": "Search Jobs",
+    "uploadResume": "Upload Resume",
+    "myConnections": "My Connections"
+  },
+  "jobs": {
+    "search": "Search for jobs",
+    "results": "Results",
+    "noResults": "No jobs found"
+  },
+  "resume": {
+    "upload": "Upload your resume",
+    "optimize": "Optimize with AI",
+    "downloading": "Downloading optimized resume..."
+  },
+  "errors": {
+    "notFound": "Page not found",
+    "unauthorized": "You need to be logged in"
+  }
+}
