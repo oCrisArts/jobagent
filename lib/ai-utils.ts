@@ -3,6 +3,7 @@
 
 import Anthropic from '@anthropic-ai/sdk';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+// @ts-ignore
 import * as pdf from 'pdf-parse';
 
 // ── CLIENTS ────────────────────────────────────────────────────────────
@@ -101,7 +102,6 @@ Retorne um JSON com:
     throw new Error('Erro ao extrair texto do currículo');
   }
 }
-// lib/ai-utils.ts - CHUNK 2/3 (append)
 
 // ── FUNÇÃO 2: Adaptar Currículo para Vaga ──────────────────────────────
 // Free: Gemini básico | Pro: Claude 3.5 Sonnet (melhor qualidade)
@@ -174,7 +174,6 @@ Retorne apenas o currículo adaptado, sem explicações adicionais.`;
     throw new Error('Erro ao adaptar currículo');
   }
 }
-// lib/ai-utils.ts - CHUNK 3/3 (append)
 
 // ── FUNÇÃO 3: Analisar Fit Job-Candidato (só Pro) ─────────────────────
 // Usa Claude para análise profunda

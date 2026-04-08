@@ -1,42 +1,34 @@
-"use client";
-import { signOut, useSession } from "next-auth/react";
-import { useState } from "react";
-import AuthModal from "./AuthModal";
+'use client';
 
-const LoginButton = ({ large = false }: { large?: boolean }) => {
-  const { data: session, status } = useSession();
-  const [modalOpen, setModalOpen] = useState(false);
+import { useState } from 'react';
 
-  if (status === "loading") return (
-    <div className="w-8 h-8 rounded-full bg-white/10 animate-pulse" />
-  );
-
-  if (session) return (
-    <div className="flex items-center gap-3">
-      {session.user?.image && (
-        <img src={session.user.image} alt="" className="w-8 h-8 rounded-full border-2 border-white/20" />
-      )}
-      <span className="hidden sm:block text-sm text-white/60">{session.user?.name}</span>
-      <button
-        onClick={() => signOut({ callbackUrl: "/" })}
-        className="text-xs px-3 py-1.5 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/30 transition-all"
-      >
-        Sair
-      </button>
-    </div>
-  );
+export function LoginButton() {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <button
-        onClick={() => setModalOpen(true)}
-        className={`flex items-center gap-2 bg-brand-gradient hover:opacity-90 text-white font-medium rounded-lg transition-all shadow-glow-sm ${large ? "px-6 py-3 text-base" : "px-4 py-2 text-sm"}`}
+      <button 
+        onClick={() => setIsOpen(true)}
+        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
-        Entrar
+        Login
       </button>
-      <AuthModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+      
+      {isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 max-w-md w-full">
+            <h2 className="text-2xl font-bold mb-6">Sign In</h2>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="mt-4 text-gray-600"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
-};
+}
 
 export default LoginButton;
