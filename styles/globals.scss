@@ -1,54 +1,96 @@
 // ============================================
-// SYNC.IA - GLOBAL STYLES (SCSS)
+// SYNC.IA GLOBAL STYLES (BULMA + TOKENS)
 // ============================================
 
-// 1. IMPORT DESIGN TOKENS (Gerado pelo sync-sass-tokens.js)
-@import 'tokens';
+// 1️⃣ IMPORTAR BULMA (deve ser o primeiro @use)
+@use 'bulma' as bulma;
 
-// ============================================
-// 2. GLOBAL RESET & BASE STYLES
-// ============================================
+// 2️⃣ IMPORTAR NOSSOS DESIGN TOKENS (usando @import, que é mais simples para vars)
+@import './tokens';
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+// 3️⃣ MAPEAR VARIÁVEIS BULMA PARA NOSSOS TOKENS
+// (Em Dart Sass, o @use acima já define as variáveis Bulma)
+
+// Sobrescrever cores específicas se necessário (após imports)
+:root {
+  // Cores primárias
+  --color-primary: #7c3aed;      // $color-brand-600
+  --color-secondary: #8b5cf6;    // $color-brand-500
+  --color-surface-base: #0A0A0F;
+  --color-surface-default: #13141A;
+  --color-surface-card: #1A1D27;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #94A3B8;
 }
 
+// 4️⃣ CUSTOMIZAÇÕES GLOBAIS
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
+  background-color: #0A0A0F;
+  color: #FFFFFF;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  color: #fff;
-  line-height: 1.5;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  background: none;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 #__next {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+/* Reset global */
+* {
+  box-sizing: border-box;
+}
+
+/* Override Bulma para tema escuro */
+.box {
+  background-color: #1A1D27;
+  color: #FFFFFF;
+}
+
+.card {
+  background-color: #1A1D27;
+  color: #FFFFFF;
+  
+  .card-header-title {
+    color: #FFFFFF;
+  }
+}
+
+.button.is-primary {
+  background-color: #7c3aed;
+  
+  &:hover {
+    background-color: #6d28d9;
+  }
+}
+
+.navbar {
+  background-color: #13141A;
+}
+
+.hero {
+  background-color: #0A0A0F;
+}
+
+.hero-body {
+  padding: 3rem 1.5rem;
+}
+
+.title,
+.subtitle {
+  color: #FFFFFF;
+}
+
+.content a {
+  color: #8b5cf6;
+  
+  &:hover {
+    color: #a78bfa;
+  }
 }

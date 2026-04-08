@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR">
-      <body>
+      <body className="has-background-dark">
         <Providers>{children}</Providers>
         {/* Plugin de Figma para HTML to Design */}
         <script

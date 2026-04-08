@@ -2,38 +2,46 @@
   "name": "jobagent",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "npm run sync-tokens && next dev",
     "build": "npm run sync-tokens && next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
     "sync-tokens": "node scripts/sync-sass-tokens.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.84.0",
     "@formatjs/intl-localematcher": "^0.5.4",
-    "@google/generative-ai": "^0.19.0",
+    "@google/generative-ai": "^0.21.0",
     "@supabase/ssr": "^0.4.0",
-    "@supabase/supabase-js": "^2.38.0",
-    "ai": "^6.0.134",
-    "axios": "^1.13.6",
-    "framer-motion": "^12.38.0",
+    "@supabase/supabase-js": "^2.39.0",
+    "ai": "^6.0.136",
+    "axios": "^1.7.2",
+    "bulma": "^1.0.4",
+    "framer-motion": "^11.0.0",
     "negotiator": "^0.6.3",
-    "next": "16.0.0",
+    "next": "15.1.3",
     "next-auth": "^4.24.13",
-    "next-intl": "^3.15.0",
+    "next-intl": "^3.26.5",
     "pdf-parse": "^1.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sass": "^1.77.0",
-    "stripe": "^15.0.0"
+    "stripe": "^15.8.0"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "@types/react": "^19.0.0",
+    "@types/negotiator": "^0.6.4",
+    "@types/node": "^20.14.0",
+    "@types/react": "19.2.14",
     "@types/react-dom": "^19.0.0",
-    "eslint": "^9.0.0",
-    "eslint-config-next": "16.0.0",
-    "typescript": "^5.6.0"
+    "eslint": "^9.8.0",
+    "eslint-config-next": "15.1.3",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=11.0.0"
   }
 }

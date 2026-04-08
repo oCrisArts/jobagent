@@ -1,14 +1,10 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-
 export default function CheckoutPage() {
-  const t = useTranslations();
-
   return (
     <main style={{ minHeight: '100vh', padding: '40px 20px' }}>
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-        <h1>{t('pricing.pro')}</h1>
+        <h1>Plano Pro</h1>
         <p style={{ color: '#94a3b8', marginBottom: '30px' }}>
           Checkout page - Stripe integration
         </p>
@@ -19,7 +15,7 @@ export default function CheckoutPage() {
           padding: '40px',
           textAlign: 'center'
         }}>
-          <h2>$14.90{t('pricing.monthly')}</h2>
+          <h2>$14.90 / month</h2>
           <p style={{ color: '#94a3b8', margin: '20px 0' }}>
             Full access to AI-powered resume optimization
           </p>
