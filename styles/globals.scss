@@ -1,96 +1,90 @@
-// ============================================
-// SYNC.IA GLOBAL STYLES (BULMA + TOKENS)
-// ============================================
+@import "./_tokens.scss";
 
-// 1️⃣ IMPORTAR BULMA (deve ser o primeiro @use)
-@use 'bulma' as bulma;
+$primary: $color-brand-600;
+$link: $color-brand-500;
+$text: $color-text-primary;
+$body-background-color: $color-surface-base;
+$scheme-main: $color-surface-base;
+$scheme-main-bis: $color-surface-default;
+$scheme-main-ter: $color-surface-card;
+$family-primary: $typography-font-family-sans;
 
-// 2️⃣ IMPORTAR NOSSOS DESIGN TOKENS (usando @import, que é mais simples para vars)
-@import './tokens';
+@import "bulma/bulma";
 
-// 3️⃣ MAPEAR VARIÁVEIS BULMA PARA NOSSOS TOKENS
-// (Em Dart Sass, o @use acima já define as variáveis Bulma)
 
-// Sobrescrever cores específicas se necessário (após imports)
-:root {
-  // Cores primárias
-  --color-primary: #7c3aed;      // $color-brand-600
-  --color-secondary: #8b5cf6;    // $color-brand-500
-  --color-surface-base: #0A0A0F;
-  --color-surface-default: #13141A;
-  --color-surface-card: #1A1D27;
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #94A3B8;
-}
-
-// 4️⃣ CUSTOMIZAÇÕES GLOBAIS
+// ─────────────────────────────────────────────────────────────────
+// 🎯 SMOOTH SCROLL BEHAVIOR (Âncoras da Landing Page)
+// ─────────────────────────────────────────────────────────────────
 html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
-body {
-  background-color: #0A0A0F;
-  color: #FFFFFF;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+// ─────────────────────────────────────────────────────────────────
+// 📱 RESPONSIVE LAYOUT ADJUSTMENTS
+// ─────────────────────────────────────────────────────────────────
+
+// Top Navigation Padding (Desktop)
+@media screen and (min-width: 769px) {
+  body {
+    padding-top: 70px; // Altura aprox. da Top Navbar Bulma
+  }
 }
 
-#__next {
+// Bottom Navigation Padding (Mobile)
+@media screen and (max-width: 768px) {
+  body {
+    padding-bottom: 70px; // Espaço para Bottom Navigation Bar
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// 🎨 CUSTOM NAVIGATION STYLES (Bulma Extensions)
+// ─────────────────────────────────────────────────────────────────
+
+// Bottom Navigation Bar (Mobile - App Like)
+.navbar-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background-color: $color-surface-card;
+  border-top: 1px solid $color-surface-default;
+  z-index: 1000;
   display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+  justify-content: space-around;
+  align-items: center;
 
-/* Reset global */
-* {
-  box-sizing: border-box;
-}
+  .navbar-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: $color-text-secondary;
+    text-decoration: none;
+    padding: 8px 0;
+    transition: color 0.3s ease;
 
-/* Override Bulma para tema escuro */
-.box {
-  background-color: #1A1D27;
-  color: #FFFFFF;
-}
+    &:hover,
+    &.is-active {
+      color: $color-brand-600;
+    }
 
-.card {
-  background-color: #1A1D27;
-  color: #FFFFFF;
-  
-  .card-header-title {
-    color: #FFFFFF;
+    .icon {
+      margin-bottom: 4px;
+      font-size: 1.2rem;
+    }
+
+    .label {
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
   }
 }
 
-.button.is-primary {
-  background-color: #7c3aed;
-  
-  &:hover {
-    background-color: #6d28d9;
-  }
-}
-
-.navbar {
-  background-color: #13141A;
-}
-
-.hero {
-  background-color: #0A0A0F;
-}
-
-.hero-body {
-  padding: 3rem 1.5rem;
-}
-
-.title,
-.subtitle {
-  color: #FFFFFF;
-}
-
-.content a {
-  color: #8b5cf6;
-  
-  &:hover {
-    color: #a78bfa;
-  }
+// Top Navbar Sticky (Desktop)
+.navbar.is-fixed-top {
+  background-color: $color-surface-card;
+  border-bottom: 1px solid $color-surface-default;
 }

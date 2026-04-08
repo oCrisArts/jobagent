@@ -18,6 +18,37 @@
     "cta": {
       "start": "Get Started Free",
       "signin": "Sign In"
+    },
+    "pricing": {
+      "popular": "Popular",
+      "subscribe": "Subscribe now",
+      "enterprise": "Enterprise",
+      "custom": "Custom",
+      "talkSales": "Talk to sales",
+      "freeFeature1": "5 searches per month",
+      "freeFeature2": "1 resume optimization",
+      "freeFeature3": "Basic support",
+      "proFeature1": "Unlimited searches",
+      "proFeature2": "Unlimited optimizations",
+      "proFeature3": "AI analysis (Claude)",
+      "proFeature4": "Priority support",
+      "enterpriseFeature1": "Everything in Pro",
+      "enterpriseFeature2": "Dedicated API",
+      "enterpriseFeature3": "Custom integrations",
+      "enterpriseFeature4": "Account manager"
+    },
+    "features": {
+      "title": "Features",
+      "globalTitle": "Global",
+      "globalDesc": "Support for 180+ countries and 50+ languages",
+      "aiTitle": "Smart AI",
+      "aiDesc": "Optimization with Claude 3.5 + Google Gemini",
+      "mobileTitle": "Mobile first",
+      "mobileDesc": "Responsive web app for any device"
+    },
+    "footer": {
+      "title": "Ready to transform your career?",
+      "subtitle": "Join thousands of professionals already using Sync.IA"
     }
   },
   "pricing": {
@@ -40,6 +71,57 @@
     "upload": "Upload your resume",
     "optimize": "Optimize with AI",
     "downloading": "Downloading optimized resume..."
+  },
+  "auth": {
+    "titleLogin": "Sign in",
+    "titleSignup": "Create account",
+    "email": "Email",
+    "emailPlaceholder": "you@email.com",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "loginButton": "Sign in",
+    "signupButton": "Register",
+    "cancel": "Cancel",
+    "orContinue": "or continue with",
+    "continueGoogle": "Continue with Google",
+    "continueLinkedin": "Continue with LinkedIn"
+  },
+  "inicio": {
+    "title": "Dashboard",
+    "subtitle": "Main HUD with SSI Score, applied jobs and last viewed job.",
+    "cards": {
+      "ssi": "SSI Score",
+      "appliedJobs": "Applied jobs",
+      "lastViewedJob": "Last viewed job"
+    }
+  },
+  "vagas": {
+    "title": "Job search",
+    "subtitle": "Search jobs, view compatibility and adapt resume with AI.",
+    "jobLabel": "Role",
+    "jobPlaceholder": "e.g. Product Designer",
+    "locationLabel": "Location",
+    "locationPlaceholder": "e.g. Sao Paulo",
+    "searchButton": "Search"
+  },
+  "curriculos": {
+    "title": "Resume evolution",
+    "subtitle": "Download adapted resumes and see ATS analysis for the latest one.",
+    "lastResume": "Latest generated resume",
+    "download": "Download PDF",
+    "atsAnalysis": "View ATS analysis"
+  },
+  "network": {
+    "title": "Network",
+    "subtitle": "Interview CRM and tasks to improve SSI Score.",
+    "pipeline": "Connections and pipeline",
+    "newConnection": "New connection"
+  },
+  "perfil": {
+    "title": "Profile and account",
+    "subtitle": "Manage personal data, subscription and payment portal.",
+    "updateProfile": "Update profile",
+    "manageSubscription": "Manage subscription"
   },
   "errors": {
     "notFound": "Page not found",

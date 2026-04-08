@@ -18,6 +18,37 @@
     "cta": {
       "start": "Começar Grátis",
       "signin": "Entrar"
+    },
+    "pricing": {
+      "popular": "Popular",
+      "subscribe": "Assinar agora",
+      "enterprise": "Enterprise",
+      "custom": "Personalizado",
+      "talkSales": "Falar com vendas",
+      "freeFeature1": "5 buscas por mês",
+      "freeFeature2": "1 otimização de CV",
+      "freeFeature3": "Suporte básico",
+      "proFeature1": "Buscas ilimitadas",
+      "proFeature2": "Otimizações ilimitadas",
+      "proFeature3": "Análise com IA (Claude)",
+      "proFeature4": "Suporte prioritário",
+      "enterpriseFeature1": "Tudo do Pro",
+      "enterpriseFeature2": "API dedicada",
+      "enterpriseFeature3": "Integrações custom",
+      "enterpriseFeature4": "Account manager"
+    },
+    "features": {
+      "title": "Recursos",
+      "globalTitle": "Global",
+      "globalDesc": "Suporte para 180+ países e 50+ idiomas",
+      "aiTitle": "IA inteligente",
+      "aiDesc": "Otimização com Claude 3.5 + Google Gemini",
+      "mobileTitle": "Mobile first",
+      "mobileDesc": "Aplicativo web responsivo para qualquer dispositivo"
+    },
+    "footer": {
+      "title": "Pronto para revolucionar sua carreira?",
+      "subtitle": "Junte-se a milhares de profissionais que já estão usando Sync.IA"
     }
   },
   "pricing": {
@@ -40,6 +71,57 @@
     "upload": "Envie seu currículo",
     "optimize": "Otimizar com IA",
     "downloading": "Baixando currículo otimizado..."
+  },
+  "auth": {
+    "titleLogin": "Entrar",
+    "titleSignup": "Criar conta",
+    "email": "Email",
+    "emailPlaceholder": "seu@email.com",
+    "password": "Senha",
+    "passwordPlaceholder": "••••••••",
+    "loginButton": "Entrar",
+    "signupButton": "Registrar",
+    "cancel": "Cancelar",
+    "orContinue": "ou continue com",
+    "continueGoogle": "Continuar com Google",
+    "continueLinkedin": "Continuar com LinkedIn"
+  },
+  "inicio": {
+    "title": "Dashboard",
+    "subtitle": "HUD principal com SSI Score, vagas aplicadas e última vaga vista.",
+    "cards": {
+      "ssi": "SSI Score",
+      "appliedJobs": "Vagas aplicadas",
+      "lastViewedJob": "Última vaga vista"
+    }
+  },
+  "vagas": {
+    "title": "Busca de vagas",
+    "subtitle": "Busque vagas, veja compatibilidade e adapte currículo com IA.",
+    "jobLabel": "Cargo",
+    "jobPlaceholder": "Ex.: Product Designer",
+    "locationLabel": "Localização",
+    "locationPlaceholder": "Ex.: São Paulo",
+    "searchButton": "Buscar"
+  },
+  "curriculos": {
+    "title": "Evolução de currículos",
+    "subtitle": "Baixe currículos adaptados e veja a análise ATS do último gerado.",
+    "lastResume": "Último currículo gerado",
+    "download": "Download PDF",
+    "atsAnalysis": "Ver análise ATS"
+  },
+  "network": {
+    "title": "Network",
+    "subtitle": "CRM de entrevistas e tarefas para evoluir SSI Score.",
+    "pipeline": "Conexões e pipeline",
+    "newConnection": "Nova conexão"
+  },
+  "perfil": {
+    "title": "Perfil e conta",
+    "subtitle": "Gerencie dados pessoais, assinatura e portal de pagamento.",
+    "updateProfile": "Atualizar perfil",
+    "manageSubscription": "Gerenciar assinatura"
   },
   "errors": {
     "notFound": "Página não encontrada",

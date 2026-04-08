@@ -1,18 +1,23 @@
 'use client';
+import { useState } from 'react';
+import { useTranslations } from 'next-intl';
+import AuthModal from '@/components/ui/AuthModal';
 
 export default function LandingPage() {
-  const t = (key: string) => {
-    const dict: Record<string, string> = {
-      'landing.hero.title': 'Conquiste sua vaga ideal com IA',
-      'landing.hero.subtitle': 'Busque oportunidades, otimize seu CV e aplique com confiança.',
-      'landing.cta.start': 'Começar agora',
-      'landing.cta.signin': 'Entrar',
-      'pricing.pro': 'Plano Pro',
-      'pricing.free': 'Plano Gratuito',
-      'pricing.monthly': '/mês',
-    };
-    return dict[key] ?? key;
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+
+  const openLogin = () => {
+    setAuthMode('login');
+    setIsAuthOpen(true);
   };
+
+  const openSignup = () => {
+    setAuthMode('signup');
+    setIsAuthOpen(true);
+  };
+
+  const t = useTranslations();
 
   return (
     <main>
@@ -27,10 +32,10 @@ export default function LandingPage() {
               {t('landing.hero.subtitle')}
             </p>
             <div className="buttons is-centered mt-6">
-              <button className="button is-primary is-large">
+              <button className="button is-primary is-large" onClick={openSignup}>
                 {t('landing.cta.start')}
               </button>
-              <button className="button is-light is-large">
+              <button className="button is-light is-large" onClick={openLogin}>
                 {t('landing.cta.signin')}
               </button>
             </div>
@@ -52,18 +57,18 @@ export default function LandingPage() {
                 <h3 className="title is-4 has-text-primary">
                   {t('pricing.free')}
                 </h3>
-                <p className="subtitle is-6">Gratuito</p>
+                <p className="subtitle is-6">{t('pricing.free')}</p>
                 
                 <div className="content">
                   <ul>
-                    <li>5 buscas por mês</li>
-                    <li>1 otimização de CV</li>
-                    <li>Suporte básico</li>
+                    <li>{t('landing.pricing.freeFeature1')}</li>
+                    <li>{t('landing.pricing.freeFeature2')}</li>
+                    <li>{t('landing.pricing.freeFeature3')}</li>
                   </ul>
                 </div>
 
-                <button className="button is-light is-fullwidth">
-                  Começar Grátis
+                <button className="button is-light is-fullwidth" onClick={openSignup}>
+                  {t('landing.cta.start')}
                 </button>
               </div>
             </div>
@@ -72,7 +77,7 @@ export default function LandingPage() {
             <div className="column is-4">
               <div className="box has-background-primary has-text-white" style={{ position: 'relative', marginTop: '-2rem' }}>
                 <div className="tag is-warning" style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
-                  Popular
+                  {t('landing.pricing.popular')}
                 </div>
                 <h3 className="title is-4 has-text-white">
                   {t('pricing.pro')}
@@ -83,15 +88,15 @@ export default function LandingPage() {
                 
                 <div className="content has-text-white">
                   <ul>
-                    <li>✓ Buscas ilimitadas</li>
-                    <li>✓ Otimizações ilimitadas</li>
-                    <li>✓ Análise com IA (Claude)</li>
-                    <li>✓ Suporte prioritário</li>
+                    <li>✓ {t('landing.pricing.proFeature1')}</li>
+                    <li>✓ {t('landing.pricing.proFeature2')}</li>
+                    <li>✓ {t('landing.pricing.proFeature3')}</li>
+                    <li>✓ {t('landing.pricing.proFeature4')}</li>
                   </ul>
                 </div>
 
-                <button className="button is-light is-fullwidth">
-                  Assinar Agora
+                <button className="button is-light is-fullwidth" onClick={openSignup}>
+                  {t('landing.pricing.subscribe')}
                 </button>
               </div>
             </div>
@@ -100,21 +105,21 @@ export default function LandingPage() {
             <div className="column is-4">
               <div className="box has-background-dark">
                 <h3 className="title is-4 has-text-danger">
-                  Enterprise
+                  {t('landing.pricing.enterprise')}
                 </h3>
-                <p className="subtitle is-6">Personalizado</p>
+                <p className="subtitle is-6">{t('landing.pricing.custom')}</p>
                 
                 <div className="content">
                   <ul>
-                    <li>Tudo do Pro</li>
-                    <li>API dedicada</li>
-                    <li>Integrações custom</li>
-                    <li>Account manager</li>
+                    <li>{t('landing.pricing.enterpriseFeature1')}</li>
+                    <li>{t('landing.pricing.enterpriseFeature2')}</li>
+                    <li>{t('landing.pricing.enterpriseFeature3')}</li>
+                    <li>{t('landing.pricing.enterpriseFeature4')}</li>
                   </ul>
                 </div>
 
                 <button className="button is-danger is-fullwidth">
-                  Falar com Sales
+                  {t('landing.pricing.talkSales')}
                 </button>
               </div>
             </div>
@@ -126,28 +131,28 @@ export default function LandingPage() {
       <section className="section">
         <div className="container">
           <h2 className="title is-2 has-text-centered mb-6">
-            🎯 Recursos
+            {t('landing.features.title')}
           </h2>
 
           <div className="columns is-multiline">
             <div className="column is-4">
               <div className="box">
-                <p className="heading">🌍 Global</p>
-                <p>Suporte para 180+ países e 50+ idiomas</p>
+                <p className="heading">{t('landing.features.globalTitle')}</p>
+                <p>{t('landing.features.globalDesc')}</p>
               </div>
             </div>
             
             <div className="column is-4">
               <div className="box">
-                <p className="heading">🤖 IA Inteligente</p>
-                <p>Otimização com Claude 3.5 + Google Gemini</p>
+                <p className="heading">{t('landing.features.aiTitle')}</p>
+                <p>{t('landing.features.aiDesc')}</p>
               </div>
             </div>
             
             <div className="column is-4">
               <div className="box">
-                <p className="heading">📱 Mobile First</p>
-                <p>Aplicativo Web responsivo para qualquer dispositivo</p>
+                <p className="heading">{t('landing.features.mobileTitle')}</p>
+                <p>{t('landing.features.mobileDesc')}</p>
               </div>
             </div>
           </div>
@@ -158,16 +163,17 @@ export default function LandingPage() {
       <section className="section has-background-primary has-text-centered has-text-white">
         <div className="container">
           <h2 className="title is-3 has-text-white">
-            Pronto para revolucionar sua carreira?
+            {t('landing.footer.title')}
           </h2>
           <p className="subtitle is-5 has-text-white-bis mb-6">
-            Junte-se a milhares de profissionais que já estão usando Sync.IA
+            {t('landing.footer.subtitle')}
           </p>
-          <button className="button is-light is-large">
+          <button className="button is-light is-large" onClick={openSignup}>
             {t('landing.cta.start')}
           </button>
         </div>
       </section>
+      <AuthModal isOpen={isAuthOpen} mode={authMode} onClose={() => setIsAuthOpen(false)} />
     </main>
   );
 }

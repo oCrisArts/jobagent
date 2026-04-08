@@ -1,46 +1,51 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import {match as matchLocale} from '@formatjs/intl-localematcher';
+import Negotiator from 'negotiator';
 
-const locales = ['en', 'pt'];
-const defaultLocale = 'en';
+const locales = ['pt', 'en'];
+const defaultLocale = 'pt';
 
 /**
  * Detecta idioma preferido do usuário
  * Prioridade: Cookie > Padrão
  */
 function getPreferredLocale(request: NextRequest): string {
-  // Verificar cookie existente
   const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
   if (cookieLocale && locales.includes(cookieLocale)) {
     return cookieLocale;
   }
 
-  // Usar padrão
-  return defaultLocale;
+  const headers = Object.fromEntries(request.headers.entries());
+  const languages = new Negotiator({headers}).languages();
+  return matchLocale(languages, locales, defaultLocale);
 }
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const pathname = request.nextUrl.pathname;
 
-  // ── i18n: ADICIONAR LOCALE AO COOKIE (sem mudar URL) ───────────────
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/api') ||
+    pathname.includes('.') ||
+    pathname === '/favicon.ico'
+  ) {
+    return NextResponse.next();
+  }
+
   const locale = getPreferredLocale(request);
   const response = NextResponse.next();
-  
-  // Apenas setar cookie se for diferente do atual
-  if (request.cookies.get('NEXT_LOCALE')?.value !== locale) {
-    response.cookies.set('NEXT_LOCALE', locale, {
-      maxAge: 365 * 24 * 60 * 60, // 1 ano
-      httpOnly: false,
-      sameSite: 'lax',
-    });
-  }
+  response.cookies.set('NEXT_LOCALE', locale, {
+    maxAge: 365 * 24 * 60 * 60,
+    httpOnly: false,
+    sameSite: 'lax',
+    path: '/',
+  });
 
   return response;
 }
 
-// ── MATCHER: Aplica middleware em todas as rotas ─────────────────────
+// Manter URL limpa, sem segmento de locale.
 export const config = {
-  matcher: [
-    '/((?!_next/static|_next/image|favicon.ico).*)',
-  ],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
 };
