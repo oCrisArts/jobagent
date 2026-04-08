@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 
 interface AuthModalProps {
   isOpen?: boolean;
+  mode?: 'login' | 'signup';
   onClose?: () => void;
 }
 
@@ -21,6 +22,7 @@ interface AuthModalProps {
  */
 export default function AuthModal({
   isOpen: externalIsOpen = false,
+  mode: _mode = 'login',
   onClose,
 }: AuthModalProps) {
   const t = useTranslations('AuthModal');
