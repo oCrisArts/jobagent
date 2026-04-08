@@ -86,6 +86,38 @@
     "continueGoogle": "Continue with Google",
     "continueLinkedin": "Continue with LinkedIn"
   },
+  "Navigation": {
+    "ariaLabel": "Main navigation",
+    "brandName": "Sync.IA",
+    "linkProduto": "Product",
+    "linkPrecos": "Pricing",
+    "linkInicio": "Home",
+    "linkVagas": "Jobs",
+    "linkCurriculos": "Resumes",
+    "linkCV": "Resume",
+    "linkNetwork": "Network",
+    "ctaSignIn": "Sign In",
+    "profile": "Profile",
+    "myAccount": "My Account",
+    "logout": "Logout",
+    "mobileNav": "Mobile navigation"
+  },
+  "AuthModal": {
+    "title": "Sign in or create your account",
+    "subtitle": "Find your job with AI in minutes",
+    "signInGoogle": "Continue with Google",
+    "signInLinkedIn": "Continue with LinkedIn",
+    "orDivider": "or",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@email.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "••••••••",
+    "signInButton": "Sign in",
+    "loading": "Loading...",
+    "errorEmptyFields": "Please fill all fields",
+    "termsText": "By signing in, you agree to our",
+    "termsLink": "Terms of Service"
+  },
   "inicio": {
     "title": "Dashboard",
     "subtitle": "Main HUD with SSI Score, applied jobs and last viewed job.",

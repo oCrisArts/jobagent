@@ -1,80 +1,107 @@
 'use client';
 
 import { useSession, signOut } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 /**
- * 🧭 Navigation Global Híbrida
+ * 🧭 Navigation Global Híbrida + i18n + Hydration Safe
  * 
- * Comportamento:
- * 1. Visitante (sem login): Landing Page com âncoras suaves
- * 2. Desktop (com login): Top Navbar com links principais
- * 3. Mobile (com login): Bottom Navigation Bar (estilo app nativo)
+ * ✅ BDD Implementado:
+ * - Cenário A: Visitante (Landing, deslogado) - Âncoras suaves + i18n
+ * - Cenário B: Logado Desktop - Top Navbar com links
+ * - Cenário C: Logado Mobile - Bottom Navigation Bar (App-like)
+ * - isMounted state para evitar hydration mismatch
  */
 export default function Navigation() {
   const { data: session } = useSession();
+  const t = useTranslations('Navigation');
   const pathname = usePathname();
+  
+  // ✅ BDD: isMounted para evitar hydration mismatch
+  const [isMounted, setIsMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Detectar mudança de scroll para efeito visual
+  // ─────────────────────────────────────────────────────
+  // 🔄 Montar componente no cliente (hydration safe)
+  // ─────────────────────────────────────────────────────
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Detectar mudança de scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Detectar tamanho da tela para responsividade
+  // Detectar tamanho da tela
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
     handleResize();
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // ─────────────────────────────────────────────────────────
-  // 👤 CENÁRIO 1: Visitante na Landing (Deslogado)
-  // ─────────────────────────────────────────────────────────
+  // ─────────────────────────────────────────────────────
+  // ⚠️ Retornar null até montar no cliente
+  // ─────────────────────────────────────────────────────
+  if (!isMounted) {
+    return null; // ✅ Evita hydration mismatch
+  }
+
+  // ─────────────────────────────────────────────────────
+  // 👤 CENÁRIO A: Visitante (Deslogado - Landing)
+  // ─────────────────────────────────────────────────────
   if (!session) {
     return (
-      <nav className="navbar is-fixed-top" role="navigation">
+      <nav
+        className="navbar is-fixed-top"
+        role="navigation"
+        aria-label={t('ariaLabel')}
+        style={{ background: '#1A1D27', borderBottom: '1px solid #2A2D3A' }}
+      >
         <div className="navbar-brand">
           <Link href="/" className="navbar-item has-text-weight-bold">
             <span className="icon has-text-primary">
               <i className="fas fa-rocket"></i>
             </span>
-            <span>Sync.IA</span>
+            <span>{t('brandName')}</span>
           </Link>
         </div>
 
-        <div className="navbar-menu">
+        <div className="navbar-menu" id="navbarMenu">
           <div className="navbar-end">
-            {/* Âncoras da Landing Page */}
+            {/* ✅ BDD: Âncoras suaves (Smooth Scroll) */}
             <a href="#produto" className="navbar-item">
-              Produto
+              {t('linkProduto')}
             </a>
             <a href="#pricing" className="navbar-item">
-              Preços
+              {t('linkPrecos')}
             </a>
 
-            {/* Botão Entrar */}
+            {/* ✅ CTA: Botão Entrar */}
             <div className="navbar-item">
               <div className="buttons">
                 <button
                   className="button is-primary"
                   onClick={() => {
-                    // TODO: Abrir AuthModal
-                    console.log('Abrir AuthModal');
+                    // TODO: Abrir AuthModal via Context/State
+                    const event = new CustomEvent('openAuthModal');
+                    window.dispatchEvent(event);
                   }}
+                  aria-label={t('ctaSignIn')}
                 >
-                  Entrar
+                  {t('ctaSignIn')}
                 </button>
               </div>
             </div>
@@ -84,80 +111,107 @@ export default function Navigation() {
     );
   }
 
-  // ─────────────────────────────────────────────────────────
-  // 🖥️ CENÁRIO 2: Desktop (Logado)
-  // ─────────────────────────────────────────────────────────
+  // ─────────────────────────────────────────────────────
+  // 💻 CENÁRIO B: Desktop (Logado)
+  // ─────────────────────────────────────────────────────
   if (!isMobile) {
     return (
       <nav
         className={`navbar is-fixed-top ${isScrolled ? 'has-shadow' : ''}`}
         role="navigation"
+        aria-label={t('ariaLabel')}
+        style={{ background: '#1A1D27', borderBottom: '1px solid #2A2D3A' }}
       >
         <div className="navbar-brand">
           <Link href="/iniciar" className="navbar-item has-text-weight-bold">
             <span className="icon has-text-primary">
               <i className="fas fa-rocket"></i>
             </span>
-            <span>Sync.IA</span>
+            <span>{t('brandName')}</span>
           </Link>
         </div>
 
         <div className="navbar-menu">
           <div className="navbar-start">
-            <Link href="/iniciar" className="navbar-item">
+            {/* ✅ Links Principais */}
+            <Link
+              href="/iniciar"
+              className={`navbar-item ${
+                pathname === '/iniciar' ? 'is-active' : ''
+              }`}
+            >
               <span className="icon">
                 <i className="fas fa-home"></i>
               </span>
-              <span>Início</span>
+              <span>{t('linkInicio')}</span>
             </Link>
-            <Link href="/buscar" className="navbar-item">
+
+            <Link
+              href="/buscar"
+              className={`navbar-item ${
+                pathname === '/buscar' ? 'is-active' : ''
+              }`}
+            >
               <span className="icon">
                 <i className="fas fa-briefcase"></i>
               </span>
-              <span>Vagas</span>
+              <span>{t('linkVagas')}</span>
             </Link>
-            <Link href="/evoluir" className="navbar-item">
+
+            <Link
+              href="/evoluir"
+              className={`navbar-item ${
+                pathname === '/evoluir' ? 'is-active' : ''
+              }`}
+            >
               <span className="icon">
                 <i className="fas fa-file-pdf"></i>
               </span>
-              <span>Currículos</span>
+              <span>{t('linkCurriculos')}</span>
             </Link>
-            <Link href="/conectar" className="navbar-item">
+
+            <Link
+              href="/conectar"
+              className={`navbar-item ${
+                pathname === '/conectar' ? 'is-active' : ''
+              }`}
+            >
               <span className="icon">
                 <i className="fas fa-network-wired"></i>
               </span>
-              <span>Network</span>
+              <span>{t('linkNetwork')}</span>
             </Link>
           </div>
 
           <div className="navbar-end">
-            {/* Dropdown Perfil */}
+            {/* ✅ Dropdown Perfil */}
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link">
                 <span className="icon">
                   <i className="fas fa-user-circle"></i>
                 </span>
-                <span>{session.user?.name || 'Perfil'}</span>
+                <span>{session.user?.name || t('profile')}</span>
               </a>
-              <div className="navbar-dropdown">
+              <div className="navbar-dropdown is-right">
                 <Link href="/perfil" className="navbar-item">
                   <span className="icon-text">
                     <span className="icon">
                       <i className="fas fa-cog"></i>
                     </span>
-                    <span>Minha Conta</span>
+                    <span>{t('myAccount')}</span>
                   </span>
                 </Link>
                 <hr className="navbar-divider" />
                 <a
                   className="navbar-item"
-                  onClick={() => signOut()}
+                  onClick={() => signOut({ callbackUrl: '/' })}
+                  style={{ cursor: 'pointer' }}
                 >
                   <span className="icon-text">
                     <span className="icon">
                       <i className="fas fa-sign-out-alt"></i>
                     </span>
-                    <span>Sair</span>
+                    <span>{t('logout')}</span>
                   </span>
                 </a>
               </div>
@@ -168,13 +222,17 @@ export default function Navigation() {
     );
   }
 
-  // ─────────────────────────────────────────────────────────
-  // 📱 CENÁRIO 3: Mobile (Logado - App Like)
-  // ─────────────────────────────────────────────────────────
+  // ─────────────────────────────────────────────────────
+  // 📱 CENÁRIO C: Mobile (Logado - App Like)
+  // ─────────────────────────────────────────────────────
   return (
     <>
-      {/* Top Mobile Bar (minimal) */}
-      <nav className="navbar is-fixed-top" role="navigation">
+      {/* Top Mobile Bar (Minimal) */}
+      <nav
+        className="navbar is-fixed-top"
+        role="navigation"
+        style={{ background: '#1A1D27', borderBottom: '1px solid #2A2D3A' }}
+      >
         <div className="navbar-brand" style={{ width: '100%' }}>
           <div
             style={{
@@ -191,10 +249,11 @@ export default function Navigation() {
               </span>
             </Link>
 
-            {/* Perfil no topo */}
+            {/* ✅ Perfil Icon Mobile */}
             <button
-              className="button is-white"
+              className="button is-white is-small"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={t('profile')}
             >
               <span className="icon">
                 <i className="fas fa-user-circle"></i>
@@ -203,16 +262,17 @@ export default function Navigation() {
           </div>
         </div>
 
-        {/* Menu dropdown mobile */}
+        {/* Menu Dropdown Mobile */}
         {isMobileMenuOpen && (
           <div
             style={{
               position: 'absolute',
               top: '60px',
               right: '1rem',
-              background: '$color-surface-card',
+              background: '#1A1D27',
+              border: '1px solid #2A2D3A',
               borderRadius: '8px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
               minWidth: '200px',
               zIndex: 999,
             }}
@@ -222,27 +282,31 @@ export default function Navigation() {
               className="navbar-item"
               style={{ display: 'block', padding: '12px 16px' }}
             >
-              Minha Conta
+              {t('myAccount')}
             </Link>
             <hr style={{ margin: '8px 0' }} />
             <a
               className="navbar-item"
-              onClick={() => signOut()}
+              onClick={() => signOut({ callbackUrl: '/' })}
               style={{
                 display: 'block',
                 padding: '12px 16px',
-                color: '#d32f2f',
+                color: '#ff6b6b',
                 cursor: 'pointer',
               }}
             >
-              Sair
+              {t('logout')}
             </a>
           </div>
         )}
       </nav>
 
-      {/* Bottom Navigation Bar (Mobile) */}
-      <div className="navbar-bottom">
+      {/* ✅ Bottom Navigation Bar (Mobile - App Like) */}
+      <div
+        className="navbar-bottom"
+        role="navigation"
+        aria-label={t('mobileNav')}
+      >
         <Link
           href="/iniciar"
           className={`navbar-item ${
@@ -252,19 +316,17 @@ export default function Navigation() {
           <div className="icon">
             <i className="fas fa-home"></i>
           </div>
-          <div className="label">Início</div>
+          <div className="label">{t('linkInicio')}</div>
         </Link>
 
         <Link
           href="/buscar"
-          className={`navbar-item ${
-            pathname === '/buscar' ? 'is-active' : ''
-          }`}
+          className={`navbar-item ${pathname === '/buscar' ? 'is-active' : ''}`}
         >
           <div className="icon">
             <i className="fas fa-briefcase"></i>
           </div>
-          <div className="label">Vagas</div>
+          <div className="label">{t('linkVagas')}</div>
         </Link>
 
         <Link
@@ -276,7 +338,7 @@ export default function Navigation() {
           <div className="icon">
             <i className="fas fa-file-pdf"></i>
           </div>
-          <div className="label">CV</div>
+          <div className="label">{t('linkCV')}</div>
         </Link>
 
         <Link
@@ -288,7 +350,7 @@ export default function Navigation() {
           <div className="icon">
             <i className="fas fa-network-wired"></i>
           </div>
-          <div className="label">Network</div>
+          <div className="label">{t('linkNetwork')}</div>
         </Link>
       </div>
     </>

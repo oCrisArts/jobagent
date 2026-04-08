@@ -86,6 +86,38 @@
     "continueGoogle": "Continuar com Google",
     "continueLinkedin": "Continuar com LinkedIn"
   },
+  "Navigation": {
+    "ariaLabel": "Navegação principal",
+    "brandName": "Sync.IA",
+    "linkProduto": "Produto",
+    "linkPrecos": "Preços",
+    "linkInicio": "Início",
+    "linkVagas": "Vagas",
+    "linkCurriculos": "Currículos",
+    "linkCV": "CV",
+    "linkNetwork": "Network",
+    "ctaSignIn": "Entrar",
+    "profile": "Perfil",
+    "myAccount": "Minha Conta",
+    "logout": "Sair",
+    "mobileNav": "Navegação móvel"
+  },
+  "AuthModal": {
+    "title": "Acesse ou crie sua conta",
+    "subtitle": "Encontre sua vaga com IA em minutos",
+    "signInGoogle": "Continuar com Google",
+    "signInLinkedIn": "Continuar com LinkedIn",
+    "orDivider": "ou",
+    "emailLabel": "Email",
+    "emailPlaceholder": "seu@email.com",
+    "passwordLabel": "Senha",
+    "passwordPlaceholder": "••••••••",
+    "signInButton": "Entrar",
+    "loading": "Carregando...",
+    "errorEmptyFields": "Preencha todos os campos",
+    "termsText": "Ao entrar, você concorda com nossos",
+    "termsLink": "Termos de Serviço"
+  },
   "inicio": {
     "title": "Dashboard",
     "subtitle": "HUD principal com SSI Score, vagas aplicadas e última vaga vista.",
