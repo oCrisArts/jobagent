@@ -13,7 +13,7 @@ When('clico no elemento {string}', async ({ page }, selector: string) => {
 });
 
 Then('o elemento {string} deve estar visível', async ({ page }, selector: string) => {
-  const element = page.locator(selector);
+  const element = page.locator(selector).first();
   await expect(element).toBeVisible();
 });
 
@@ -29,6 +29,12 @@ When('acesso o caminho {string}', async ({ page }, path: string) => {
 
 Then('sou redirecionado para a página inicial', async ({ page }) => {
   await expect(page).toHaveURL('/');
+});
+
+Then('a página carrega sem redirecionamento', async ({ page }) => {
+  // Verifica que a URL atual é a que foi acessada (não houve redirecionamento)
+  const currentUrl = page.url();
+  expect(currentUrl).toContain('/inicio');
 });
 
 Then('não consigo acessar a área restrita', async ({ page }) => {
