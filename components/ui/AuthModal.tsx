@@ -19,10 +19,12 @@ export default function AuthModal({
   const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(externalIsOpen);
   const [isLoading, setIsLoading] = useState(false);
-  
+  const [view, setView] = useState<'login' | 'forgot-password'>('login');
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState('');
 
   useEffect(() => {
     setIsMounted(true);
@@ -71,6 +73,25 @@ export default function AuthModal({
       // await signIn('credentials', { email, password, callbackUrl: '/iniciar' });
     } catch (error) {
       console.error('Email sign-in error:', error);
+      setIsLoading(false);
+    }
+  };
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      if (!forgotEmail) {
+        alert(t('errorEmptyFields'));
+        setIsLoading(false);
+        return;
+      }
+      // TODO: Implementar envio de e-mail de recuperação via Resend/NextAuth
+      console.log('Enviar e-mail de recuperação para:', forgotEmail);
+      setIsLoading(false);
+      setView('login');
+    } catch (error) {
+      console.error('Forgot password error:', error);
       setIsLoading(false);
     }
   };
@@ -186,13 +207,17 @@ export default function AuthModal({
               </div>
               
               <div className="is-flex is-justify-content-flex-end mt-2">
-                <a 
-                  href="/forgot-password" 
-                  id="link-forgot-password" 
-                  className="is-size-7"
+                <button
+                  type="button"
+                  id="link-forgot-password"
+                  className="is-size-7 button is-text has-text-primary p-0"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setView('forgot-password');
+                  }}
                 >
                   {t('forgotPassword')}
-                </a>
+                </button>
               </div>
             </div>
 
@@ -206,6 +231,51 @@ export default function AuthModal({
               <span>{t('signInButton')}</span>
             </button>
           </form>
+
+          {/* Vista de Recuperação de Senha */}
+          {view === 'forgot-password' && (
+            <form onSubmit={handleForgotPassword} className="mt-5">
+              <div className="field">
+                <label htmlFor="input-forgot-email" className="label has-text-white has-text-weight-semibold">
+                  {t('emailLabel')}
+                </label>
+                <div className="control">
+                  <input
+                    id="input-forgot-email"
+                    className="input"
+                    type="email"
+                    placeholder={t('emailPlaceholder')}
+                    value={forgotEmail}
+                    onChange={(e) => setForgotEmail(e.target.value)}
+                    required
+                    disabled={isLoading}
+                    aria-required="true"
+                  />
+                </div>
+              </div>
+
+              <button
+                id="btn-send-recovery"
+                type="submit"
+                className={`button is-primary is-fullwidth mt-5 has-text-weight-semibold ${isLoading ? 'is-loading' : ''}`}
+                disabled={isLoading}
+                aria-busy={isLoading}
+              >
+                <span>{t('sendRecoveryButton')}</span>
+              </button>
+
+              <div className="has-text-centered mt-4">
+                <button
+                  type="button"
+                  id="btn-back-to-login"
+                  className="button is-text has-text-grey-light is-size-7 p-0"
+                  onClick={() => setView('login')}
+                >
+                  {t('backToLogin')}
+                </button>
+              </div>
+            </form>
+          )}
 
           <p className="has-text-centered mt-5 is-size-7 has-text-grey">
             {t('termsText')}{' '}

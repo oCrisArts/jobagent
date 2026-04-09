@@ -116,7 +116,10 @@
     "loading": "Carregando...",
     "errorEmptyFields": "Preencha todos os campos",
     "termsText": "Ao entrar, você concorda com nossos",
-    "termsLink": "Termos de Serviço"
+    "termsLink": "Termos de Serviço",
+    "forgotPassword": "Esqueceu a senha?",
+    "sendRecoveryButton": "Enviar Link de Recuperação",
+    "backToLogin": "Voltar para Login"
   },
   "AuthError": {
     "oauthCallbackError": "Erro ao processar o login OAuth. Tente novamente.",
@@ -131,6 +134,34 @@
       "ssi": "SSI Score",
       "appliedJobs": "Vagas aplicadas",
       "lastViewedJob": "Última vaga vista"
+    }
+  },
+  "Terms": {
+    "title": "Termos de Serviço",
+    "subtitle": "Última atualização: Abril de 2026",
+    "section1": {
+      "title": "1. Aceitação dos Termos",
+      "content": "Ao acessar e usar o JobAgent, você concorda em cumprir estes termos de serviço e todas as leis e regulamentos aplicáveis. Se você não concordar com qualquer um destes termos, está proibido de usar ou acessar este site."
+    },
+    "section2": {
+      "title": "2. Uso da Licença",
+      "content": "É concedida permissão para baixar temporariamente uma cópia dos materiais no JobAgent apenas para visualização transitória pessoal e não comercial. Esta é a concessão de uma licença, não uma transferência de título, e sob esta licença você não pode modificar ou copiar os materiais."
+    },
+    "section3": {
+      "title": "3. Isenção de Responsabilidade",
+      "content": "Os materiais no JobAgent são fornecidos 'como estão'. O JobAgent não oferece garantias, expressas ou implícitas, e por este meio isenta e nega todas as outras garantias, incluindo, sem limitação, garantias implícitas ou condições de comercialização."
+    },
+    "section4": {
+      "title": "4. Limitações de Responsabilidade",
+      "content": "Em nenhum caso o JobAgent ou seus fornecedores serão responsáveis por quaisquer danos que surjam do uso ou da incapacidade de usar os materiais no JobAgent, mesmo que o JobAgent tenha sido notificado sobre a possibilidade de tais danos."
+    },
+    "section5": {
+      "title": "5. Privacidade",
+      "content": "Sua privacidade é importante para nós. É política do JobAgent respeitar sua privacidade em relação a qualquer informação que possamos coletar no site JobAgent."
+    },
+    "contact": {
+      "title": "Contato",
+      "email": "Para questões sobre estes termos, entre em contato: support@jobagent.com"
     }
   },
   "vagas": {

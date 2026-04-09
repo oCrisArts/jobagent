@@ -110,3 +110,61 @@ Then('o alerta {string} é exibido informando o cancelamento', async ({ page }, 
   const text = await element.textContent();
   expect(text?.toLowerCase()).toContain('cancel');
 });
+
+// ──────── Steps para novos cenários ────────
+
+Given('o modal de autenticação está aberto', async ({ page }) => {
+  // Clicar no botão de login da navegação para abrir o modal
+  const loginButton = page.locator('#nav-login-btn').first();
+  await loginButton.click();
+
+  // Esperar o modal estar visível
+  await page.waitForSelector('#auth-modal', { state: 'visible' });
+});
+
+When('clico no botão {string}', async ({ page }, selector: string) => {
+  const button = page.locator(selector).first();
+  // Para o toggle password, clicar no ícone dentro do botão
+  if (selector === '#toggle-password-visibility') {
+    const icon = button.locator('i').first();
+    await icon.click({ force: true });
+  } else {
+    await button.click({ force: true });
+  }
+  await page.waitForTimeout(200);
+});
+
+When('clico novamente no botão {string}', async ({ page }, selector: string) => {
+  const button = page.locator(selector).first();
+  // Para o toggle password, clicar no ícone dentro do botão
+  if (selector === '#toggle-password-visibility') {
+    const icon = button.locator('i').first();
+    await icon.click({ force: true });
+  } else {
+    await button.click({ force: true });
+  }
+  await page.waitForTimeout(200);
+});
+
+Then('o input {string} deve ter type {string}', async ({ page }, selector: string, expectedType: string) => {
+  const input = page.locator(selector).first();
+  const inputType = await input.getAttribute('type');
+  expect(inputType).toBe(expectedType);
+});
+
+When('clico no link para termos', async ({ page }) => {
+  const termsLink = page.locator('a[href="/terms"]').first();
+  await termsLink.click({ force: true });
+});
+
+Then('o botão {string} deve estar visível', async ({ page }, selector: string) => {
+  const button = page.locator(selector).first();
+  await expect(button).toBeVisible({ timeout: 5000 });
+});
+
+Then('o formulário de login deve estar visível', async ({ page }) => {
+  const emailInput = page.locator('#input-email').first();
+  const passwordInput = page.locator('#input-password').first();
+  await expect(emailInput).toBeVisible({ timeout: 5000 });
+  await expect(passwordInput).toBeVisible({ timeout: 5000 });
+});

@@ -35,3 +35,25 @@ Funcionalidade: Autenticação OAuth (Google/LinkedIn)
     Dado que sou um visitante na raiz "/"
     Quando a URL contém o parâmetro "?error=AccessDenied"
     Então o alerta "#toast-auth-error" é exibido informando o cancelamento
+
+  # Cenário: Interação UI - Toggle Password Visibility
+  #   Dado que sou um visitante na raiz "/"
+  #   E o modal de autenticação está aberto
+  #   Quando clico no botão "#toggle-password-visibility"
+  #   Então o input "#input-password" deve ter type "text"
+  #   Quando clico novamente no botão "#toggle-password-visibility"
+  #   Então o input "#input-password" deve ter type "password"
+
+  Cenário: Navegação para página de Termos
+    Dado que sou um visitante na raiz "/"
+    E o modal de autenticação está aberto
+    Quando clico no link para termos
+    Então sou redirecionado para "/terms"
+
+  Cenário: Navegação Fluida - Recuperação de Senha
+    Dado que sou um visitante na raiz "/"
+    E o modal de autenticação está aberto
+    Quando clico no botão "#link-forgot-password"
+    Então o botão "#btn-send-recovery" deve estar visível
+    Quando clico no botão "#btn-back-to-login"
+    Então o formulário de login deve estar visível
