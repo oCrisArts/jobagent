@@ -37,6 +37,22 @@ test.describe("Autenticação OAuth (Google/LinkedIn)", () => {
     await Then("o alerta \"#toast-auth-error\" é exibido informando o cancelamento", null, { page });
   });
 
+  test("Navegação para página de Termos", async ({ Given, page, And, When, Then }) => {
+    await Given("que sou um visitante na raiz \"/\"", null, { page });
+    await And("o modal de autenticação está aberto", null, { page });
+    await When("clico no link para termos", null, { page });
+    await Then("sou redirecionado para \"/terms\"", null, { page });
+  });
+
+  test("Navegação Fluida - Recuperação de Senha", async ({ Given, page, And, When, Then }) => {
+    await Given("que sou um visitante na raiz \"/\"", null, { page });
+    await And("o modal de autenticação está aberto", null, { page });
+    await When("clico no botão \"#link-forgot-password\"", null, { page });
+    await Then("o botão \"#btn-send-recovery\" deve estar visível", null, { page });
+    await When("clico no botão \"#btn-back-to-login\"", null, { page });
+    await Then("o formulário de login deve estar visível", null, { page });
+  });
+
 });
 
 // == technical section ==
@@ -53,4 +69,6 @@ const bddFileMeta = {
   "Cadastro/Login via LinkedIn com validação de persistência": {"pickleLocation":"20:3"},
   "Erro no callback OAuth exibe alerta": {"pickleLocation":"29:3"},
   "Cancelamento pelo utilizador exibe alerta": {"pickleLocation":"34:3"},
+  "Navegação para página de Termos": {"pickleLocation":"47:3"},
+  "Navegação Fluida - Recuperação de Senha": {"pickleLocation":"53:3"},
 };

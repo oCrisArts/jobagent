@@ -1,229 +1,61 @@
-<testsuites id="" name="" tests="48" failures="0" skipped="12" errors="0" time="86.004927">
-<testsuite name="tests\features\auth.feature.spec.js" timestamp="2026-04-09T16:47:42.337Z" hostname="chromium" tests="4" failures="0" skipped="0" time="49.832" errors="0">
-<testcase name="Autenticação OAuth (Google/LinkedIn) › Cadastro/Login via Google com validação de persistência" classname="tests\features\auth.feature.spec.js" time="9.839">
-<system-out>
-<![CDATA[◇ injected env (18) from .env.local // tip: ◈ secrets for agents [www.dotenvx.com]
-]]>
-</system-out>
-</testcase>
-<testcase name="Autenticação OAuth (Google/LinkedIn) › Cadastro/Login via LinkedIn com validação de persistência" classname="tests\features\auth.feature.spec.js" time="9.803">
+<testsuites id="" name="" tests="54" failures="0" skipped="12" errors="0" time="54.662603000000004">
+<testsuite name="tests\features\auth.feature.spec.js" timestamp="2026-04-09T17:04:59.794Z" hostname="chromium" tests="6" failures="0" skipped="0" time="66.745" errors="0">
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Cadastro/Login via Google com validação de persistência" classname="tests\features\auth.feature.spec.js" time="3.232">
 <system-out>
 <![CDATA[◇ injected env (18) from .env.local // tip: ⌘ enable debugging { debug: true }
 ]]>
 </system-out>
 </testcase>
-<testcase name="Autenticação OAuth (Google/LinkedIn) › Erro no callback OAuth exibe alerta" classname="tests\features\auth.feature.spec.js" time="17.325">
-<system-out>
-<![CDATA[◇ injected env (18) from .env.local // tip: ⌘ suppress logs { quiet: true }
-]]>
-</system-out>
-</testcase>
-<testcase name="Autenticação OAuth (Google/LinkedIn) › Cancelamento pelo utilizador exibe alerta" classname="tests\features\auth.feature.spec.js" time="12.865">
-<system-out>
-<![CDATA[◇ injected env (18) from .env.local // tip: ⌘ custom filepath { path: '/custom/path/.env' }
-]]>
-</system-out>
-</testcase>
-</testsuite>
-<testsuite name="tests\features\design.feature.spec.js" timestamp="2026-04-09T16:47:42.337Z" hostname="chromium" tests="4" failures="0" skipped="0" time="0.229" errors="0">
-<testcase name="Validação de Design Tokens › Validar existência do arquivo de tokens" classname="tests\features\design.feature.spec.js" time="0.056">
-<system-out>
-<![CDATA[◇ injected env (18) from .env.local // tip: ⌘ custom filepath { path: '/custom/path/.env' }
-]]>
-</system-out>
-</testcase>
-<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de cor" classname="tests\features\design.feature.spec.js" time="0.054">
-<system-out>
-<![CDATA[◇ injected env (18) from .env.local // tip: ◈ secrets for agents [www.dotenvx.com]
-]]>
-</system-out>
-</testcase>
-<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de espaçamento" classname="tests\features\design.feature.spec.js" time="0.064">
-<system-out>
-<![CDATA[◇ injected env (18) from .env.local // tip: ⌘ suppress logs { quiet: true }
-]]>
-</system-out>
-</testcase>
-<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de tipografia" classname="tests\features\design.feature.spec.js" time="0.055">
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Cadastro/Login via LinkedIn com validação de persistência" classname="tests\features\auth.feature.spec.js" time="3.271">
 <system-out>
 <![CDATA[◇ injected env (18) from .env.local // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
 ]]>
 </system-out>
 </testcase>
-</testsuite>
-<testsuite name="tests\features\infra.feature.spec.js" timestamp="2026-04-09T16:47:42.337Z" hostname="chromium" tests="6" failures="0" skipped="4" time="8.79" errors="0">
-<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Supabase" classname="tests\features\infra.feature.spec.js">
-<properties>
-<property name="skip" value="Variáveis do Supabase não configuradas no .env.local">
-</property>
-</properties>
-<skipped>
-</skipped>
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Erro no callback OAuth exibe alerta" classname="tests\features\auth.feature.spec.js" time="18.703">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ⌁ auth for agents [www.vestauth.com]
+]]>
+</system-out>
 </testcase>
-<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Stripe" classname="tests\features\infra.feature.spec.js">
-<properties>
-<property name="skip" value="Variáveis do Stripe não configuradas no .env.local">
-</property>
-</properties>
-<skipped>
-</skipped>
-</testcase>
-<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do NextAuth" classname="tests\features\infra.feature.spec.js" time="0.028">
-</testcase>
-<testcase name="Validação de Infraestrutura › Validar conexão com banco de dados Supabase" classname="tests\features\infra.feature.spec.js">
-<properties>
-<property name="skip" value="Credenciais do Supabase não configuradas no .env.local">
-</property>
-</properties>
-<skipped>
-</skipped>
-</testcase>
-<testcase name="Validação de Infraestrutura › Verificar integridade do provedor de e-mail" classname="tests\features\infra.feature.spec.js" time="8.039">
-</testcase>
-<testcase name="Validação de Infraestrutura › Validar disponibilidade da API do Supabase" classname="tests\features\infra.feature.spec.js">
-<properties>
-<property name="skip" value="Credenciais do Supabase não configuradas no .env.local">
-</property>
-</properties>
-<skipped>
-</skipped>
-</testcase>
-</testsuite>
-<testsuite name="tests\features\navigation.feature.spec.js" timestamp="2026-04-09T16:47:42.337Z" hostname="chromium" tests="2" failures="0" skipped="0" time="25.463" errors="0">
-<testcase name="Navegação do Usuário › Visitante clica no botão de login na página inicial" classname="tests\features\navigation.feature.spec.js" time="9.125">
-</testcase>
-<testcase name="Navegação do Usuário › Visitante deslogado é bloqueado ao acessar área restrita" classname="tests\features\navigation.feature.spec.js" time="16.338">
-</testcase>
-</testsuite>
-<testsuite name="tests\features\auth.feature.spec.js" timestamp="2026-04-09T16:47:42.337Z" hostname="firefox" tests="4" failures="0" skipped="0" time="32.275" errors="0">
-<testcase name="Autenticação OAuth (Google/LinkedIn) › Cadastro/Login via Google com validação de persistência" classname="tests\features\auth.feature.spec.js" time="7.335">
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Cancelamento pelo utilizador exibe alerta" classname="tests\features\auth.feature.spec.js" time="18.717">
 <system-out>
 <![CDATA[◇ injected env (18) from .env.local // tip: ⌘ override existing { override: true }
 ]]>
 </system-out>
 </testcase>
-<testcase name="Autenticação OAuth (Google/LinkedIn) › Cadastro/Login via LinkedIn com validação de persistência" classname="tests\features\auth.feature.spec.js" time="6.344">
-<system-out>
-<![CDATA[◇ injected env (18) from .env.local // tip: ◈ encrypted .env [www.dotenvx.com]
-]]>
-</system-out>
-</testcase>
-<testcase name="Autenticação OAuth (Google/LinkedIn) › Erro no callback OAuth exibe alerta" classname="tests\features\auth.feature.spec.js" time="9.311">
-<system-out>
-<![CDATA[◇ injected env (18) from .env.local // tip: ◈ encrypted .env [www.dotenvx.com]
-]]>
-</system-out>
-</testcase>
-<testcase name="Autenticação OAuth (Google/LinkedIn) › Cancelamento pelo utilizador exibe alerta" classname="tests\features\auth.feature.spec.js" time="9.285">
-<system-out>
-<![CDATA[◇ injected env (18) from .env.local // tip: ⌘ custom filepath { path: '/custom/path/.env' }
-]]>
-</system-out>
-</testcase>
-</testsuite>
-<testsuite name="tests\features\design.feature.spec.js" timestamp="2026-04-09T16:47:42.337Z" hostname="firefox" tests="4" failures="0" skipped="0" time="0.137" errors="0">
-<testcase name="Validação de Design Tokens › Validar existência do arquivo de tokens" classname="tests\features\design.feature.spec.js" time="0.091">
-<system-out>
-<![CDATA[◇ injected env (18) from .env.local // tip: ⌘ custom filepath { path: '/custom/path/.env' }
-]]>
-</system-out>
-</testcase>
-<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de cor" classname="tests\features\design.feature.spec.js" time="0.021">
-</testcase>
-<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de espaçamento" classname="tests\features\design.feature.spec.js" time="0.013">
-</testcase>
-<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de tipografia" classname="tests\features\design.feature.spec.js" time="0.012">
-</testcase>
-</testsuite>
-<testsuite name="tests\features\infra.feature.spec.js" timestamp="2026-04-09T16:47:42.337Z" hostname="firefox" tests="6" failures="0" skipped="4" time="5.376" errors="0">
-<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Supabase" classname="tests\features\infra.feature.spec.js">
-<properties>
-<property name="skip" value="Variáveis do Supabase não configuradas no .env.local">
-</property>
-</properties>
-<skipped>
-</skipped>
-</testcase>
-<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Stripe" classname="tests\features\infra.feature.spec.js">
-<properties>
-<property name="skip" value="Variáveis do Stripe não configuradas no .env.local">
-</property>
-</properties>
-<skipped>
-</skipped>
-</testcase>
-<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do NextAuth" classname="tests\features\infra.feature.spec.js" time="0.012">
-</testcase>
-<testcase name="Validação de Infraestrutura › Validar conexão com banco de dados Supabase" classname="tests\features\infra.feature.spec.js">
-<properties>
-<property name="skip" value="Credenciais do Supabase não configuradas no .env.local">
-</property>
-</properties>
-<skipped>
-</skipped>
-</testcase>
-<testcase name="Validação de Infraestrutura › Verificar integridade do provedor de e-mail" classname="tests\features\infra.feature.spec.js" time="5.015">
-</testcase>
-<testcase name="Validação de Infraestrutura › Validar disponibilidade da API do Supabase" classname="tests\features\infra.feature.spec.js">
-<properties>
-<property name="skip" value="Credenciais do Supabase não configuradas no .env.local">
-</property>
-</properties>
-<skipped>
-</skipped>
-</testcase>
-</testsuite>
-<testsuite name="tests\features\navigation.feature.spec.js" timestamp="2026-04-09T16:47:42.337Z" hostname="firefox" tests="2" failures="0" skipped="0" time="12.428" errors="0">
-<testcase name="Navegação do Usuário › Visitante clica no botão de login na página inicial" classname="tests\features\navigation.feature.spec.js" time="2.243">
-</testcase>
-<testcase name="Navegação do Usuário › Visitante deslogado é bloqueado ao acessar área restrita" classname="tests\features\navigation.feature.spec.js" time="10.185">
-<system-out>
-<![CDATA[◇ injected env (18) from .env.local // tip: ◈ secrets for agents [www.dotenvx.com]
-]]>
-</system-out>
-</testcase>
-</testsuite>
-<testsuite name="tests\features\auth.feature.spec.js" timestamp="2026-04-09T16:47:42.337Z" hostname="webkit" tests="4" failures="0" skipped="0" time="21.917" errors="0">
-<testcase name="Autenticação OAuth (Google/LinkedIn) › Cadastro/Login via Google com validação de persistência" classname="tests\features\auth.feature.spec.js" time="3.744">
-<system-out>
-<![CDATA[◇ injected env (18) from .env.local // tip: ◈ secrets for agents [www.dotenvx.com]
-]]>
-</system-out>
-</testcase>
-<testcase name="Autenticação OAuth (Google/LinkedIn) › Cadastro/Login via LinkedIn com validação de persistência" classname="tests\features\auth.feature.spec.js" time="2.537">
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Navegação para página de Termos" classname="tests\features\auth.feature.spec.js" time="19.065">
 <system-out>
 <![CDATA[◇ injected env (18) from .env.local // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
 ]]>
 </system-out>
 </testcase>
-<testcase name="Autenticação OAuth (Google/LinkedIn) › Erro no callback OAuth exibe alerta" classname="tests\features\auth.feature.spec.js" time="6.96">
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Navegação Fluida - Recuperação de Senha" classname="tests\features\auth.feature.spec.js" time="3.757">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ◈ encrypted .env [www.dotenvx.com]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="tests\features\design.feature.spec.js" timestamp="2026-04-09T17:04:59.794Z" hostname="chromium" tests="4" failures="0" skipped="0" time="0.186" errors="0">
+<testcase name="Validação de Design Tokens › Validar existência do arquivo de tokens" classname="tests\features\design.feature.spec.js" time="0.057">
 <system-out>
 <![CDATA[◇ injected env (18) from .env.local // tip: ⌘ enable debugging { debug: true }
 ]]>
 </system-out>
 </testcase>
-<testcase name="Autenticação OAuth (Google/LinkedIn) › Cancelamento pelo utilizador exibe alerta" classname="tests\features\auth.feature.spec.js" time="8.676">
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de cor" classname="tests\features\design.feature.spec.js" time="0.089">
 <system-out>
-<![CDATA[◇ injected env (18) from .env.local // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+<![CDATA[◇ injected env (18) from .env.local // tip: ◈ secrets for agents [www.dotenvx.com]
 ]]>
 </system-out>
 </testcase>
-</testsuite>
-<testsuite name="tests\features\design.feature.spec.js" timestamp="2026-04-09T16:47:42.337Z" hostname="webkit" tests="4" failures="0" skipped="0" time="0.17" errors="0">
-<testcase name="Validação de Design Tokens › Validar existência do arquivo de tokens" classname="tests\features\design.feature.spec.js" time="0.08">
-<system-out>
-<![CDATA[◇ injected env (18) from .env.local // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
-]]>
-</system-out>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de espaçamento" classname="tests\features\design.feature.spec.js" time="0.026">
 </testcase>
-<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de cor" classname="tests\features\design.feature.spec.js" time="0.036">
-</testcase>
-<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de espaçamento" classname="tests\features\design.feature.spec.js" time="0.03">
-</testcase>
-<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de tipografia" classname="tests\features\design.feature.spec.js" time="0.024">
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de tipografia" classname="tests\features\design.feature.spec.js" time="0.014">
 </testcase>
 </testsuite>
-<testsuite name="tests\features\infra.feature.spec.js" timestamp="2026-04-09T16:47:42.337Z" hostname="webkit" tests="6" failures="0" skipped="4" time="2.907" errors="0">
+<testsuite name="tests\features\infra.feature.spec.js" timestamp="2026-04-09T17:04:59.794Z" hostname="chromium" tests="6" failures="0" skipped="4" time="9.814" errors="0">
 <testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Supabase" classname="tests\features\infra.feature.spec.js">
 <properties>
 <property name="skip" value="Variáveis do Supabase não configuradas no .env.local">
@@ -250,7 +82,7 @@
 <skipped>
 </skipped>
 </testcase>
-<testcase name="Validação de Infraestrutura › Verificar integridade do provedor de e-mail" classname="tests\features\infra.feature.spec.js" time="2.607">
+<testcase name="Validação de Infraestrutura › Verificar integridade do provedor de e-mail" classname="tests\features\infra.feature.spec.js" time="9.041">
 </testcase>
 <testcase name="Validação de Infraestrutura › Validar disponibilidade da API do Supabase" classname="tests\features\infra.feature.spec.js">
 <properties>
@@ -261,10 +93,210 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="tests\features\navigation.feature.spec.js" timestamp="2026-04-09T16:47:42.337Z" hostname="webkit" tests="2" failures="0" skipped="0" time="12.507" errors="0">
-<testcase name="Navegação do Usuário › Visitante clica no botão de login na página inicial" classname="tests\features\navigation.feature.spec.js" time="5.586">
+<testsuite name="tests\features\navigation.feature.spec.js" timestamp="2026-04-09T17:04:59.794Z" hostname="chromium" tests="2" failures="0" skipped="0" time="25.258" errors="0">
+<testcase name="Navegação do Usuário › Visitante clica no botão de login na página inicial" classname="tests\features\navigation.feature.spec.js" time="9.731">
 </testcase>
-<testcase name="Navegação do Usuário › Visitante deslogado é bloqueado ao acessar área restrita" classname="tests\features\navigation.feature.spec.js" time="6.921">
+<testcase name="Navegação do Usuário › Visitante deslogado é bloqueado ao acessar área restrita" classname="tests\features\navigation.feature.spec.js" time="15.527">
+</testcase>
+</testsuite>
+<testsuite name="tests\features\auth.feature.spec.js" timestamp="2026-04-09T17:04:59.794Z" hostname="firefox" tests="6" failures="0" skipped="0" time="41.247" errors="0">
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Cadastro/Login via Google com validação de persistência" classname="tests\features\auth.feature.spec.js" time="5.461">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ◈ encrypted .env [www.dotenvx.com]
+]]>
+</system-out>
+</testcase>
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Cadastro/Login via LinkedIn com validação de persistência" classname="tests\features\auth.feature.spec.js" time="4.911">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ⌘ override existing { override: true }
+]]>
+</system-out>
+</testcase>
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Erro no callback OAuth exibe alerta" classname="tests\features\auth.feature.spec.js" time="5.922">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ⌘ enable debugging { debug: true }
+]]>
+</system-out>
+</testcase>
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Cancelamento pelo utilizador exibe alerta" classname="tests\features\auth.feature.spec.js" time="6.96">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ⌁ auth for agents [www.vestauth.com]
+]]>
+</system-out>
+</testcase>
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Navegação para página de Termos" classname="tests\features\auth.feature.spec.js" time="9.031">
+</testcase>
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Navegação Fluida - Recuperação de Senha" classname="tests\features\auth.feature.spec.js" time="8.962">
+</testcase>
+</testsuite>
+<testsuite name="tests\features\design.feature.spec.js" timestamp="2026-04-09T17:04:59.794Z" hostname="firefox" tests="4" failures="0" skipped="0" time="0.384" errors="0">
+<testcase name="Validação de Design Tokens › Validar existência do arquivo de tokens" classname="tests\features\design.feature.spec.js" time="0.078">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ⌘ override existing { override: true }
+]]>
+</system-out>
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de cor" classname="tests\features\design.feature.spec.js" time="0.073">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ⌁ auth for agents [www.vestauth.com]
+]]>
+</system-out>
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de espaçamento" classname="tests\features\design.feature.spec.js" time="0.103">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ⌘ suppress logs { quiet: true }
+]]>
+</system-out>
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de tipografia" classname="tests\features\design.feature.spec.js" time="0.13">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ◈ encrypted .env [www.dotenvx.com]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="tests\features\infra.feature.spec.js" timestamp="2026-04-09T17:04:59.794Z" hostname="firefox" tests="6" failures="0" skipped="4" time="1.599" errors="0">
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Supabase" classname="tests\features\infra.feature.spec.js">
+<properties>
+<property name="skip" value="Variáveis do Supabase não configuradas no .env.local">
+</property>
+</properties>
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Stripe" classname="tests\features\infra.feature.spec.js">
+<properties>
+<property name="skip" value="Variáveis do Stripe não configuradas no .env.local">
+</property>
+</properties>
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do NextAuth" classname="tests\features\infra.feature.spec.js" time="0.022">
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar conexão com banco de dados Supabase" classname="tests\features\infra.feature.spec.js">
+<properties>
+<property name="skip" value="Credenciais do Supabase não configuradas no .env.local">
+</property>
+</properties>
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Validação de Infraestrutura › Verificar integridade do provedor de e-mail" classname="tests\features\infra.feature.spec.js" time="1.303">
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar disponibilidade da API do Supabase" classname="tests\features\infra.feature.spec.js">
+<properties>
+<property name="skip" value="Credenciais do Supabase não configuradas no .env.local">
+</property>
+</properties>
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="tests\features\navigation.feature.spec.js" timestamp="2026-04-09T17:04:59.794Z" hostname="firefox" tests="2" failures="0" skipped="0" time="7.77" errors="0">
+<testcase name="Navegação do Usuário › Visitante clica no botão de login na página inicial" classname="tests\features\navigation.feature.spec.js" time="2.691">
+</testcase>
+<testcase name="Navegação do Usuário › Visitante deslogado é bloqueado ao acessar área restrita" classname="tests\features\navigation.feature.spec.js" time="5.079">
+</testcase>
+</testsuite>
+<testsuite name="tests\features\auth.feature.spec.js" timestamp="2026-04-09T17:04:59.794Z" hostname="webkit" tests="6" failures="0" skipped="0" time="24.297" errors="0">
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Cadastro/Login via Google com validação de persistência" classname="tests\features\auth.feature.spec.js" time="3.308">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ⌘ override existing { override: true }
+]]>
+</system-out>
+</testcase>
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Cadastro/Login via LinkedIn com validação de persistência" classname="tests\features\auth.feature.spec.js" time="3.244">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+]]>
+</system-out>
+</testcase>
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Erro no callback OAuth exibe alerta" classname="tests\features\auth.feature.spec.js" time="5.616">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ◈ secrets for agents [www.dotenvx.com]
+]]>
+</system-out>
+</testcase>
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Cancelamento pelo utilizador exibe alerta" classname="tests\features\auth.feature.spec.js" time="5.628">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ⌁ auth for agents [www.vestauth.com]
+]]>
+</system-out>
+</testcase>
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Navegação para página de Termos" classname="tests\features\auth.feature.spec.js" time="3.509">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ⌁ auth for agents [www.vestauth.com]
+]]>
+</system-out>
+</testcase>
+<testcase name="Autenticação OAuth (Google/LinkedIn) › Navegação Fluida - Recuperação de Senha" classname="tests\features\auth.feature.spec.js" time="2.992">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ◈ encrypted .env [www.dotenvx.com]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="tests\features\design.feature.spec.js" timestamp="2026-04-09T17:04:59.794Z" hostname="webkit" tests="4" failures="0" skipped="0" time="0.217" errors="0">
+<testcase name="Validação de Design Tokens › Validar existência do arquivo de tokens" classname="tests\features\design.feature.spec.js" time="0.047">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ⌘ override existing { override: true }
+]]>
+</system-out>
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de cor" classname="tests\features\design.feature.spec.js" time="0.087">
+<system-out>
+<![CDATA[◇ injected env (18) from .env.local // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+]]>
+</system-out>
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de espaçamento" classname="tests\features\design.feature.spec.js" time="0.038">
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de tipografia" classname="tests\features\design.feature.spec.js" time="0.045">
+</testcase>
+</testsuite>
+<testsuite name="tests\features\infra.feature.spec.js" timestamp="2026-04-09T17:04:59.794Z" hostname="webkit" tests="6" failures="0" skipped="4" time="1.947" errors="0">
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Supabase" classname="tests\features\infra.feature.spec.js">
+<properties>
+<property name="skip" value="Variáveis do Supabase não configuradas no .env.local">
+</property>
+</properties>
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Stripe" classname="tests\features\infra.feature.spec.js">
+<properties>
+<property name="skip" value="Variáveis do Stripe não configuradas no .env.local">
+</property>
+</properties>
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do NextAuth" classname="tests\features\infra.feature.spec.js" time="0.03">
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar conexão com banco de dados Supabase" classname="tests\features\infra.feature.spec.js">
+<properties>
+<property name="skip" value="Credenciais do Supabase não configuradas no .env.local">
+</property>
+</properties>
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Validação de Infraestrutura › Verificar integridade do provedor de e-mail" classname="tests\features\infra.feature.spec.js" time="1.626">
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar disponibilidade da API do Supabase" classname="tests\features\infra.feature.spec.js">
+<properties>
+<property name="skip" value="Credenciais do Supabase não configuradas no .env.local">
+</property>
+</properties>
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="tests\features\navigation.feature.spec.js" timestamp="2026-04-09T17:04:59.794Z" hostname="webkit" tests="2" failures="0" skipped="0" time="6.996" errors="0">
+<testcase name="Navegação do Usuário › Visitante clica no botão de login na página inicial" classname="tests\features\navigation.feature.spec.js" time="3.842">
+</testcase>
+<testcase name="Navegação do Usuário › Visitante deslogado é bloqueado ao acessar área restrita" classname="tests\features\navigation.feature.spec.js" time="3.154">
 </testcase>
 </testsuite>
 </testsuites>
