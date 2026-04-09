@@ -189,7 +189,7 @@ export default function Navigation() {
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link" style={{ alignItems: 'center', gap: '0.5rem' }}>
                 {session.user?.image ? (
-                  <figure className="image is-32x32" style={{ margin: 0, flexShrink: 0 }}>
+                  <figure id="user-avatar" className="image is-32x32" style={{ margin: 0, flexShrink: 0 }}>
                     <img
                       className="is-rounded"
                       src={session.user.image}

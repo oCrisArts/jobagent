@@ -1,7 +1,6 @@
 import { type NextAuthOptions } from "next-auth";
 import LinkedInProvider from "next-auth/providers/linkedin";
 import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
 import { SupabaseAdapter } from "@auth/supabase-adapter";
 import { createClient } from "@supabase/supabase-js";
 
@@ -17,6 +16,8 @@ export const supabaseAdmin = createClient(
 // 📋 NextAuth Options
 // ─────────────────────────────────────────────────────────
 export const authOptions: NextAuthOptions = {
+  // O Adapter já cria o usuário na tabela public.users perfeitamente.
+  // E o nosso Trigger no banco de dados cria o public.profiles automaticamente!
   adapter: SupabaseAdapter({
     url: process.env.NEXT_PUBLIC_SUPABASE_URL!,
     secret: process.env.SUPABASE_SERVICE_ROLE_KEY!,
@@ -51,19 +52,6 @@ export const authOptions: NextAuthOptions = {
       },
       allowDangerousEmailAccountLinking: true,
     }),
-
-    // ──────── Email/Senha (Credentials — TODO) ────────
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Senha", type: "password" },
-      },
-      async authorize() {
-        // TODO: implementar autenticação com email/senha
-        return null;
-      },
-    }),
   ],
 
   // ─────────────────────────────────────────────────────
@@ -72,51 +60,32 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session, token }) {
       if (session.user && token.sub) {
+        // token.sub aqui já é o UUID correto gerado pelo banco de dados
         session.user.id = token.sub;
 
         try {
-          const { data } = await supabaseAdmin
+          // Buscamos as colunas corretas do novo Schema
+          const { data, error } = await supabaseAdmin
             .from("profiles")
-            .select("is_pro, subscription_status, auth_provider, avatar_url")
+            .select("plan_type, resumes_count, ssi_score")
             .eq("id", token.sub)
             .single();
 
-          if (data) {
-            session.user.image = data.avatar_url ?? session.user.image ?? null;
-            session.user.is_pro = data.is_pro ?? false;
-            session.user.subscription_status = data.subscription_status ?? "inactive";
-            session.user.provider = data.auth_provider ?? null;
+          if (!error && data) {
+            // Mapeamos os dados modernos para a sessão
+            session.user.plan_type = data.plan_type;
+            session.user.resumes_count = data.resumes_count;
+            session.user.ssi_score = data.ssi_score;
+            session.user.is_pro = data.plan_type === "pro" || data.plan_type === "enterprise";
           }
         } catch (error) {
-          console.error("Erro ao sincronizar perfil:", error);
+          console.error("Erro ao sincronizar perfil na sessão:", error);
         }
       }
       return session;
     },
 
-    async signIn({ user, account }) {
-      if (!user.email) return false;
-
-      try {
-        await supabaseAdmin.from("profiles").upsert(
-          {
-            id: user.id,
-            email: user.email,
-            name: user.name ?? null,
-            avatar_url: user.image ?? null,
-            auth_provider: account?.provider ?? null,
-            last_login: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-          },
-          { onConflict: "id" }
-        );
-      } catch (error) {
-        console.error("Erro ao salvar perfil no Supabase:", error);
-        // Não bloqueia o login se falhar
-      }
-
-      return true;
-    },
+    // O callback signIn manual foi REMOVIDO pois o banco de dados faz isso sozinho agora!
 
     async redirect({ url, baseUrl }) {
       if (url.startsWith("/")) return `${baseUrl}${url}`;

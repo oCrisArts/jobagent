@@ -1,15 +1,34 @@
-import "next-auth";
+import NextAuth, { DefaultSession } from "next-auth"
 
 declare module "next-auth" {
+  /**
+   * Retornado pelo `useSession`, `getSession` e recebido como prop na página
+   */
   interface Session {
     user: {
       id: string;
-      name?: string | null;
-      email?: string | null;
-      image?: string | null;
+      plan_type: string;
+      resumes_count: number;
+      ssi_score: number;
       is_pro: boolean;
-      subscription_status: string;
-      provider: string | null;
-    };
+    } & DefaultSession["user"]
+  }
+
+  /**
+   * O objeto User que o banco de dados retorna
+   */
+  interface User {
+    id: string;
+    plan_type?: string;
+    resumes_count?: number;
+    ssi_score?: number;
+    is_pro?: boolean;
+  }
+}
+
+declare module "next-auth/jwt" {
+  /** Retornado pelo callback jwt */
+  interface JWT {
+    id: string;
   }
 }

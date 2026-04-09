@@ -2,6 +2,7 @@
 import { SessionProvider } from "next-auth/react";
 import { NextIntlClientProvider } from "next-intl";
 import type { AbstractIntlMessages } from "next-intl";
+import AuthErrorToast from "@/components/ui/AuthErrorToast";
 
 type ProvidersProps = {
   children: React.ReactNode;
@@ -11,7 +12,10 @@ type ProvidersProps = {
 
 const Providers = ({ children, locale, messages }: ProvidersProps) => (
   <NextIntlClientProvider locale={locale} messages={messages}>
-    <SessionProvider>{children}</SessionProvider>
+    <SessionProvider>
+      <AuthErrorToast />
+      {children}
+    </SessionProvider>
   </NextIntlClientProvider>
 );
 

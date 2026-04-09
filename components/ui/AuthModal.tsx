@@ -138,6 +138,7 @@ export default function AuthModal({
           <div style={{ marginBottom: '2rem' }}>
             {/* Google Button */}
             <button
+              id="btn-google-login"
               className="button is-fullwidth"
               onClick={handleGoogleSignIn}
               disabled={isLoading}
@@ -156,6 +157,7 @@ export default function AuthModal({
 
             {/* LinkedIn Button */}
             <button
+              id="btn-linkedin-login"
               className="button is-fullwidth"
               onClick={handleLinkedInSignIn}
               disabled={isLoading}

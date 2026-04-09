@@ -118,6 +118,12 @@
     "termsText": "By signing in, you agree to our",
     "termsLink": "Terms of Service"
   },
+  "AuthError": {
+    "oauthCallbackError": "Error processing OAuth login. Please try again.",
+    "accessDenied": "Login cancelled by user.",
+    "configurationError": "OAuth configuration error. Please contact support.",
+    "defaultError": "Error logging in. Please try again."
+  },
   "inicio": {
     "title": "Dashboard",
     "subtitle": "Main HUD with SSI Score, applied jobs and last viewed job.",

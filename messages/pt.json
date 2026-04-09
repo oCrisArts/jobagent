@@ -118,6 +118,12 @@
     "termsText": "Ao entrar, você concorda com nossos",
     "termsLink": "Termos de Serviço"
   },
+  "AuthError": {
+    "oauthCallbackError": "Erro ao processar o login OAuth. Tente novamente.",
+    "accessDenied": "Login cancelado pelo utilizador.",
+    "configurationError": "Erro de configuração do OAuth. Contacte o suporte.",
+    "defaultError": "Erro ao fazer login. Tente novamente."
+  },
   "inicio": {
     "title": "Dashboard",
     "subtitle": "HUD principal com SSI Score, vagas aplicadas e última vaga vista.",
