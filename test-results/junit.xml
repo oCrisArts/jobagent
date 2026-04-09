@@ -1,0 +1,1262 @@
+<testsuites id="" name="" tests="55" failures="32" skipped="0" errors="3" time="75.742835">
+<testsuite name="tests\features\design.feature.spec.js" timestamp="2026-04-09T00:19:37.217Z" hostname="chromium" tests="4" failures="0" skipped="0" time="0.294" errors="0">
+<testcase name="Validação de Design Tokens › Validar existência do arquivo de tokens" classname="tests\features\design.feature.spec.js" time="0.064">
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de cor" classname="tests\features\design.feature.spec.js" time="0.093">
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de espaçamento" classname="tests\features\design.feature.spec.js" time="0.07">
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de tipografia" classname="tests\features\design.feature.spec.js" time="0.067">
+</testcase>
+</testsuite>
+<testsuite name="tests\features\infra.feature.spec.js" timestamp="2026-04-09T00:19:37.217Z" hostname="chromium" tests="5" failures="5" skipped="0" time="0.288" errors="0">
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Supabase" classname="tests\features\infra.feature.spec.js" time="0.07">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-4d887-te-obrigatórias-do-Supabase-chromium\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [chromium] › tests\features\infra.feature.spec.js:10:3 › Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Supabase › a variável "NEXT_PUBLIC_SUPABASE_URL" deve estar definida 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:45
+
+      43 | Then('a variável {string} deve estar definida', async ({}, varName: string) => {
+      44 |   const value = getEnvVar(varName);
+    > 45 |   expect(value).toBeDefined();
+         |                 ^
+      46 |   expect(value).not.toBe('');
+      47 | });
+      48 |
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:45:17)
+
+    Error Context: ..\test-results\tests-features-infra.featu-4d887-te-obrigatórias-do-Supabase-chromium\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Stripe" classname="tests\features\infra.feature.spec.js" time="0.072">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-13298-ente-obrigatórias-do-Stripe-chromium\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [chromium] › tests\features\infra.feature.spec.js:18:3 › Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Stripe › verifico as variáveis de ambiente do Stripe 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:54
+
+      52 |   const webhookSecret = getEnvVar('STRIPE_WEBHOOK_SECRET');
+      53 |   
+    > 54 |   expect(publishableKey).toBeDefined();
+         |                          ^
+      55 |   expect(secretKey).toBeDefined();
+      56 |   expect(webhookSecret).toBeDefined();
+      57 | });
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:54:26)
+
+    Error Context: ..\test-results\tests-features-infra.featu-13298-ente-obrigatórias-do-Stripe-chromium\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do NextAuth" classname="tests\features\infra.feature.spec.js" time="0.071">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-d7858-te-obrigatórias-do-NextAuth-chromium\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [chromium] › tests\features\infra.feature.spec.js:26:3 › Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do NextAuth › verifico as variáveis de ambiente do NextAuth 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:63
+
+      61 |   const authSecret = getEnvVar('NEXTAUTH_SECRET');
+      62 |   
+    > 63 |   expect(authUrl).toBeDefined();
+         |                   ^
+      64 |   expect(authSecret).toBeDefined();
+      65 | });
+      66 |
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:63:19)
+
+    Error Context: ..\test-results\tests-features-infra.featu-d7858-te-obrigatórias-do-NextAuth-chromium\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar conexão com banco de dados Supabase" classname="tests\features\infra.feature.spec.js" time="0.062">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-53feb-com-banco-de-dados-Supabase-chromium\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [chromium] › tests\features\infra.feature.spec.js:33:3 › Validação de Infraestrutura › Validar conexão com banco de dados Supabase › que as credenciais do Supabase estão configuradas 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:71
+
+      69 |   const supabaseKey = getEnvVar('NEXT_PUBLIC_SUPABASE_ANON_KEY');
+      70 |   
+    > 71 |   expect(supabaseUrl).toBeDefined();
+         |                       ^
+      72 |   expect(supabaseKey).toBeDefined();
+      73 | });
+      74 |
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:71:23)
+
+    Error Context: ..\test-results\tests-features-infra.featu-53feb-com-banco-de-dados-Supabase-chromium\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar disponibilidade da API do Supabase" classname="tests\features\infra.feature.spec.js" time="0.013">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-41aa2-bilidade-da-API-do-Supabase-chromium\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [chromium] › tests\features\infra.feature.spec.js:40:3 › Validação de Infraestrutura › Validar disponibilidade da API do Supabase › que a URL do Supabase está configurada 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:107
+
+      105 | Given('que a URL do Supabase está configurada', async ({}) => {
+      106 |   const supabaseUrl = getEnvVar('NEXT_PUBLIC_SUPABASE_URL');
+    > 107 |   expect(supabaseUrl).toBeDefined();
+          |                       ^
+      108 | });
+      109 |
+      110 | When('faço um ping na API do Supabase', async ({}) => {
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:107:23)
+
+    Error Context: ..\test-results\tests-features-infra.featu-41aa2-bilidade-da-API-do-Supabase-chromium\error-context.md
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="tests\features\navigation.feature.spec.js" timestamp="2026-04-09T00:19:37.217Z" hostname="chromium" tests="2" failures="2" skipped="0" time="25.518" errors="0">
+<testcase name="Navegação do Usuário › Visitante clica no botão de login na página inicial" classname="tests\features\navigation.feature.spec.js" time="4.478">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-navigation.-c9b55--de-login-na-página-inicial-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|tests-features-navigation.-c9b55--de-login-na-página-inicial-chromium\video.webm]]
+
+[[ATTACHMENT|tests-features-navigation.-c9b55--de-login-na-página-inicial-chromium\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(locator).toBeVisible() failed" type="expect.toBeVisible">
+<![CDATA[  [chromium] › tests\features\navigation.feature.spec.js:10:3 › Navegação do Usuário › Visitante clica no botão de login na página inicial › o elemento "#auth-modal" deve estar visível 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('#auth-modal')
+    Expected: visible
+    Error: strict mode violation: locator('#auth-modal') resolved to 2 elements:
+        1) <div role="dialog" id="auth-modal" aria-modal="true" class="modal is-active" aria-labelledby="authModalTitle">…</div> aka getByRole('dialog', { name: 'Sign in or create your account' }).first()
+        2) <div role="dialog" id="auth-modal" aria-modal="true" class="modal is-active" aria-labelledby="authModalTitle">…</div> aka getByRole('dialog', { name: 'Sign in or create your account' }).nth(1)
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('#auth-modal')
+
+
+       at ..\tests\steps\navigation.steps.ts:17
+
+      15 | Then('o elemento {string} deve estar visível', async ({ page }, selector: string) => {
+      16 |   const element = page.locator(selector);
+    > 17 |   await expect(element).toBeVisible();
+         |                         ^
+      18 | });
+      19 |
+      20 | Given('que sou um visitante deslogado', async ({ page }) => {
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\navigation.steps.ts:17:25)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-c9b55--de-login-na-página-inicial-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-c9b55--de-login-na-página-inicial-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\tests-features-navigation.-c9b55--de-login-na-página-inicial-chromium\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Navegação do Usuário › Visitante deslogado é bloqueado ao acessar área restrita" classname="tests\features\navigation.feature.spec.js" time="21.04">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-navigation.-0652d-do-ao-acessar-área-restrita-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|tests-features-navigation.-0652d-do-ao-acessar-área-restrita-chromium\video.webm]]
+
+[[ATTACHMENT|tests-features-navigation.-0652d-do-ao-acessar-área-restrita-chromium\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(page).toHaveURL(expected) failed" type="expect.toHaveURL">
+<![CDATA[  [chromium] › tests\features\navigation.feature.spec.js:16:3 › Navegação do Usuário › Visitante deslogado é bloqueado ao acessar área restrita › sou redirecionado para a página inicial 
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected: "http://localhost:3000/"
+    Received: "http://localhost:3000/inicio"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 5000ms
+        8 × unexpected value "http://localhost:3000/inicio"
+
+
+       at ..\tests\steps\navigation.steps.ts:31
+
+      29 |
+      30 | Then('sou redirecionado para a página inicial', async ({ page }) => {
+    > 31 |   await expect(page).toHaveURL('/');
+         |                      ^
+      32 | });
+      33 |
+      34 | Then('não consigo acessar a área restrita', async ({ page }) => {
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\navigation.steps.ts:31:22)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-0652d-do-ao-acessar-área-restrita-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-0652d-do-ao-acessar-área-restrita-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\tests-features-navigation.-0652d-do-ao-acessar-área-restrita-chromium\error-context.md
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="tests\features\design.feature.spec.js" timestamp="2026-04-09T00:19:37.217Z" hostname="firefox" tests="4" failures="0" skipped="0" time="0.265" errors="0">
+<testcase name="Validação de Design Tokens › Validar existência do arquivo de tokens" classname="tests\features\design.feature.spec.js" time="0.06">
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de cor" classname="tests\features\design.feature.spec.js" time="0.07">
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de espaçamento" classname="tests\features\design.feature.spec.js" time="0.072">
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de tipografia" classname="tests\features\design.feature.spec.js" time="0.063">
+</testcase>
+</testsuite>
+<testsuite name="tests\features\infra.feature.spec.js" timestamp="2026-04-09T00:19:37.217Z" hostname="firefox" tests="5" failures="5" skipped="0" time="0.168" errors="0">
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Supabase" classname="tests\features\infra.feature.spec.js" time="0.066">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-4d887-te-obrigatórias-do-Supabase-firefox\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [firefox] › tests\features\infra.feature.spec.js:10:3 › Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Supabase › a variável "NEXT_PUBLIC_SUPABASE_URL" deve estar definida 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:45
+
+      43 | Then('a variável {string} deve estar definida', async ({}, varName: string) => {
+      44 |   const value = getEnvVar(varName);
+    > 45 |   expect(value).toBeDefined();
+         |                 ^
+      46 |   expect(value).not.toBe('');
+      47 | });
+      48 |
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:45:17)
+
+    Error Context: ..\test-results\tests-features-infra.featu-4d887-te-obrigatórias-do-Supabase-firefox\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Stripe" classname="tests\features\infra.feature.spec.js" time="0.055">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-13298-ente-obrigatórias-do-Stripe-firefox\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [firefox] › tests\features\infra.feature.spec.js:18:3 › Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Stripe › verifico as variáveis de ambiente do Stripe 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:54
+
+      52 |   const webhookSecret = getEnvVar('STRIPE_WEBHOOK_SECRET');
+      53 |   
+    > 54 |   expect(publishableKey).toBeDefined();
+         |                          ^
+      55 |   expect(secretKey).toBeDefined();
+      56 |   expect(webhookSecret).toBeDefined();
+      57 | });
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:54:26)
+
+    Error Context: ..\test-results\tests-features-infra.featu-13298-ente-obrigatórias-do-Stripe-firefox\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do NextAuth" classname="tests\features\infra.feature.spec.js" time="0.024">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-d7858-te-obrigatórias-do-NextAuth-firefox\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [firefox] › tests\features\infra.feature.spec.js:26:3 › Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do NextAuth › verifico as variáveis de ambiente do NextAuth 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:63
+
+      61 |   const authSecret = getEnvVar('NEXTAUTH_SECRET');
+      62 |   
+    > 63 |   expect(authUrl).toBeDefined();
+         |                   ^
+      64 |   expect(authSecret).toBeDefined();
+      65 | });
+      66 |
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:63:19)
+
+    Error Context: ..\test-results\tests-features-infra.featu-d7858-te-obrigatórias-do-NextAuth-firefox\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar conexão com banco de dados Supabase" classname="tests\features\infra.feature.spec.js" time="0.011">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-53feb-com-banco-de-dados-Supabase-firefox\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [firefox] › tests\features\infra.feature.spec.js:33:3 › Validação de Infraestrutura › Validar conexão com banco de dados Supabase › que as credenciais do Supabase estão configuradas 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:71
+
+      69 |   const supabaseKey = getEnvVar('NEXT_PUBLIC_SUPABASE_ANON_KEY');
+      70 |   
+    > 71 |   expect(supabaseUrl).toBeDefined();
+         |                       ^
+      72 |   expect(supabaseKey).toBeDefined();
+      73 | });
+      74 |
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:71:23)
+
+    Error Context: ..\test-results\tests-features-infra.featu-53feb-com-banco-de-dados-Supabase-firefox\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar disponibilidade da API do Supabase" classname="tests\features\infra.feature.spec.js" time="0.012">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-41aa2-bilidade-da-API-do-Supabase-firefox\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [firefox] › tests\features\infra.feature.spec.js:40:3 › Validação de Infraestrutura › Validar disponibilidade da API do Supabase › que a URL do Supabase está configurada 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:107
+
+      105 | Given('que a URL do Supabase está configurada', async ({}) => {
+      106 |   const supabaseUrl = getEnvVar('NEXT_PUBLIC_SUPABASE_URL');
+    > 107 |   expect(supabaseUrl).toBeDefined();
+          |                       ^
+      108 | });
+      109 |
+      110 | When('faço um ping na API do Supabase', async ({}) => {
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:107:23)
+
+    Error Context: ..\test-results\tests-features-infra.featu-41aa2-bilidade-da-API-do-Supabase-firefox\error-context.md
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="tests\features\navigation.feature.spec.js" timestamp="2026-04-09T00:19:37.217Z" hostname="firefox" tests="2" failures="2" skipped="0" time="27.561" errors="0">
+<testcase name="Navegação do Usuário › Visitante clica no botão de login na página inicial" classname="tests\features\navigation.feature.spec.js" time="10.742">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-navigation.-c9b55--de-login-na-página-inicial-firefox\test-failed-1.png]]
+
+[[ATTACHMENT|tests-features-navigation.-c9b55--de-login-na-página-inicial-firefox\video.webm]]
+
+[[ATTACHMENT|tests-features-navigation.-c9b55--de-login-na-página-inicial-firefox\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(locator).toBeVisible() failed" type="expect.toBeVisible">
+<![CDATA[  [firefox] › tests\features\navigation.feature.spec.js:10:3 › Navegação do Usuário › Visitante clica no botão de login na página inicial › o elemento "#auth-modal" deve estar visível 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('#auth-modal')
+    Expected: visible
+    Error: strict mode violation: locator('#auth-modal') resolved to 2 elements:
+        1) <div role="dialog" id="auth-modal" aria-modal="true" class="modal is-active" aria-labelledby="authModalTitle">…</div> aka getByRole('dialog', { name: 'Sign in or create your account' }).first()
+        2) <div role="dialog" id="auth-modal" aria-modal="true" class="modal is-active" aria-labelledby="authModalTitle">…</div> aka getByRole('dialog', { name: 'Sign in or create your account' }).nth(1)
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('#auth-modal')
+
+
+       at ..\tests\steps\navigation.steps.ts:17
+
+      15 | Then('o elemento {string} deve estar visível', async ({ page }, selector: string) => {
+      16 |   const element = page.locator(selector);
+    > 17 |   await expect(element).toBeVisible();
+         |                         ^
+      18 | });
+      19 |
+      20 | Given('que sou um visitante deslogado', async ({ page }) => {
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\navigation.steps.ts:17:25)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-c9b55--de-login-na-página-inicial-firefox\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-c9b55--de-login-na-página-inicial-firefox\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\tests-features-navigation.-c9b55--de-login-na-página-inicial-firefox\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Navegação do Usuário › Visitante deslogado é bloqueado ao acessar área restrita" classname="tests\features\navigation.feature.spec.js" time="16.819">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-navigation.-0652d-do-ao-acessar-área-restrita-firefox\test-failed-1.png]]
+
+[[ATTACHMENT|tests-features-navigation.-0652d-do-ao-acessar-área-restrita-firefox\video.webm]]
+
+[[ATTACHMENT|tests-features-navigation.-0652d-do-ao-acessar-área-restrita-firefox\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(page).toHaveURL(expected) failed" type="expect.toHaveURL">
+<![CDATA[  [firefox] › tests\features\navigation.feature.spec.js:16:3 › Navegação do Usuário › Visitante deslogado é bloqueado ao acessar área restrita › sou redirecionado para a página inicial 
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected: "http://localhost:3000/"
+    Received: "http://localhost:3000/inicio"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 5000ms
+        8 × unexpected value "http://localhost:3000/inicio"
+
+
+       at ..\tests\steps\navigation.steps.ts:31
+
+      29 |
+      30 | Then('sou redirecionado para a página inicial', async ({ page }) => {
+    > 31 |   await expect(page).toHaveURL('/');
+         |                      ^
+      32 | });
+      33 |
+      34 | Then('não consigo acessar a área restrita', async ({ page }) => {
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\navigation.steps.ts:31:22)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-0652d-do-ao-acessar-área-restrita-firefox\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-0652d-do-ao-acessar-área-restrita-firefox\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\tests-features-navigation.-0652d-do-ao-acessar-área-restrita-firefox\error-context.md
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="tests\features\design.feature.spec.js" timestamp="2026-04-09T00:19:37.217Z" hostname="webkit" tests="4" failures="0" skipped="0" time="0.289" errors="0">
+<testcase name="Validação de Design Tokens › Validar existência do arquivo de tokens" classname="tests\features\design.feature.spec.js" time="0.058">
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de cor" classname="tests\features\design.feature.spec.js" time="0.078">
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de espaçamento" classname="tests\features\design.feature.spec.js" time="0.075">
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de tipografia" classname="tests\features\design.feature.spec.js" time="0.078">
+</testcase>
+</testsuite>
+<testsuite name="tests\features\infra.feature.spec.js" timestamp="2026-04-09T00:19:37.217Z" hostname="webkit" tests="5" failures="5" skipped="0" time="0.182" errors="0">
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Supabase" classname="tests\features\infra.feature.spec.js" time="0.023">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-4d887-te-obrigatórias-do-Supabase-webkit\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [webkit] › tests\features\infra.feature.spec.js:10:3 › Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Supabase › a variável "NEXT_PUBLIC_SUPABASE_URL" deve estar definida 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:45
+
+      43 | Then('a variável {string} deve estar definida', async ({}, varName: string) => {
+      44 |   const value = getEnvVar(varName);
+    > 45 |   expect(value).toBeDefined();
+         |                 ^
+      46 |   expect(value).not.toBe('');
+      47 | });
+      48 |
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:45:17)
+
+    Error Context: ..\test-results\tests-features-infra.featu-4d887-te-obrigatórias-do-Supabase-webkit\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Stripe" classname="tests\features\infra.feature.spec.js" time="0.021">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-13298-ente-obrigatórias-do-Stripe-webkit\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [webkit] › tests\features\infra.feature.spec.js:18:3 › Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Stripe › verifico as variáveis de ambiente do Stripe 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:54
+
+      52 |   const webhookSecret = getEnvVar('STRIPE_WEBHOOK_SECRET');
+      53 |   
+    > 54 |   expect(publishableKey).toBeDefined();
+         |                          ^
+      55 |   expect(secretKey).toBeDefined();
+      56 |   expect(webhookSecret).toBeDefined();
+      57 | });
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:54:26)
+
+    Error Context: ..\test-results\tests-features-infra.featu-13298-ente-obrigatórias-do-Stripe-webkit\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do NextAuth" classname="tests\features\infra.feature.spec.js" time="0.016">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-d7858-te-obrigatórias-do-NextAuth-webkit\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [webkit] › tests\features\infra.feature.spec.js:26:3 › Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do NextAuth › verifico as variáveis de ambiente do NextAuth 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:63
+
+      61 |   const authSecret = getEnvVar('NEXTAUTH_SECRET');
+      62 |   
+    > 63 |   expect(authUrl).toBeDefined();
+         |                   ^
+      64 |   expect(authSecret).toBeDefined();
+      65 | });
+      66 |
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:63:19)
+
+    Error Context: ..\test-results\tests-features-infra.featu-d7858-te-obrigatórias-do-NextAuth-webkit\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar conexão com banco de dados Supabase" classname="tests\features\infra.feature.spec.js" time="0.056">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-53feb-com-banco-de-dados-Supabase-webkit\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [webkit] › tests\features\infra.feature.spec.js:33:3 › Validação de Infraestrutura › Validar conexão com banco de dados Supabase › que as credenciais do Supabase estão configuradas 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:71
+
+      69 |   const supabaseKey = getEnvVar('NEXT_PUBLIC_SUPABASE_ANON_KEY');
+      70 |   
+    > 71 |   expect(supabaseUrl).toBeDefined();
+         |                       ^
+      72 |   expect(supabaseKey).toBeDefined();
+      73 | });
+      74 |
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:71:23)
+
+    Error Context: ..\test-results\tests-features-infra.featu-53feb-com-banco-de-dados-Supabase-webkit\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar disponibilidade da API do Supabase" classname="tests\features\infra.feature.spec.js" time="0.066">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-41aa2-bilidade-da-API-do-Supabase-webkit\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [webkit] › tests\features\infra.feature.spec.js:40:3 › Validação de Infraestrutura › Validar disponibilidade da API do Supabase › que a URL do Supabase está configurada 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:107
+
+      105 | Given('que a URL do Supabase está configurada', async ({}) => {
+      106 |   const supabaseUrl = getEnvVar('NEXT_PUBLIC_SUPABASE_URL');
+    > 107 |   expect(supabaseUrl).toBeDefined();
+          |                       ^
+      108 | });
+      109 |
+      110 | When('faço um ping na API do Supabase', async ({}) => {
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:107:23)
+
+    Error Context: ..\test-results\tests-features-infra.featu-41aa2-bilidade-da-API-do-Supabase-webkit\error-context.md
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="tests\features\navigation.feature.spec.js" timestamp="2026-04-09T00:19:37.217Z" hostname="webkit" tests="2" failures="1" skipped="0" time="18.027" errors="1">
+<testcase name="Navegação do Usuário › Visitante clica no botão de login na página inicial" classname="tests\features\navigation.feature.spec.js" time="8.407">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-navigation.-c9b55--de-login-na-página-inicial-webkit\test-failed-1.png]]
+
+[[ATTACHMENT|tests-features-navigation.-c9b55--de-login-na-página-inicial-webkit\video.webm]]
+
+[[ATTACHMENT|tests-features-navigation.-c9b55--de-login-na-página-inicial-webkit\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(locator).toBeVisible() failed" type="expect.toBeVisible">
+<![CDATA[  [webkit] › tests\features\navigation.feature.spec.js:10:3 › Navegação do Usuário › Visitante clica no botão de login na página inicial › o elemento "#auth-modal" deve estar visível 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('#auth-modal')
+    Expected: visible
+    Error: strict mode violation: locator('#auth-modal') resolved to 2 elements:
+        1) <div role="dialog" id="auth-modal" aria-modal="true" class="modal is-active" aria-labelledby="authModalTitle">…</div> aka getByRole('dialog', { name: 'Sign in or create your account' }).first()
+        2) <div role="dialog" id="auth-modal" aria-modal="true" class="modal is-active" aria-labelledby="authModalTitle">…</div> aka getByRole('dialog', { name: 'Sign in or create your account' }).nth(1)
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('#auth-modal')
+
+
+       at ..\tests\steps\navigation.steps.ts:17
+
+      15 | Then('o elemento {string} deve estar visível', async ({ page }, selector: string) => {
+      16 |   const element = page.locator(selector);
+    > 17 |   await expect(element).toBeVisible();
+         |                         ^
+      18 | });
+      19 |
+      20 | Given('que sou um visitante deslogado', async ({ page }) => {
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\navigation.steps.ts:17:25)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-c9b55--de-login-na-página-inicial-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-c9b55--de-login-na-página-inicial-webkit\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\tests-features-navigation.-c9b55--de-login-na-página-inicial-webkit\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Navegação do Usuário › Visitante deslogado é bloqueado ao acessar área restrita" classname="tests\features\navigation.feature.spec.js" time="9.62">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-navigation.-0652d-do-ao-acessar-área-restrita-webkit\test-failed-1.png]]
+
+[[ATTACHMENT|tests-features-navigation.-0652d-do-ao-acessar-área-restrita-webkit\video.webm]]
+
+[[ATTACHMENT|tests-features-navigation.-0652d-do-ao-acessar-área-restrita-webkit\error-context.md]]
+]]>
+</system-out>
+<error message="page.goto: Navigation to &quot;http://localhost:3000/inicio&quot; is interrupted by another navigation to &quot;http://localhost:3000/&quot;" type="Error">
+<![CDATA[  [webkit] › tests\features\navigation.feature.spec.js:16:3 › Navegação do Usuário › Visitante deslogado é bloqueado ao acessar área restrita › acesso o caminho "/inicio" 
+
+    Error: page.goto: Navigation to "http://localhost:3000/inicio" is interrupted by another navigation to "http://localhost:3000/"
+    Call log:
+      - navigating to "http://localhost:3000/inicio", waiting until "load"
+
+
+       at ..\tests\steps\navigation.steps.ts:27
+
+      25 |
+      26 | When('acesso o caminho {string}', async ({ page }, path: string) => {
+    > 27 |   await page.goto(path);
+         |              ^
+      28 | });
+      29 |
+      30 | Then('sou redirecionado para a página inicial', async ({ page }) => {
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\navigation.steps.ts:27:14)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-0652d-do-ao-acessar-área-restrita-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-0652d-do-ao-acessar-área-restrita-webkit\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\tests-features-navigation.-0652d-do-ao-acessar-área-restrita-webkit\error-context.md
+]]>
+</error>
+</testcase>
+</testsuite>
+<testsuite name="tests\features\design.feature.spec.js" timestamp="2026-04-09T00:19:37.217Z" hostname="Mobile Chrome" tests="4" failures="0" skipped="0" time="0.198" errors="0">
+<testcase name="Validação de Design Tokens › Validar existência do arquivo de tokens" classname="tests\features\design.feature.spec.js" time="0.071">
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de cor" classname="tests\features\design.feature.spec.js" time="0.077">
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de espaçamento" classname="tests\features\design.feature.spec.js" time="0.036">
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de tipografia" classname="tests\features\design.feature.spec.js" time="0.014">
+</testcase>
+</testsuite>
+<testsuite name="tests\features\infra.feature.spec.js" timestamp="2026-04-09T00:19:37.217Z" hostname="Mobile Chrome" tests="5" failures="5" skipped="0" time="0.256" errors="0">
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Supabase" classname="tests\features\infra.feature.spec.js" time="0.02">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-4d887-te-obrigatórias-do-Supabase-Mobile-Chrome\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [Mobile Chrome] › tests\features\infra.feature.spec.js:10:3 › Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Supabase › a variável "NEXT_PUBLIC_SUPABASE_URL" deve estar definida 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:45
+
+      43 | Then('a variável {string} deve estar definida', async ({}, varName: string) => {
+      44 |   const value = getEnvVar(varName);
+    > 45 |   expect(value).toBeDefined();
+         |                 ^
+      46 |   expect(value).not.toBe('');
+      47 | });
+      48 |
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:45:17)
+
+    Error Context: ..\test-results\tests-features-infra.featu-4d887-te-obrigatórias-do-Supabase-Mobile-Chrome\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Stripe" classname="tests\features\infra.feature.spec.js" time="0.014">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-13298-ente-obrigatórias-do-Stripe-Mobile-Chrome\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [Mobile Chrome] › tests\features\infra.feature.spec.js:18:3 › Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Stripe › verifico as variáveis de ambiente do Stripe 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:54
+
+      52 |   const webhookSecret = getEnvVar('STRIPE_WEBHOOK_SECRET');
+      53 |   
+    > 54 |   expect(publishableKey).toBeDefined();
+         |                          ^
+      55 |   expect(secretKey).toBeDefined();
+      56 |   expect(webhookSecret).toBeDefined();
+      57 | });
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:54:26)
+
+    Error Context: ..\test-results\tests-features-infra.featu-13298-ente-obrigatórias-do-Stripe-Mobile-Chrome\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do NextAuth" classname="tests\features\infra.feature.spec.js" time="0.081">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-d7858-te-obrigatórias-do-NextAuth-Mobile-Chrome\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [Mobile Chrome] › tests\features\infra.feature.spec.js:26:3 › Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do NextAuth › verifico as variáveis de ambiente do NextAuth 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:63
+
+      61 |   const authSecret = getEnvVar('NEXTAUTH_SECRET');
+      62 |   
+    > 63 |   expect(authUrl).toBeDefined();
+         |                   ^
+      64 |   expect(authSecret).toBeDefined();
+      65 | });
+      66 |
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:63:19)
+
+    Error Context: ..\test-results\tests-features-infra.featu-d7858-te-obrigatórias-do-NextAuth-Mobile-Chrome\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar conexão com banco de dados Supabase" classname="tests\features\infra.feature.spec.js" time="0.066">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-53feb-com-banco-de-dados-Supabase-Mobile-Chrome\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [Mobile Chrome] › tests\features\infra.feature.spec.js:33:3 › Validação de Infraestrutura › Validar conexão com banco de dados Supabase › que as credenciais do Supabase estão configuradas 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:71
+
+      69 |   const supabaseKey = getEnvVar('NEXT_PUBLIC_SUPABASE_ANON_KEY');
+      70 |   
+    > 71 |   expect(supabaseUrl).toBeDefined();
+         |                       ^
+      72 |   expect(supabaseKey).toBeDefined();
+      73 | });
+      74 |
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:71:23)
+
+    Error Context: ..\test-results\tests-features-infra.featu-53feb-com-banco-de-dados-Supabase-Mobile-Chrome\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar disponibilidade da API do Supabase" classname="tests\features\infra.feature.spec.js" time="0.075">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-41aa2-bilidade-da-API-do-Supabase-Mobile-Chrome\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [Mobile Chrome] › tests\features\infra.feature.spec.js:40:3 › Validação de Infraestrutura › Validar disponibilidade da API do Supabase › que a URL do Supabase está configurada 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:107
+
+      105 | Given('que a URL do Supabase está configurada', async ({}) => {
+      106 |   const supabaseUrl = getEnvVar('NEXT_PUBLIC_SUPABASE_URL');
+    > 107 |   expect(supabaseUrl).toBeDefined();
+          |                       ^
+      108 | });
+      109 |
+      110 | When('faço um ping na API do Supabase', async ({}) => {
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:107:23)
+
+    Error Context: ..\test-results\tests-features-infra.featu-41aa2-bilidade-da-API-do-Supabase-Mobile-Chrome\error-context.md
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="tests\features\navigation.feature.spec.js" timestamp="2026-04-09T00:19:37.217Z" hostname="Mobile Chrome" tests="2" failures="1" skipped="0" time="40.002" errors="1">
+<testcase name="Navegação do Usuário › Visitante clica no botão de login na página inicial" classname="tests\features\navigation.feature.spec.js" time="31.321">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-navigation.-c9b55--de-login-na-página-inicial-Mobile-Chrome\test-failed-1.png]]
+
+[[ATTACHMENT|tests-features-navigation.-c9b55--de-login-na-página-inicial-Mobile-Chrome\video.webm]]
+
+[[ATTACHMENT|tests-features-navigation.-c9b55--de-login-na-página-inicial-Mobile-Chrome\error-context.md]]
+]]>
+</system-out>
+<error message="Test timeout of 30000ms exceeded." type="Error">
+<![CDATA[  [Mobile Chrome] › tests\features\navigation.feature.spec.js:10:3 › Navegação do Usuário › Visitante clica no botão de login na página inicial › clico no elemento "#nav-login-btn" 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('#nav-login-btn')
+        - locator resolved to <button id="nav-login-btn" aria-label="Sign In" class="button is-primary">Sign In</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not visible
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not visible
+        - retrying click action
+          - waiting 100ms
+        54 × waiting for element to be visible, enabled and stable
+           - element is not visible
+         - retrying click action
+           - waiting 500ms
+
+
+       at ..\tests\steps\navigation.steps.ts:12
+
+      10 | When('clico no elemento {string}', async ({ page }, selector: string) => {
+      11 |   const element = page.locator(selector);
+    > 12 |   await element.click();
+         |                 ^
+      13 | });
+      14 |
+      15 | Then('o elemento {string} deve estar visível', async ({ page }, selector: string) => {
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\navigation.steps.ts:12:17)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-c9b55--de-login-na-página-inicial-Mobile-Chrome\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-c9b55--de-login-na-página-inicial-Mobile-Chrome\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\tests-features-navigation.-c9b55--de-login-na-página-inicial-Mobile-Chrome\error-context.md
+]]>
+</error>
+</testcase>
+<testcase name="Navegação do Usuário › Visitante deslogado é bloqueado ao acessar área restrita" classname="tests\features\navigation.feature.spec.js" time="8.681">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-navigation.-0652d-do-ao-acessar-área-restrita-Mobile-Chrome\test-failed-1.png]]
+
+[[ATTACHMENT|tests-features-navigation.-0652d-do-ao-acessar-área-restrita-Mobile-Chrome\video.webm]]
+
+[[ATTACHMENT|tests-features-navigation.-0652d-do-ao-acessar-área-restrita-Mobile-Chrome\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(page).toHaveURL(expected) failed" type="expect.toHaveURL">
+<![CDATA[  [Mobile Chrome] › tests\features\navigation.feature.spec.js:16:3 › Navegação do Usuário › Visitante deslogado é bloqueado ao acessar área restrita › sou redirecionado para a página inicial 
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected: "http://localhost:3000/"
+    Received: "http://localhost:3000/inicio"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 5000ms
+        9 × unexpected value "http://localhost:3000/inicio"
+
+
+       at ..\tests\steps\navigation.steps.ts:31
+
+      29 |
+      30 | Then('sou redirecionado para a página inicial', async ({ page }) => {
+    > 31 |   await expect(page).toHaveURL('/');
+         |                      ^
+      32 | });
+      33 |
+      34 | Then('não consigo acessar a área restrita', async ({ page }) => {
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\navigation.steps.ts:31:22)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-0652d-do-ao-acessar-área-restrita-Mobile-Chrome\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-0652d-do-ao-acessar-área-restrita-Mobile-Chrome\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\tests-features-navigation.-0652d-do-ao-acessar-área-restrita-Mobile-Chrome\error-context.md
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="tests\features\design.feature.spec.js" timestamp="2026-04-09T00:19:37.217Z" hostname="Mobile Safari" tests="4" failures="0" skipped="0" time="0.119" errors="0">
+<testcase name="Validação de Design Tokens › Validar existência do arquivo de tokens" classname="tests\features\design.feature.spec.js" time="0.039">
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de cor" classname="tests\features\design.feature.spec.js" time="0.055">
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de espaçamento" classname="tests\features\design.feature.spec.js" time="0.016">
+</testcase>
+<testcase name="Validação de Design Tokens › Validar conteúdo dos tokens de tipografia" classname="tests\features\design.feature.spec.js" time="0.009">
+</testcase>
+</testsuite>
+<testsuite name="tests\features\infra.feature.spec.js" timestamp="2026-04-09T00:19:37.217Z" hostname="Mobile Safari" tests="5" failures="5" skipped="0" time="0.288" errors="0">
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Supabase" classname="tests\features\infra.feature.spec.js" time="0.011">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-4d887-te-obrigatórias-do-Supabase-Mobile-Safari\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [Mobile Safari] › tests\features\infra.feature.spec.js:10:3 › Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Supabase › a variável "NEXT_PUBLIC_SUPABASE_URL" deve estar definida 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:45
+
+      43 | Then('a variável {string} deve estar definida', async ({}, varName: string) => {
+      44 |   const value = getEnvVar(varName);
+    > 45 |   expect(value).toBeDefined();
+         |                 ^
+      46 |   expect(value).not.toBe('');
+      47 | });
+      48 |
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:45:17)
+
+    Error Context: ..\test-results\tests-features-infra.featu-4d887-te-obrigatórias-do-Supabase-Mobile-Safari\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Stripe" classname="tests\features\infra.feature.spec.js" time="0.057">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-13298-ente-obrigatórias-do-Stripe-Mobile-Safari\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [Mobile Safari] › tests\features\infra.feature.spec.js:18:3 › Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do Stripe › verifico as variáveis de ambiente do Stripe 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:54
+
+      52 |   const webhookSecret = getEnvVar('STRIPE_WEBHOOK_SECRET');
+      53 |   
+    > 54 |   expect(publishableKey).toBeDefined();
+         |                          ^
+      55 |   expect(secretKey).toBeDefined();
+      56 |   expect(webhookSecret).toBeDefined();
+      57 | });
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:54:26)
+
+    Error Context: ..\test-results\tests-features-infra.featu-13298-ente-obrigatórias-do-Stripe-Mobile-Safari\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do NextAuth" classname="tests\features\infra.feature.spec.js" time="0.014">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-d7858-te-obrigatórias-do-NextAuth-Mobile-Safari\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [Mobile Safari] › tests\features\infra.feature.spec.js:26:3 › Validação de Infraestrutura › Validar variáveis de ambiente obrigatórias do NextAuth › verifico as variáveis de ambiente do NextAuth 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:63
+
+      61 |   const authSecret = getEnvVar('NEXTAUTH_SECRET');
+      62 |   
+    > 63 |   expect(authUrl).toBeDefined();
+         |                   ^
+      64 |   expect(authSecret).toBeDefined();
+      65 | });
+      66 |
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:63:19)
+
+    Error Context: ..\test-results\tests-features-infra.featu-d7858-te-obrigatórias-do-NextAuth-Mobile-Safari\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar conexão com banco de dados Supabase" classname="tests\features\infra.feature.spec.js" time="0.171">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-53feb-com-banco-de-dados-Supabase-Mobile-Safari\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [Mobile Safari] › tests\features\infra.feature.spec.js:33:3 › Validação de Infraestrutura › Validar conexão com banco de dados Supabase › que as credenciais do Supabase estão configuradas 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:71
+
+      69 |   const supabaseKey = getEnvVar('NEXT_PUBLIC_SUPABASE_ANON_KEY');
+      70 |   
+    > 71 |   expect(supabaseUrl).toBeDefined();
+         |                       ^
+      72 |   expect(supabaseKey).toBeDefined();
+      73 | });
+      74 |
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:71:23)
+
+    Error Context: ..\test-results\tests-features-infra.featu-53feb-com-banco-de-dados-Supabase-Mobile-Safari\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Validação de Infraestrutura › Validar disponibilidade da API do Supabase" classname="tests\features\infra.feature.spec.js" time="0.035">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-infra.featu-41aa2-bilidade-da-API-do-Supabase-Mobile-Safari\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeDefined()" type="expect.toBeDefined">
+<![CDATA[  [Mobile Safari] › tests\features\infra.feature.spec.js:40:3 › Validação de Infraestrutura › Validar disponibilidade da API do Supabase › que a URL do Supabase está configurada 
+
+    Error: expect(received).toBeDefined()
+
+    Received: undefined
+
+       at ..\tests\steps\infra.steps.ts:107
+
+      105 | Given('que a URL do Supabase está configurada', async ({}) => {
+      106 |   const supabaseUrl = getEnvVar('NEXT_PUBLIC_SUPABASE_URL');
+    > 107 |   expect(supabaseUrl).toBeDefined();
+          |                       ^
+      108 | });
+      109 |
+      110 | When('faço um ping na API do Supabase', async ({}) => {
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\infra.steps.ts:107:23)
+
+    Error Context: ..\test-results\tests-features-infra.featu-41aa2-bilidade-da-API-do-Supabase-Mobile-Safari\error-context.md
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="tests\features\navigation.feature.spec.js" timestamp="2026-04-09T00:19:37.217Z" hostname="Mobile Safari" tests="2" failures="1" skipped="0" time="38.345" errors="1">
+<testcase name="Navegação do Usuário › Visitante clica no botão de login na página inicial" classname="tests\features\navigation.feature.spec.js" time="31.241">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-navigation.-c9b55--de-login-na-página-inicial-Mobile-Safari\test-failed-1.png]]
+
+[[ATTACHMENT|tests-features-navigation.-c9b55--de-login-na-página-inicial-Mobile-Safari\video.webm]]
+
+[[ATTACHMENT|tests-features-navigation.-c9b55--de-login-na-página-inicial-Mobile-Safari\error-context.md]]
+]]>
+</system-out>
+<error message="Test timeout of 30000ms exceeded." type="Error">
+<![CDATA[  [Mobile Safari] › tests\features\navigation.feature.spec.js:10:3 › Navegação do Usuário › Visitante clica no botão de login na página inicial › clico no elemento "#nav-login-btn" 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('#nav-login-btn')
+        - locator resolved to <button id="nav-login-btn" aria-label="Sign In" class="button is-primary">Sign In</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not visible
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not visible
+        - retrying click action
+          - waiting 100ms
+        43 × waiting for element to be visible, enabled and stable
+           - element is not visible
+         - retrying click action
+           - waiting 500ms
+
+
+       at ..\tests\steps\navigation.steps.ts:12
+
+      10 | When('clico no elemento {string}', async ({ page }, selector: string) => {
+      11 |   const element = page.locator(selector);
+    > 12 |   await element.click();
+         |                 ^
+      13 | });
+      14 |
+      15 | Then('o elemento {string} deve estar visível', async ({ page }, selector: string) => {
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\navigation.steps.ts:12:17)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-c9b55--de-login-na-página-inicial-Mobile-Safari\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-c9b55--de-login-na-página-inicial-Mobile-Safari\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\tests-features-navigation.-c9b55--de-login-na-página-inicial-Mobile-Safari\error-context.md
+]]>
+</error>
+</testcase>
+<testcase name="Navegação do Usuário › Visitante deslogado é bloqueado ao acessar área restrita" classname="tests\features\navigation.feature.spec.js" time="7.104">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|tests-features-navigation.-0652d-do-ao-acessar-área-restrita-Mobile-Safari\test-failed-1.png]]
+
+[[ATTACHMENT|tests-features-navigation.-0652d-do-ao-acessar-área-restrita-Mobile-Safari\video.webm]]
+
+[[ATTACHMENT|tests-features-navigation.-0652d-do-ao-acessar-área-restrita-Mobile-Safari\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(page).toHaveURL(expected) failed" type="expect.toHaveURL">
+<![CDATA[  [Mobile Safari] › tests\features\navigation.feature.spec.js:16:3 › Navegação do Usuário › Visitante deslogado é bloqueado ao acessar área restrita › sou redirecionado para a página inicial 
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected: "http://localhost:3000/"
+    Received: "http://localhost:3000/inicio"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 5000ms
+        8 × unexpected value "http://localhost:3000/inicio"
+
+
+       at ..\tests\steps\navigation.steps.ts:31
+
+      29 |
+      30 | Then('sou redirecionado para a página inicial', async ({ page }) => {
+    > 31 |   await expect(page).toHaveURL('/');
+         |                      ^
+      32 | });
+      33 |
+      34 | Then('não consigo acessar a área restrita', async ({ page }) => {
+        at Object.<anonymous> (D:\xampp\htdocs\jobagent\tests\steps\navigation.steps.ts:31:22)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-0652d-do-ao-acessar-área-restrita-Mobile-Safari\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\tests-features-navigation.-0652d-do-ao-acessar-área-restrita-Mobile-Safari\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\tests-features-navigation.-0652d-do-ao-acessar-área-restrita-Mobile-Safari\error-context.md
+]]>
+</failure>
+</testcase>
+</testsuite>
+</testsuites>

@@ -16,9 +16,14 @@ function getPreferredLocale(request: NextRequest): string {
     return cookieLocale;
   }
 
-  const headers = Object.fromEntries(request.headers.entries());
-  const languages = new Negotiator({headers}).languages();
-  return matchLocale(languages, locales, defaultLocale);
+  try {
+    const headers = Object.fromEntries(request.headers.entries());
+    const languages = new Negotiator({headers}).languages();
+    return matchLocale(languages, locales, defaultLocale);
+  } catch (error) {
+    // Fallback para locale padrão se headers forem inválidos (ex: Playwright)
+    return defaultLocale;
+  }
 }
 
 export function middleware(request: NextRequest) {

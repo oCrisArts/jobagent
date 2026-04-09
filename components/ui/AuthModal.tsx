@@ -93,6 +93,7 @@ export default function AuthModal({
 
   return (
     <div
+      id="auth-modal"
       className="modal is-active"
       role="dialog"
       aria-labelledby="authModalTitle"

@@ -93,6 +93,7 @@ export default function Navigation() {
             <div className="navbar-item">
               <div className="buttons">
                 <button
+                  id="nav-login-btn"
                   className="button is-primary"
                   onClick={() => {
                     // TODO: Abrir AuthModal via Context/State
