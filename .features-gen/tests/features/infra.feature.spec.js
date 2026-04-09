@@ -37,6 +37,12 @@ test.describe("Validação de Infraestrutura", () => {
     await And("a resposta deve conter dados válidos");
   });
 
+  test("Verificar integridade do provedor de e-mail", async ({ Given, When, page, request, Then }) => {
+    await Given("que o serviço de e-mail está configurado");
+    await When("eu disparo um e-mail de teste para \"cristiano.acosta.m@gmail.com\"", null, { page, request });
+    await Then("a API do Resend deve retornar um status de sucesso 200");
+  });
+
   test("Validar disponibilidade da API do Supabase", async ({ Given, When, Then, And }) => {
     await Given("que a URL do Supabase está configurada");
     await When("faço um ping na API do Supabase");
@@ -60,5 +66,6 @@ const bddFileMeta = {
   "Validar variáveis de ambiente obrigatórias do Stripe": {"pickleLocation":"18:3"},
   "Validar variáveis de ambiente obrigatórias do NextAuth": {"pickleLocation":"25:3"},
   "Validar conexão com banco de dados Supabase": {"pickleLocation":"31:3"},
-  "Validar disponibilidade da API do Supabase": {"pickleLocation":"37:3"},
+  "Verificar integridade do provedor de e-mail": {"pickleLocation":"37:3"},
+  "Validar disponibilidade da API do Supabase": {"pickleLocation":"42:3"},
 };

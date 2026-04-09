@@ -34,6 +34,11 @@ Funcionalidade: Validação de Infraestrutura
     Então a conexão deve ser estabelecida com sucesso
     E a resposta deve conter dados válidos
 
+  Cenário: Verificar integridade do provedor de e-mail
+    Dado que o serviço de e-mail está configurado
+    Quando eu disparo um e-mail de teste para "cristiano.acosta.m@gmail.com"
+    Então a API do Resend deve retornar um status de sucesso 200
+
   Cenário: Validar disponibilidade da API do Supabase
     Dado que a URL do Supabase está configurada
     Quando faço um ping na API do Supabase

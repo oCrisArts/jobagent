@@ -1,0 +1,116 @@
+// ============================================
+// MODAL COMPONENTS  
+// ============================================
+// styles/components/_auth-modal.scss
+
+#auth-modal {
+  // Overlay
+  .modal-background {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  // Content Box
+  .modal-content {
+    max-width: 420px;
+    width: 90vw;
+  }
+
+  .box {
+    background-color: #1A1D27;
+    border: 1px solid #2A2D3A;
+    position: relative;
+  }
+
+  // Título e Subtítulo
+  #authModalTitle {
+    color: #FFFFFF;
+  }
+  
+  // Botão de Fechar
+  #auth-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  // Botões Sociais
+  #btn-google-login {
+    background-color: #FFFFFF;
+    color: #000000;
+    border: none;
+    &:hover {
+      background-color: darken(#FFFFFF, 10%);
+      color: #000000;
+    }
+  }
+
+  #btn-linkedin-login {
+    background-color: #0A66C2;
+    color: #FFFFFF;
+    border: none;
+    &:hover {
+      background-color: darken(#0A66C2, 10%);
+      color: #FFFFFF;
+    }
+  }
+
+  // Divider (Usando classes utilitárias ainda faz sentido aqui, mas podemos isolar se quiser)
+  .auth-divider {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+
+    &__line {
+      flex: 1;
+      height: 1px;
+      background-color: #2A2D3A;
+    }
+
+    &__text {
+      padding: 0 1rem;
+      color: #94A3B8;
+      font-size: 0.875rem;
+    }
+  }
+
+  // Inputs
+  #input-email, #input-password {
+    background-color: #0A0A0F;
+    border: 1px solid #2A2D3A;
+    color: #FFFFFF;
+
+    &::placeholder {
+      color: #64748B;
+    }
+
+    &:focus, &:active {
+      border-color: #A78BFA;
+      box-shadow: 0 0 0 0.125em rgba(167, 139, 250, 0.25);
+      color: #FFFFFF;
+    }
+  }
+
+  // Olhinho
+  #toggle-password-visibility {
+    pointer-events: auto;
+    cursor: pointer;
+    color: #A78BFA;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: lighten(#A78BFA, 15%);
+    }
+  }
+
+  // Link Esqueceu Senha
+  #link-forgot-password {
+    color: #A78BFA;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: lighten(#A78BFA, 15%);
+      text-decoration: underline;
+    }
+  }
+}

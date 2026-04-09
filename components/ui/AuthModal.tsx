@@ -10,16 +10,6 @@ interface AuthModalProps {
   onClose?: () => void;
 }
 
-/**
- * 🔑 AuthModal Unificada (MVP)
- * 
- * ✅ BDD Implementado:
- * - Interface única (sem abas)
- * - Título: "Acesse ou crie sua conta"
- * - Opções sociais em destaque (Google, LinkedIn)
- * - Email/Senha juntos (evita cliques desnecessários)
- * - Minimalista e focado em conversão
- */
 export default function AuthModal({
   isOpen: externalIsOpen = false,
   mode: _mode = 'login',
@@ -29,15 +19,15 @@ export default function AuthModal({
   const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(externalIsOpen);
   const [isLoading, setIsLoading] = useState(false);
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
-  // ✅ Hydration safe
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // Escutar evento global para abrir modal
   useEffect(() => {
     const handleOpenModal = () => setIsOpen(true);
     window.addEventListener('openAuthModal', handleOpenModal);
@@ -73,8 +63,6 @@ export default function AuthModal({
     e.preventDefault();
     setIsLoading(true);
     try {
-      // TODO: Implementar autenticação com email/senha
-      // Por enquanto, apenas valida campos
       if (!email || !password) {
         alert(t('errorEmptyFields'));
         setIsLoading(false);
@@ -87,9 +75,7 @@ export default function AuthModal({
     }
   };
 
-  if (!isMounted) return null;
-
-  if (!isOpen) return null;
+  if (!isMounted || !isOpen) return null;
 
   return (
     <div
@@ -99,116 +85,63 @@ export default function AuthModal({
       aria-labelledby="authModalTitle"
       aria-modal="true"
     >
-      {/* Background overlay */}
-      <div
-        className="modal-background"
-        onClick={handleClose}
-        style={{ background: 'rgba(0, 0, 0, 0.7)' }}
-      />
+      <div className="modal-background" onClick={handleClose} />
 
-      {/* Modal content */}
-      <div className="modal-content" style={{ maxWidth: '420px', width: '90vw' }}>
-        <div className="box" style={{ background: '#1A1D27', border: '1px solid #2A2D3A' }}>
-          {/* Close button */}
+      <div className="modal-content">
+        <div className="box">
+          
           <button
+            id="auth-modal-close"
             className="delete is-large"
             aria-label="Close modal"
             onClick={handleClose}
-            style={{ position: 'absolute', top: '1rem', right: '1rem' }}
           />
 
-          {/* Header */}
-          <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
-            <h1
-              id="authModalTitle"
-              className="title is-4"
-              style={{ color: '#FFFFFF', marginBottom: '0.5rem' }}
-            >
+          <div className="has-text-centered mb-5">
+            <h1 id="authModalTitle" className="title is-4 mb-2">
               {t('title')}
             </h1>
-            <p
-              className="subtitle is-6"
-              style={{ color: '#94A3B8', margin: 0 }}
-            >
+            <p className="subtitle is-6 has-text-grey-light m-0">
               {t('subtitle')}
             </p>
           </div>
 
-          {/* ✅ Social Sign-In (Destaque) */}
-          <div style={{ marginBottom: '2rem' }}>
-            {/* Google Button */}
+          <div className="mb-5">
             <button
               id="btn-google-login"
-              className="button is-fullwidth"
+              className="button is-fullwidth mb-3 has-text-weight-semibold"
               onClick={handleGoogleSignIn}
               disabled={isLoading}
-              style={{
-                background: '#FFFFFF',
-                color: '#000000',
-                marginBottom: '1rem',
-                fontWeight: 600,
-              }}
             >
-              <span className="icon">
-                <i className="fab fa-google"></i>
-              </span>
+              <span className="icon"><i className="fab fa-google"></i></span>
               <span>{t('signInGoogle')}</span>
             </button>
 
-            {/* LinkedIn Button */}
             <button
               id="btn-linkedin-login"
-              className="button is-fullwidth"
+              className="button is-fullwidth has-text-weight-semibold"
               onClick={handleLinkedInSignIn}
               disabled={isLoading}
-              style={{
-                background: '#0A66C2',
-                color: '#FFFFFF',
-                fontWeight: 600,
-              }}
             >
-              <span className="icon">
-                <i className="fab fa-linkedin"></i>
-              </span>
+              <span className="icon"><i className="fab fa-linkedin"></i></span>
               <span>{t('signInLinkedIn')}</span>
             </button>
           </div>
 
-          {/* Divider */}
-          <div style={{ display: 'flex', alignItems: 'center', margin: '2rem 0' }}>
-            <div
-              style={{
-                flex: 1,
-                height: '1px',
-                background: '#2A2D3A',
-              }}
-            />
-            <span
-              style={{
-                padding: '0 1rem',
-                color: '#94A3B8',
-                fontSize: '0.875rem',
-              }}
-            >
-              {t('orDivider')}
-            </span>
-            <div
-              style={{
-                flex: 1,
-                height: '1px',
-                background: '#2A2D3A',
-              }}
-            />
+          <div className="auth-divider">
+            <div className="auth-divider__line" />
+            <span className="auth-divider__text">{t('orDivider')}</span>
+            <div className="auth-divider__line" />
           </div>
 
-          {/* ✅ Email/Senha (Juntos - evita fragmentação) */}
-          <form onSubmit={handleEmailSignIn} style={{ marginTop: '2rem' }}>
+          <form onSubmit={handleEmailSignIn} className="mt-5">
             <div className="field">
-              <label className="label" style={{ color: '#FFFFFF', fontWeight: 600 }}>
+              <label htmlFor="input-email" className="label has-text-white has-text-weight-semibold">
                 {t('emailLabel')}
               </label>
               <div className="control">
                 <input
+                  id="input-email"
                   className="input"
                   type="email"
                   placeholder={t('emailPlaceholder')}
@@ -216,72 +149,67 @@ export default function AuthModal({
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={isLoading}
-                  style={{
-                    background: '#0A0A0F',
-                    border: '1px solid #2A2D3A',
-                    color: '#FFFFFF',
-                  }}
+                  aria-required="true"
                 />
               </div>
             </div>
 
-            <div className="field">
-              <label className="label" style={{ color: '#FFFFFF', fontWeight: 600 }}>
+            <div className="field mt-4">
+              <label htmlFor="input-password" className="label has-text-white has-text-weight-semibold">
                 {t('passwordLabel')}
               </label>
-              <div className="control">
+              
+              <div className="control has-icons-right">
                 <input
+                  id="input-password"
                   className="input"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder={t('passwordPlaceholder')}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   disabled={isLoading}
-                  style={{
-                    background: '#0A0A0F',
-                    border: '1px solid #2A2D3A',
-                    color: '#FFFFFF',
-                  }}
+                  aria-required="true"
                 />
+                
+                <span 
+                  id="toggle-password-visibility"
+                  className="icon is-right" 
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => { if (e.key === 'Enter') setShowPassword(!showPassword) }}
+                >
+                  <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                </span>
+              </div>
+              
+              <div className="is-flex is-justify-content-flex-end mt-2">
+                <a 
+                  href="/forgot-password" 
+                  id="link-forgot-password" 
+                  className="is-size-7"
+                >
+                  {t('forgotPassword')}
+                </a>
               </div>
             </div>
 
-            {/* Submit Button */}
             <button
+              id="btn-email-login"
               type="submit"
-              className="button is-primary is-fullwidth"
+              className={`button is-primary is-fullwidth mt-5 has-text-weight-semibold ${isLoading ? 'is-loading' : ''}`}
               disabled={isLoading}
-              style={{ fontWeight: 600, marginTop: '1.5rem' }}
+              aria-busy={isLoading}
             >
-              {isLoading ? (
-                <>
-                  <span className="icon">
-                    <i className="fas fa-spinner fa-spin"></i>
-                  </span>
-                  <span>{t('loading')}</span>
-                </>
-              ) : (
-                <>
-                  <span>{t('signInButton')}</span>
-                </>
-              )}
+              <span>{t('signInButton')}</span>
             </button>
           </form>
 
-          {/* Terms */}
-          <p
-            style={{
-              fontSize: '0.75rem',
-              color: '#64748B',
-              textAlign: 'center',
-              marginTop: '1.5rem',
-            }}
-          >
+          <p className="has-text-centered mt-5 is-size-7 has-text-grey">
             {t('termsText')}{' '}
-            <a href="/terms" style={{ color: '#7c3aed' }}>
-              {t('termsLink')}
-            </a>
+            <a href="/terms">{t('termsLink')}</a>
           </p>
         </div>
       </div>

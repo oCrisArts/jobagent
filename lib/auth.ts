@@ -1,6 +1,7 @@
 import { type NextAuthOptions } from "next-auth";
 import LinkedInProvider from "next-auth/providers/linkedin";
 import GoogleProvider from "next-auth/providers/google";
+import EmailProvider from "next-auth/providers/email";
 import { SupabaseAdapter } from "@auth/supabase-adapter";
 import { createClient } from "@supabase/supabase-js";
 
@@ -52,6 +53,19 @@ export const authOptions: NextAuthOptions = {
       },
       allowDangerousEmailAccountLinking: true,
     }),
+
+    // ──────── Email Provider (Resend) ────────
+    EmailProvider({
+      from: process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev",
+      server: {
+        host: "smtp.resend.com",
+        port: 587,
+        auth: {
+          user: "resend",
+          pass: process.env.RESEND_API_KEY!,
+        },
+      },
+    }),
   ],
 
   // ─────────────────────────────────────────────────────
@@ -64,28 +78,27 @@ export const authOptions: NextAuthOptions = {
         session.user.id = token.sub;
 
         try {
-          // Buscamos as colunas corretas do novo Schema
+          // ⚠️ MUDANÇA AQUI: Lemos diretamente da tabela "users", e adicionamos o ats_score
           const { data, error } = await supabaseAdmin
-            .from("profiles")
-            .select("plan_type, resumes_count, ssi_score")
+            .from("users") 
+            .select("plan_type, resumes_count, ssi_score, ats_score")
             .eq("id", token.sub)
             .single();
 
           if (!error && data) {
-            // Mapeamos os dados modernos para a sessão
-            session.user.plan_type = data.plan_type;
-            session.user.resumes_count = data.resumes_count;
-            session.user.ssi_score = data.ssi_score;
+            // Mapeamos os dados para a sessão, com fallbacks de segurança
+            session.user.plan_type = data.plan_type || 'free';
+            session.user.resumes_count = data.resumes_count || 0;
+            session.user.ssi_score = data.ssi_score || 0;
+            session.user.ats_score = data.ats_score || 0;
             session.user.is_pro = data.plan_type === "pro" || data.plan_type === "enterprise";
           }
         } catch (error) {
-          console.error("Erro ao sincronizar perfil na sessão:", error);
+          console.error("Erro ao sincronizar dados na sessão:", error);
         }
       }
       return session;
     },
-
-    // O callback signIn manual foi REMOVIDO pois o banco de dados faz isso sozinho agora!
 
     async redirect({ url, baseUrl }) {
       if (url.startsWith("/")) return `${baseUrl}${url}`;

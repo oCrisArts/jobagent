@@ -37,6 +37,9 @@ const infraContext: {
   apiStatusCode?: number;
   shouldSkip?: boolean;
   skipReason?: string;
+  emailConfigured?: boolean;
+  emailResponseStatus?: number;
+  emailResponseBody?: any;
 } = {};
 
 Given('que o arquivo .env.local existe', async ({}) => {
@@ -183,4 +186,41 @@ Then('o tempo de resposta deve ser menor que 5 segundos', async ({}) => {
     test.skip(true, infraContext.skipReason || 'Teste skipado');
   }
   expect(infraContext.apiResponseTime).toBeLessThan(5000);
+});
+
+// ──────── Teste de Provedor de E-mail (Resend) ────────
+
+Given('que o serviço de e-mail está configurado', async ({}) => {
+  const resendApiKey = getEnvVar('RESEND_API_KEY');
+  const resendFromEmail = getEnvVar('RESEND_FROM_EMAIL');
+
+  if (!resendApiKey) {
+    infraContext.shouldSkip = true;
+    infraContext.skipReason = 'RESEND_API_KEY não configurada no .env.local';
+  }
+
+  infraContext.emailConfigured = !!(resendApiKey && resendFromEmail);
+});
+
+When('eu disparo um e-mail de teste para {string}', async ({ page, request }, email: string) => {
+  if (infraContext.shouldSkip) {
+    return;
+  }
+
+  try {
+    const response = await page.request.get(`/api/test-email?email=${encodeURIComponent(email)}`);
+    infraContext.emailResponseStatus = response.status();
+    infraContext.emailResponseBody = await response.json();
+  } catch (error) {
+    infraContext.emailResponseStatus = 0;
+    infraContext.emailResponseBody = { error: 'Erro ao fazer requisição' };
+  }
+});
+
+Then('a API do Resend deve retornar um status de sucesso 200', async ({}) => {
+  if (infraContext.shouldSkip) {
+    test.skip(true, infraContext.skipReason || 'Teste skipado');
+  }
+  expect(infraContext.emailResponseStatus).toBe(200);
+  expect(infraContext.emailResponseBody.success).toBeTruthy();
 });

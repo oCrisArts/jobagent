@@ -1,5 +1,4 @@
 @import "./_tokens.scss";
-
 $primary: $color-brand-600;
 $link: $color-brand-500;
 $text: $color-text-primary;
@@ -11,6 +10,11 @@ $family-primary: $typography-font-family-sans;
 
 @import "bulma/bulma";
 
+
+// ─────────────────────────────────────────────────────────────────
+// 🎨 Modal de auth
+// ─────────────────────────────────────────────────────────────────
+@import "components/auth-modal";
 
 // ─────────────────────────────────────────────────────────────────
 // 🎯 SMOOTH SCROLL BEHAVIOR (Âncoras da Landing Page)
