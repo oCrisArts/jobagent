@@ -57,3 +57,9 @@ Funcionalidade: Autenticação OAuth (Google/LinkedIn)
     Então o botão "#btn-send-recovery" deve estar visível
     Quando clico no botão "#btn-back-to-login"
     Então o formulário de login deve estar visível
+
+Cenário: Enviar solicitação de recuperação de senha
+    Dado que estou na visão de recuperação de senha
+    Quando preencho o e-mail com "teste@exemplo.com"
+    E clico no botão "#btn-send-recovery"
+    Então o sistema deve exibir uma notificação de sucesso ou erro
