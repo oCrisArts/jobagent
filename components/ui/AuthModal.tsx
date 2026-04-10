@@ -53,29 +53,44 @@ export default function AuthModal() {
 
   const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('[AuthModal] EmailSignIn: Iniciando', { email, hasPassword: !!password });
     setIsLoading(true);
     setNotification(null);
     
     try {
       if (!email || !password) {
+        console.log('[AuthModal] EmailSignIn: Campos vazios');
         setNotification({ type: 'error', message: t('errorEmptyFields') });
         setIsLoading(false);
         return;
       }
       
+      console.log('[AuthModal] EmailSignIn: Chamando signIn');
+      // Usar redirect: false para poder tratar erros antes de redirecionar
       const result = await signIn('credentials', { 
         email, 
         password, 
         callbackUrl: '/inicio',
-        redirect: true
+        redirect: false
       });
       
+      console.log('[AuthModal] EmailSignIn: Resultado', result);
+      
       if (result?.error) {
+        console.log('[AuthModal] EmailSignIn: Erro retornado', result.error);
         setNotification({ type: 'error', message: result.error });
+        setIsLoading(false);
+      } else if (result?.ok) {
+        console.log('[AuthModal] EmailSignIn: Sucesso, redirecionando');
+        // Login bem-sucedido, redirecionar manualmente
+        window.location.href = result.url || '/inicio';
+      } else {
+        console.log('[AuthModal] EmailSignIn: Resultado inesperado', result);
+        setNotification({ type: 'error', message: t('errorSignIn') });
         setIsLoading(false);
       }
     } catch (error) {
-      console.error('Email sign-in error:', error);
+      console.error('[AuthModal] EmailSignIn: Erro catch', error);
       setNotification({ type: 'error', message: t('errorSignIn') });
       setIsLoading(false);
     }
@@ -86,24 +101,32 @@ export default function AuthModal() {
     setIsLoading(true);
     setNotification(null);
     
+    console.log('[AuthModal] ForgotPassword: Iniciando', { email });
+    
     try {
       if (!email) {
+        console.log('[AuthModal] ForgotPassword: Email vazio');
         setNotification({ type: 'error', message: t('errorEmptyFields') });
         setIsLoading(false);
         return;
       }
       
+      console.log('[AuthModal] ForgotPassword: Chamando API');
       const response = await fetch('/api/auth/forgot-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       });
       
+      console.log('[AuthModal] ForgotPassword: Response status', response.status);
       const data = await response.json();
+      console.log('[AuthModal] ForgotPassword: Response data', data);
       
       if (!response.ok) {
+        console.log('[AuthModal] ForgotPassword: Erro na resposta');
         setNotification({ type: 'error', message: data.error || t('errorSendRecovery') });
       } else {
+        console.log('[AuthModal] ForgotPassword: Sucesso');
         setNotification({ type: 'success', message: data.message || t('successRecoverySent') });
         setTimeout(() => {
           setView('login');
@@ -113,7 +136,7 @@ export default function AuthModal() {
       
       setIsLoading(false);
     } catch (error) {
-      console.error('Forgot password error:', error);
+      console.error('[AuthModal] ForgotPassword: Erro', error);
       setNotification({ type: 'error', message: t('errorSendRecovery') });
       setIsLoading(false);
     }
