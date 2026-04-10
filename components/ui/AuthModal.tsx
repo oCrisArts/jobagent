@@ -15,7 +15,6 @@ export default function AuthModal() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [forgotEmail, setForgotEmail] = useState('');
 
   useEffect(() => {
     setIsMounted(true);
@@ -71,13 +70,13 @@ export default function AuthModal() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      if (!forgotEmail) {
+      if (!email) {
         alert(t('errorEmptyFields'));
         setIsLoading(false);
         return;
       }
       // TODO: Implementar envio de e-mail de recuperação via Resend/NextAuth
-      console.log('Enviar e-mail de recuperação para:', forgotEmail);
+      console.log('Enviar e-mail de recuperação para:', email);
       setIsLoading(false);
       setView('login');
     } catch (error) {
@@ -98,7 +97,7 @@ export default function AuthModal() {
     >
       <div className="modal-background" onClick={handleClose} />
 
-      <div className="modal-content">
+      <div className="modal-content" style={{ width: '500px' }}>
         <div className="box">
           
           <button
@@ -117,35 +116,8 @@ export default function AuthModal() {
             </p>
           </div>
 
-          <div className="mb-5">
-            <button
-              id="btn-google-login"
-              className="button is-fullwidth mb-3 has-text-weight-semibold"
-              onClick={handleGoogleSignIn}
-              disabled={isLoading}
-            >
-              <span className="icon"><i className="fab fa-google"></i></span>
-              <span>{t('signInGoogle')}</span>
-            </button>
-
-            <button
-              id="btn-linkedin-login"
-              className="button is-fullwidth has-text-weight-semibold"
-              onClick={handleLinkedInSignIn}
-              disabled={isLoading}
-            >
-              <span className="icon"><i className="fab fa-linkedin"></i></span>
-              <span>{t('signInLinkedIn')}</span>
-            </button>
-          </div>
-
-          <div className="auth-divider">
-            <div className="auth-divider__line" />
-            <span className="auth-divider__text">{t('orDivider')}</span>
-            <div className="auth-divider__line" />
-          </div>
-
-          <form onSubmit={handleEmailSignIn} className="mt-5">
+          {/* Email field - always visible */}
+          <form onSubmit={view === 'forgot-password' ? handleForgotPassword : handleEmailSignIn}>
             <div className="field">
               <label htmlFor="input-email" className="label has-text-white has-text-weight-semibold">
                 {t('emailLabel')}
@@ -165,96 +137,69 @@ export default function AuthModal() {
               </div>
             </div>
 
-            <div className="field mt-4">
-              <label htmlFor="input-password" className="label has-text-white has-text-weight-semibold">
-                {t('passwordLabel')}
-              </label>
-              
-              <div className="control has-icons-right">
-                <input
-                  id="input-password"
-                  className="input"
-                  type={showPassword ? "text" : "password"}
-                  placeholder={t('passwordPlaceholder')}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  disabled={isLoading}
-                  aria-required="true"
-                />
-                
-                <span 
-                  id="toggle-password-visibility"
-                  className="icon is-right" 
-                  onClick={() => setShowPassword(!showPassword)}
-                  aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => { if (e.key === 'Enter') setShowPassword(!showPassword) }}
-                >
-                  <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
-                </span>
-              </div>
-              
-              <div className="is-flex is-justify-content-flex-end mt-2">
-                <button
-                  type="button"
-                  id="link-forgot-password"
-                  className="is-size-7 button is-text has-text-primary p-0"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setView('forgot-password');
-                  }}
-                >
-                  {t('forgotPassword')}
-                </button>
-              </div>
-            </div>
-
-            <button
-              id="btn-email-login"
-              type="submit"
-              className={`button is-primary is-fullwidth mt-5 has-text-weight-semibold ${isLoading ? 'is-loading' : ''}`}
-              disabled={isLoading}
-              aria-busy={isLoading}
-            >
-              <span>{t('signInButton')}</span>
-            </button>
-          </form>
-
-          {/* Vista de Recuperação de Senha */}
-          {view === 'forgot-password' && (
-            <form onSubmit={handleForgotPassword} className="mt-5">
-              <div className="field">
-                <label htmlFor="input-forgot-email" className="label has-text-white has-text-weight-semibold">
-                  {t('emailLabel')}
+            {/* Password field - only in login view */}
+            {view === 'login' && (
+              <div className="field mt-4">
+                <label htmlFor="input-password" className="label has-text-white has-text-weight-semibold">
+                  {t('passwordLabel')}
                 </label>
-                <div className="control">
+                
+                <div className="control has-icons-right">
                   <input
-                    id="input-forgot-email"
+                    id="input-password"
                     className="input"
-                    type="email"
-                    placeholder={t('emailPlaceholder')}
-                    value={forgotEmail}
-                    onChange={(e) => setForgotEmail(e.target.value)}
+                    type={showPassword ? "text" : "password"}
+                    placeholder={t('passwordPlaceholder')}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                     disabled={isLoading}
                     aria-required="true"
                   />
+                  
+                  <span 
+                    id="toggle-password-visibility"
+                    className="icon is-right" 
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => { if (e.key === 'Enter') setShowPassword(!showPassword) }}
+                  >
+                    <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                  </span>
+                </div>
+                
+                <div className="is-flex is-justify-content-flex-end mt-2">
+                  <button
+                    type="button"
+                    id="link-forgot-password"
+                    className="is-size-7 button is-text has-text-primary p-0"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setView('forgot-password');
+                    }}
+                  >
+                    {t('forgotPassword')}
+                  </button>
                 </div>
               </div>
+            )}
 
-              <button
-                id="btn-send-recovery"
-                type="submit"
-                className={`button is-primary is-fullwidth mt-5 has-text-weight-semibold ${isLoading ? 'is-loading' : ''}`}
-                disabled={isLoading}
-                aria-busy={isLoading}
-              >
-                <span>{t('sendRecoveryButton')}</span>
-              </button>
+            {/* Submit button - changes based on view */}
+            <button
+              id={view === 'forgot-password' ? 'btn-send-recovery' : 'btn-email-login'}
+              type="submit"
+              className={`button is-primary is-fullwidth mt-4 has-text-weight-semibold ${isLoading ? 'is-loading' : ''}`}
+              disabled={isLoading}
+              aria-busy={isLoading}
+            >
+              <span>{view === 'forgot-password' ? t('sendRecoveryButton') : t('signInButton')}</span>
+            </button>
 
-              <div className="has-text-centered mt-4">
+            {/* Back to login link - only in forgot-password view */}
+            {view === 'forgot-password' && (
+              <div className="has-text-centered mt-3">
                 <button
                   type="button"
                   id="btn-back-to-login"
@@ -264,8 +209,40 @@ export default function AuthModal() {
                   {t('backToLogin')}
                 </button>
               </div>
-            </form>
-          )}
+            )}
+          </form>
+
+          <div className="auth-divider mt-5">
+            <div className="auth-divider__line" />
+            <span className="auth-divider__text">{t('orDivider')}</span>
+            <div className="auth-divider__line" />
+          </div>
+
+          {/* Social buttons - side by side */}
+          <div className="columns is-mobile is-gap-2 mt-4">
+            <div className="column is-half">
+              <button
+                id="btn-google-login"
+                className="button is-fullwidth has-text-weight-semibold"
+                onClick={handleGoogleSignIn}
+                disabled={isLoading}
+              >
+                <span className="icon"><i className="fab fa-google"></i></span>
+                <span>{t('signInGoogle')}</span>
+              </button>
+            </div>
+            <div className="column is-half">
+              <button
+                id="btn-linkedin-login"
+                className="button is-fullwidth has-text-weight-semibold"
+                onClick={handleLinkedInSignIn}
+                disabled={isLoading}
+              >
+                <span className="icon"><i className="fab fa-linkedin"></i></span>
+                <span>{t('signInLinkedIn')}</span>
+              </button>
+            </div>
+          </div>
 
           <p className="has-text-centered mt-5 is-size-7 has-text-grey">
             {t('termsText')}{' '}

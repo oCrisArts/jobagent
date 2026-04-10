@@ -24,9 +24,6 @@ export default function LandingPage() {
               <button className="button is-primary is-large" onClick={openAuthModal}>
                 {t('landing.cta.start')}
               </button>
-              <button className="button is-light is-large" onClick={openAuthModal}>
-                {t('landing.cta.signin')}
-              </button>
             </div>
           </div>
         </div>
