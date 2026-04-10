@@ -131,7 +131,7 @@ export const authOptions: NextAuthOptions = {
           if (existingUser.password !== password) {
             authLogger.error("Credentials:Password", "Senha incorreta");
             authLogger.debug("Credentials:Login:PasswordMismatch", { userId: existingUser.id });
-            throw new Error("E-mail ou senha incorretos");
+            return null;
           }
 
           authLogger.info("Credentials:Login:Success", { email, userId: existingUser.id });

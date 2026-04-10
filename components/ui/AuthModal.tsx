@@ -15,7 +15,6 @@ export default function AuthModal() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [notification, setNotification] = useState<{type: 'success' | 'error', message: string} | null>(null);
   
   // Estados para feedback por campo
   const [emailError, setEmailError] = useState<string | null>(null);
@@ -61,7 +60,6 @@ export default function AuthModal() {
     e.preventDefault();
     console.log('[AuthModal] EmailSignIn: Iniciando', { email, hasPassword: !!password });
     setIsLoading(true);
-    setNotification(null);
     
     // Limpar feedback de campo
     setEmailError(null);
@@ -72,7 +70,6 @@ export default function AuthModal() {
     try {
       if (!email || !password) {
         console.log('[AuthModal] EmailSignIn: Campos vazios');
-        setNotification({ type: 'error', message: t('errorEmptyFields') });
         if (!email) setEmailError(t('emailRequired'));
         if (!password) setPasswordError(t('passwordRequired'));
         setIsLoading(false);
@@ -92,8 +89,11 @@ export default function AuthModal() {
       
       if (result?.error) {
         console.log('[AuthModal] EmailSignIn: Erro retornado', result.error);
-        setNotification({ type: 'error', message: result.error });
-        setPasswordError(result.error);
+        // Traduzir erro CredentialsSignin para mensagem amigável
+        const errorMessage = result.error === 'CredentialsSignin' 
+          ? t('errorInvalidCredentials') 
+          : result.error || t('errorSignIn');
+        setPasswordError(errorMessage);
         setIsLoading(false);
       } else if (result?.ok) {
         console.log('[AuthModal] EmailSignIn: Sucesso, redirecionando');
@@ -103,13 +103,11 @@ export default function AuthModal() {
         window.location.href = result.url || '/inicio';
       } else {
         console.log('[AuthModal] EmailSignIn: Resultado inesperado', result);
-        setNotification({ type: 'error', message: t('errorSignIn') });
         setPasswordError(t('errorSignIn'));
         setIsLoading(false);
       }
     } catch (error) {
       console.error('[AuthModal] EmailSignIn: Erro catch', error);
-      setNotification({ type: 'error', message: t('errorSignIn') });
       setPasswordError(t('errorSignIn'));
       setIsLoading(false);
     }
@@ -118,7 +116,6 @@ export default function AuthModal() {
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setNotification(null);
     
     // Limpar feedback de campo
     setEmailError(null);
@@ -129,7 +126,6 @@ export default function AuthModal() {
     try {
       if (!email) {
         console.log('[AuthModal] ForgotPassword: Email vazio');
-        setNotification({ type: 'error', message: t('errorEmptyFields') });
         setEmailError(t('emailRequired'));
         setIsLoading(false);
         return;
@@ -161,7 +157,6 @@ export default function AuthModal() {
       setIsLoading(false);
     } catch (error) {
       console.error('[AuthModal] ForgotPassword: Erro', error);
-      setNotification({ type: 'error', message: t('errorSendRecovery') });
       setEmailError(t('errorSendRecovery'));
       setIsLoading(false);
     }
@@ -197,17 +192,6 @@ export default function AuthModal() {
               {t('subtitle')}
             </p>
           </div>
-
-          {/* Notification */}
-          {notification && (
-            <div 
-              id={notification.type === 'success' ? 'notification-success' : 'notification-error'}
-              className={`notification ${notification.type === 'success' ? 'is-success auth-success' : 'is-danger auth-error'}`}
-              role={notification.type === 'success' ? 'status' : 'alert'}
-            >
-              {notification.message}
-            </div>
-          )}
 
           {/* Email field - always visible */}
           <form onSubmit={view === 'forgot-password' ? handleForgotPassword : handleEmailSignIn}>
