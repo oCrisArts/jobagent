@@ -1,14 +1,18 @@
 # language: pt
 
-Funcionalidade: Autenticação OAuth (Google/LinkedIn)
+Funcionalidade: Autenticação (OAuth, Credenciais e Recuperação de Senha)
   Como Visitante
-  Quero fazer login via OAuth (Google/LinkedIn)
+  Quero fazer login via OAuth (Google/LinkedIn) ou Credenciais (Email/Senha)
   Para aceder às funcionalidades da aplicação com persistência correta no schema users
 
   Contexto:
     Dado que o sistema está sendo preparado para execução
 
-  Cenário: Cadastro/Login via Google com validação de persistência
+  # ─────────────────────────────────────────────────────────
+  # OAuth (Google e LinkedIn)
+  # ─────────────────────────────────────────────────────────
+
+  Cenário: Cadastro/Login via Google com validação de persistência e redirecionamento
     Dado que sou um visitante na raiz "/"
     Quando o OAuth retorna com sucesso simulado para Google
     Então a sessão contém os valores default do schema users
@@ -16,15 +20,15 @@ Funcionalidade: Autenticação OAuth (Google/LinkedIn)
     E ats_score é 0
     E ssi_score é 0
     E resumes_count é 0
+    E sou redirecionado para "/inicio"
 
-  Cenário: Cadastro/Login via LinkedIn com validação de persistência
+  Cenário: Cadastro/Login via LinkedIn com validação de persistência e redirecionamento
     Dado que sou um visitante na raiz "/"
     Quando o OAuth retorna com sucesso simulado para LinkedIn
     Então a sessão contém os valores default do schema users
     E plan_type é "free"
     E ats_score é 0
-
-  
+    E sou redirecionado para "/inicio"
 
   Cenário: Erro no callback OAuth exibe alerta
     Dado que sou um visitante na raiz "/"
@@ -44,11 +48,39 @@ Funcionalidade: Autenticação OAuth (Google/LinkedIn)
   #   Quando clico novamente no botão "#toggle-password-visibility"
   #   Então o input "#input-password" deve ter type "password"
 
+  # ─────────────────────────────────────────────────────────
+  # Credenciais (Email/Senha)
+  # ─────────────────────────────────────────────────────────
+
+  Cenário: Login com credenciais existentes redireciona para /inicio
+    Dado que sou um visitante na raiz "/"
+    E o modal de autenticação está aberto
+    Quando preencho o campo "#input-email" com "teste@exemplo.com"
+    E preencho o campo "#input-password" com "senha123"
+    E submeto o formulário de login
+    Então sou redirecionado para "/inicio"
+
+  Cenário: Senha incorreta exibe mensagem de erro
+    Dado que sou um visitante na raiz "/"
+    E o modal de autenticação está aberto
+    Quando preencho o campo "#input-email" com "teste@exemplo.com"
+    E preencho o campo "#input-password" com "senha_errada"
+    E submeto o formulário de login
+    Então a UI deve exibir mensagem de erro "E-mail ou senha incorretos"
+
+  # ─────────────────────────────────────────────────────────
+  # Navegação e Termos
+  # ─────────────────────────────────────────────────────────
+
   Cenário: Navegação para página de Termos
     Dado que sou um visitante na raiz "/"
     E o modal de autenticação está aberto
     Quando clico no link para termos
     Então sou redirecionado para "/terms"
+
+  # ─────────────────────────────────────────────────────────
+  # Recuperação de Senha
+  # ─────────────────────────────────────────────────────────
 
   Cenário: Navegação Fluida - Recuperação de Senha
     Dado que sou um visitante na raiz "/"
@@ -58,8 +90,14 @@ Funcionalidade: Autenticação OAuth (Google/LinkedIn)
     Quando clico no botão "#btn-back-to-login"
     Então o formulário de login deve estar visível
 
-Cenário: Enviar solicitação de recuperação de senha
+  Cenário: Enviar solicitação de recuperação de senha com email existente
     Dado que estou na visão de recuperação de senha
     Quando preencho o e-mail com "teste@exemplo.com"
     E clico no botão "#btn-send-recovery"
-    Então o sistema deve exibir uma notificação de sucesso ou erro
+    Então o sistema deve exibir uma notificação de sucesso "Email de recuperação enviado"
+
+  Cenário: Enviar solicitação de recuperação com email não existente exibe erro
+    Dado que estou na visão de recuperação de senha
+    Quando preencho o e-mail com "naoexiste@exemplo.com"
+    E clico no botão "#btn-send-recovery"
+    Então a UI deve exibir mensagem de erro "E-mail não encontrado"
