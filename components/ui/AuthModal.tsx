@@ -15,6 +15,7 @@ export default function AuthModal() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [notification, setNotification] = useState<{type: 'success' | 'error', message: string} | null>(null);
 
   useEffect(() => {
     setIsMounted(true);
@@ -53,15 +54,29 @@ export default function AuthModal() {
   const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setNotification(null);
+    
     try {
       if (!email || !password) {
-        alert(t('errorEmptyFields'));
+        setNotification({ type: 'error', message: t('errorEmptyFields') });
         setIsLoading(false);
         return;
       }
-      // await signIn('credentials', { email, password, callbackUrl: '/iniciar' });
+      
+      const result = await signIn('credentials', { 
+        email, 
+        password, 
+        callbackUrl: '/inicio',
+        redirect: true
+      });
+      
+      if (result?.error) {
+        setNotification({ type: 'error', message: result.error });
+        setIsLoading(false);
+      }
     } catch (error) {
       console.error('Email sign-in error:', error);
+      setNotification({ type: 'error', message: t('errorSignIn') });
       setIsLoading(false);
     }
   };
@@ -69,18 +84,37 @@ export default function AuthModal() {
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setNotification(null);
+    
     try {
       if (!email) {
-        alert(t('errorEmptyFields'));
+        setNotification({ type: 'error', message: t('errorEmptyFields') });
         setIsLoading(false);
         return;
       }
-      // TODO: Implementar envio de e-mail de recuperação via Resend/NextAuth
-      console.log('Enviar e-mail de recuperação para:', email);
+      
+      const response = await fetch('/api/auth/forgot-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        setNotification({ type: 'error', message: data.error || t('errorSendRecovery') });
+      } else {
+        setNotification({ type: 'success', message: data.message || t('successRecoverySent') });
+        setTimeout(() => {
+          setView('login');
+          setNotification(null);
+        }, 3000);
+      }
+      
       setIsLoading(false);
-      setView('login');
     } catch (error) {
       console.error('Forgot password error:', error);
+      setNotification({ type: 'error', message: t('errorSendRecovery') });
       setIsLoading(false);
     }
   };
@@ -115,6 +149,17 @@ export default function AuthModal() {
               {t('subtitle')}
             </p>
           </div>
+
+          {/* Notification */}
+          {notification && (
+            <div 
+              id={notification.type === 'success' ? 'notification-success' : 'notification-error'}
+              className={`notification ${notification.type === 'success' ? 'is-success auth-success' : 'is-danger auth-error'}`}
+              role={notification.type === 'success' ? 'status' : 'alert'}
+            >
+              {notification.message}
+            </div>
+          )}
 
           {/* Email field - always visible */}
           <form onSubmit={view === 'forgot-password' ? handleForgotPassword : handleEmailSignIn}>

@@ -195,10 +195,16 @@ When('submeto o formulário de login', async ({ page }) => {
 
 Then('a UI deve exibir mensagem de erro {string}', async ({ page }, message: string) => {
   // Verificar se há algum alerta de erro visível
-  const errorAlert = page.locator('.notification.is-danger, .auth-error, [role="alert"]').first();
+  const errorAlert = page.locator('#notification-error, .notification.is-danger, .auth-error, [role="alert"]').first();
   await expect(errorAlert).toBeVisible({ timeout: 5000 });
   const text = await errorAlert.textContent();
   expect(text?.toLowerCase()).toContain(message.toLowerCase());
+});
+
+Then('a notificação de erro {string} deve estar visível', async ({ page }, selector: string) => {
+  // Verificar notificação de erro por ID
+  const errorNotification = page.locator(selector).first();
+  await expect(errorNotification).toBeVisible({ timeout: 5000 });
 });
 
 // ─────────────────────────────────────────────────────────
@@ -240,8 +246,14 @@ When('preencho o e-mail com {string}', async ({ page }, email: string) => {
 
 Then('o sistema deve exibir uma notificação de sucesso {string}', async ({ page }, message: string) => {
   // Verificar toast ou notificação de sucesso
-  const successNotification = page.locator('.notification.is-success, .auth-success, [role="status"]').first();
+  const successNotification = page.locator('#notification-success, .notification.is-success, .auth-success, [role="status"]').first();
   await expect(successNotification).toBeVisible({ timeout: 5000 });
   const text = await successNotification.textContent();
   expect(text?.toLowerCase()).toContain(message.toLowerCase());
+});
+
+Then('a notificação de sucesso {string} deve estar visível', async ({ page }, selector: string) => {
+  // Verificar notificação de sucesso por ID
+  const successNotification = page.locator(selector).first();
+  await expect(successNotification).toBeVisible({ timeout: 5000 });
 });

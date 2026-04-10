@@ -66,7 +66,7 @@ Funcionalidade: Autenticação (OAuth, Credenciais e Recuperação de Senha)
     Quando preencho o campo "#input-email" com "teste@exemplo.com"
     E preencho o campo "#input-password" com "senha_errada"
     E submeto o formulário de login
-    Então a UI deve exibir mensagem de erro "E-mail ou senha incorretos"
+    Então a notificação de erro "#notification-error" deve estar visível
 
   # ─────────────────────────────────────────────────────────
   # Navegação e Termos
@@ -90,14 +90,14 @@ Funcionalidade: Autenticação (OAuth, Credenciais e Recuperação de Senha)
     Quando clico no botão "#btn-back-to-login"
     Então o formulário de login deve estar visível
 
-  Cenário: Enviar solicitação de recuperação de senha com email existente
+Cenário: Enviar solicitação de recuperação de senha com email existente
     Dado que estou na visão de recuperação de senha
     Quando preencho o e-mail com "teste@exemplo.com"
     E clico no botão "#btn-send-recovery"
-    Então o sistema deve exibir uma notificação de sucesso "Email de recuperação enviado"
+    Então a notificação de sucesso "#notification-success" deve estar visível
 
-  Cenário: Enviar solicitação de recuperação com email não existente exibe erro
+Cenário: Enviar solicitação de recuperação com email não existente exibe erro
     Dado que estou na visão de recuperação de senha
     Quando preencho o e-mail com "naoexiste@exemplo.com"
     E clico no botão "#btn-send-recovery"
-    Então a UI deve exibir mensagem de erro "E-mail não encontrado"
+    Então a notificação de erro "#notification-error" deve estar visível

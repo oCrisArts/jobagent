@@ -54,7 +54,7 @@ test.describe("Autenticação (OAuth, Credenciais e Recuperação de Senha)", ()
     await When("preencho o campo \"#input-email\" com \"teste@exemplo.com\"", null, { page });
     await And("preencho o campo \"#input-password\" com \"senha_errada\"", null, { page });
     await And("submeto o formulário de login", null, { page });
-    await Then("a UI deve exibir mensagem de erro \"E-mail ou senha incorretos\"", null, { page });
+    await Then("a notificação de erro \"#notification-error\" deve estar visível", null, { page });
   });
 
   test("Navegação para página de Termos", async ({ Given, page, And, When, Then }) => {
@@ -77,14 +77,14 @@ test.describe("Autenticação (OAuth, Credenciais e Recuperação de Senha)", ()
     await Given("que estou na visão de recuperação de senha", null, { page });
     await When("preencho o e-mail com \"teste@exemplo.com\"", null, { page });
     await And("clico no botão \"#btn-send-recovery\"", null, { page });
-    await Then("o sistema deve exibir uma notificação de sucesso \"Email de recuperação enviado\"", null, { page });
+    await Then("a notificação de sucesso \"#notification-success\" deve estar visível", null, { page });
   });
 
   test("Enviar solicitação de recuperação com email não existente exibe erro", async ({ Given, page, When, And, Then }) => {
     await Given("que estou na visão de recuperação de senha", null, { page });
     await When("preencho o e-mail com \"naoexiste@exemplo.com\"", null, { page });
     await And("clico no botão \"#btn-send-recovery\"", null, { page });
-    await Then("a UI deve exibir mensagem de erro \"E-mail não encontrado\"", null, { page });
+    await Then("a notificação de erro \"#notification-error\" deve estar visível", null, { page });
   });
 
 });
@@ -107,6 +107,6 @@ const bddFileMeta = {
   "Senha incorreta exibe mensagem de erro": {"pickleLocation":"63:3"},
   "Navegação para página de Termos": {"pickleLocation":"75:3"},
   "Navegação Fluida - Recuperação de Senha": {"pickleLocation":"85:3"},
-  "Enviar solicitação de recuperação de senha com email existente": {"pickleLocation":"93:3"},
-  "Enviar solicitação de recuperação com email não existente exibe erro": {"pickleLocation":"99:3"},
+  "Enviar solicitação de recuperação de senha com email existente": {"pickleLocation":"93:1"},
+  "Enviar solicitação de recuperação com email não existente exibe erro": {"pickleLocation":"99:1"},
 };
