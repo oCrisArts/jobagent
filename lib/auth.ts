@@ -120,47 +120,9 @@ export const authOptions: NextAuthOptions = {
           }
 
           if (!existingUser) {
-            // Usuário não existe - criar novo (cadastro automático)
-            authLogger.info("Credentials:Signup", { email });
-            authLogger.debug("Credentials:Signup:CreatingUser", { email });
-
-            const newUserId = uuidv4();
-            authLogger.debug("Credentials:Signup:Inserting", { newUserId, email });
-            
-            const { data: newUser, error: createError } = await supabaseAdmin
-              .from("users")
-              .insert({
-                id: newUserId,
-                email: email,
-                name: email.split("@")[0], // Nome temporário baseado no email
-                password: password, // Em produção, usar bcrypt
-                plan_type: "free",
-                resumes_count: 0,
-                ssi_score: 0,
-                ats_score: 0,
-                email_verified: new Date().toISOString(),
-              })
-              .select()
-              .single();
-
-            if (createError) {
-              authLogger.error("Credentials:Create", createError);
-              authLogger.debug("Credentials:Signup:CreateError", { code: createError.code, message: createError.message });
-              throw new Error("Erro ao criar usuário");
-            }
-            
-            authLogger.debug("Credentials:Signup:UserCreated", { userId: newUser?.id });
-
-            authLogger.info("Credentials:Signup:Success", { userId: newUser.id, email: newUser.email });
-            return {
-              id: newUser.id,
-              email: newUser.email,
-              name: newUser.name,
-              plan_type: newUser.plan_type,
-              resumes_count: newUser.resumes_count,
-              ssi_score: newUser.ssi_score,
-              ats_score: newUser.ats_score,
-            };
+            // Usuário não existe - retornar null para o NextAuth tratar o erro
+            authLogger.debug("Credentials:UserNotFound", { email });
+            return null;
           }
 
           // Usuário existe - validar senha

@@ -16,6 +16,12 @@ export default function AuthModal() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [notification, setNotification] = useState<{type: 'success' | 'error', message: string} | null>(null);
+  
+  // Estados para feedback por campo
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [emailSuccess, setEmailSuccess] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+  const [passwordSuccess, setPasswordSuccess] = useState<string | null>(null);
 
   useEffect(() => {
     setIsMounted(true);
@@ -57,10 +63,18 @@ export default function AuthModal() {
     setIsLoading(true);
     setNotification(null);
     
+    // Limpar feedback de campo
+    setEmailError(null);
+    setEmailSuccess(null);
+    setPasswordError(null);
+    setPasswordSuccess(null);
+    
     try {
       if (!email || !password) {
         console.log('[AuthModal] EmailSignIn: Campos vazios');
         setNotification({ type: 'error', message: t('errorEmptyFields') });
+        if (!email) setEmailError(t('emailRequired'));
+        if (!password) setPasswordError(t('passwordRequired'));
         setIsLoading(false);
         return;
       }
@@ -79,19 +93,24 @@ export default function AuthModal() {
       if (result?.error) {
         console.log('[AuthModal] EmailSignIn: Erro retornado', result.error);
         setNotification({ type: 'error', message: result.error });
+        setPasswordError(result.error);
         setIsLoading(false);
       } else if (result?.ok) {
         console.log('[AuthModal] EmailSignIn: Sucesso, redirecionando');
+        setEmailSuccess(t('loginSuccess'));
+        setPasswordSuccess(t('loginSuccess'));
         // Login bem-sucedido, redirecionar manualmente
         window.location.href = result.url || '/inicio';
       } else {
         console.log('[AuthModal] EmailSignIn: Resultado inesperado', result);
         setNotification({ type: 'error', message: t('errorSignIn') });
+        setPasswordError(t('errorSignIn'));
         setIsLoading(false);
       }
     } catch (error) {
       console.error('[AuthModal] EmailSignIn: Erro catch', error);
       setNotification({ type: 'error', message: t('errorSignIn') });
+      setPasswordError(t('errorSignIn'));
       setIsLoading(false);
     }
   };
@@ -101,12 +120,17 @@ export default function AuthModal() {
     setIsLoading(true);
     setNotification(null);
     
+    // Limpar feedback de campo
+    setEmailError(null);
+    setEmailSuccess(null);
+    
     console.log('[AuthModal] ForgotPassword: Iniciando', { email });
     
     try {
       if (!email) {
         console.log('[AuthModal] ForgotPassword: Email vazio');
         setNotification({ type: 'error', message: t('errorEmptyFields') });
+        setEmailError(t('emailRequired'));
         setIsLoading(false);
         return;
       }
@@ -125,12 +149,15 @@ export default function AuthModal() {
       if (!response.ok) {
         console.log('[AuthModal] ForgotPassword: Erro na resposta');
         setNotification({ type: 'error', message: data.error || t('errorSendRecovery') });
+        setEmailError(data.error || t('errorSendRecovery'));
       } else {
         console.log('[AuthModal] ForgotPassword: Sucesso');
         setNotification({ type: 'success', message: data.message || t('successRecoverySent') });
+        setEmailSuccess(data.message || t('successRecoverySent'));
         setTimeout(() => {
           setView('login');
           setNotification(null);
+          setEmailSuccess(null);
         }, 3000);
       }
       
@@ -138,6 +165,7 @@ export default function AuthModal() {
     } catch (error) {
       console.error('[AuthModal] ForgotPassword: Erro', error);
       setNotification({ type: 'error', message: t('errorSendRecovery') });
+      setEmailError(t('errorSendRecovery'));
       setIsLoading(false);
     }
   };
@@ -193,92 +221,104 @@ export default function AuthModal() {
               <div className="control">
                 <input
                   id="input-email"
-                  className="input"
+                  className={`input ${emailError ? 'is-danger' : ''} ${emailSuccess ? 'is-success' : ''}`}
                   type="email"
                   placeholder={t('emailPlaceholder')}
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setEmailError(null);
+                    setEmailSuccess(null);
+                  }}
                   required
                   disabled={isLoading}
                   aria-required="true"
                 />
               </div>
+              {emailError && <p className="help is-danger">{emailError}</p>}
+              {emailSuccess && <p className="help is-success">{emailSuccess}</p>}
             </div>
 
-            {/* Password field - only in login view */}
-            {view === 'login' && (
-              <div className="field mt-4">
-                <label htmlFor="input-password" className="label has-text-white has-text-weight-semibold">
-                  {t('passwordLabel')}
-                </label>
+          {/* Password field - only in login view */}
+          {view === 'login' && (
+            <div className="field mt-4">
+              <label htmlFor="input-password" className="label has-text-white has-text-weight-semibold">
+                {t('passwordLabel')}
+              </label>
+              
+              <div className="control has-icons-right">
+                <input
+                  id="input-password"
+                  className={`input ${passwordError ? 'is-danger' : ''} ${passwordSuccess ? 'is-success' : ''}`}
+                  type={showPassword ? "text" : "password"}
+                  placeholder={t('passwordPlaceholder')}
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setPasswordError(null);
+                    setPasswordSuccess(null);
+                  }}
+                  required
+                  disabled={isLoading}
+                  aria-required="true"
+                />
                 
-                <div className="control has-icons-right">
-                  <input
-                    id="input-password"
-                    className="input"
-                    type={showPassword ? "text" : "password"}
-                    placeholder={t('passwordPlaceholder')}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    disabled={isLoading}
-                    aria-required="true"
-                  />
-                  
-                  <span 
-                    id="toggle-password-visibility"
-                    className="icon is-right" 
-                    onClick={() => setShowPassword(!showPassword)}
-                    aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => { if (e.key === 'Enter') setShowPassword(!showPassword) }}
-                  >
-                    <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
-                  </span>
-                </div>
-                
-                <div className="is-flex is-justify-content-flex-end mt-2">
-                  <button
-                    type="button"
-                    id="link-forgot-password"
-                    className="is-size-7 button is-text has-text-primary p-0"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setView('forgot-password');
-                    }}
-                  >
-                    {t('forgotPassword')}
-                  </button>
-                </div>
+                <span 
+                  id="toggle-password-visibility"
+                  className="icon is-right" 
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => { if (e.key === 'Enter') setShowPassword(!showPassword) }}
+                >
+                  <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                </span>
               </div>
-            )}
-
-            {/* Submit button - changes based on view */}
-            <button
-              id={view === 'forgot-password' ? 'btn-send-recovery' : 'btn-email-login'}
-              type="submit"
-              className={`button is-primary is-fullwidth mt-4 has-text-weight-semibold ${isLoading ? 'is-loading' : ''}`}
-              disabled={isLoading}
-              aria-busy={isLoading}
-            >
-              <span>{view === 'forgot-password' ? t('sendRecoveryButton') : t('signInButton')}</span>
-            </button>
-
-            {/* Back to login link - only in forgot-password view */}
-            {view === 'forgot-password' && (
-              <div className="has-text-centered mt-3">
+              {passwordError && <p className="help is-danger">{passwordError}</p>}
+              {passwordSuccess && <p className="help is-success">{passwordSuccess}</p>}
+              
+              <div className="is-flex is-justify-content-flex-end mt-2">
                 <button
                   type="button"
-                  id="btn-back-to-login"
-                  className="button is-text has-text-grey-light is-size-7 p-0"
-                  onClick={() => setView('login')}
+                  id="link-forgot-password"
+                  className="is-size-7 button is-text has-text-primary p-0"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setView('forgot-password');
+                  }}
                 >
-                  {t('backToLogin')}
+                  {t('forgotPassword')}
                 </button>
               </div>
-            )}
-          </form>
+            </div>
+          )}
+
+          {/* Submit button - changes based on view */}
+          <button
+            id={view === 'forgot-password' ? 'btn-send-recovery' : 'btn-email-login'}
+            type="submit"
+            className={`button is-primary is-fullwidth mt-4 has-text-weight-semibold ${isLoading ? 'is-loading' : ''}`}
+            disabled={isLoading}
+            aria-busy={isLoading}
+          >
+            <span>{view === 'forgot-password' ? t('sendRecoveryButton') : t('signInButton')}</span>
+          </button>
+
+          {/* Back to login link - only in forgot-password view */}
+          {view === 'forgot-password' && (
+            <div className="has-text-centered mt-3">
+              <button
+                type="button"
+                id="btn-back-to-login"
+                className="button is-text has-text-grey-light is-size-7 p-0"
+                onClick={() => setView('login')}
+              >
+                {t('backToLogin')}
+              </button>
+            </div>
+          )}
+        </form>
 
           <div className="auth-divider mt-5">
             <div className="auth-divider__line" />
