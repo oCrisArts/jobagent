@@ -148,15 +148,12 @@ export default function AuthModal() {
       
       if (!response.ok) {
         console.log('[AuthModal] ForgotPassword: Erro na resposta');
-        setNotification({ type: 'error', message: data.error || t('errorSendRecovery') });
         setEmailError(data.error || t('errorSendRecovery'));
       } else {
         console.log('[AuthModal] ForgotPassword: Sucesso');
-        setNotification({ type: 'success', message: data.message || t('successRecoverySent') });
         setEmailSuccess(data.message || t('successRecoverySent'));
         setTimeout(() => {
           setView('login');
-          setNotification(null);
           setEmailSuccess(null);
         }, 3000);
       }
@@ -235,8 +232,8 @@ export default function AuthModal() {
                   aria-required="true"
                 />
               </div>
-              {emailError && <p className="help is-danger">{emailError}</p>}
-              {emailSuccess && <p className="help is-success">{emailSuccess}</p>}
+              {emailError && <p id="email-error" className="help is-danger">{emailError}</p>}
+              {emailSuccess && <p id="email-success" className="help is-success">{emailSuccess}</p>}
             </div>
 
           {/* Password field - only in login view */}
@@ -275,8 +272,8 @@ export default function AuthModal() {
                   <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
                 </span>
               </div>
-              {passwordError && <p className="help is-danger">{passwordError}</p>}
-              {passwordSuccess && <p className="help is-success">{passwordSuccess}</p>}
+              {passwordError && <p id="password-error" className="help is-danger">{passwordError}</p>}
+              {passwordSuccess && <p id="password-success" className="help is-success">{passwordSuccess}</p>}
               
               <div className="is-flex is-justify-content-flex-end mt-2">
                 <button

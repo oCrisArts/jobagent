@@ -94,10 +94,10 @@ Cenário: Enviar solicitação de recuperação de senha com email existente
     Dado que estou na visão de recuperação de senha
     Quando preencho o e-mail com "teste@exemplo.com"
     E clico no botão "#btn-send-recovery"
-    Então a notificação de sucesso "#notification-success" deve estar visível
+    Então o elemento "#email-success" deve estar visível
 
 Cenário: Enviar solicitação de recuperação com email não existente exibe erro
     Dado que estou na visão de recuperação de senha
     Quando preencho o e-mail com "naoexiste@exemplo.com"
     E clico no botão "#btn-send-recovery"
-    Então a notificação de erro "#notification-error" deve estar visível
+    Então o elemento "#email-error" deve estar visível
