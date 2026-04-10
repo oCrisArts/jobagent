@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import "@/styles/globals.scss";
 import Providers from "./providers";
 import Navigation from "@/components/shared/Navigation";
 import AuthModal from "@/components/ui/AuthModal";
+import AuthErrorToast from "@/components/ui/AuthErrorToast";
 import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
@@ -61,6 +63,11 @@ export default async function RootLayout({
 
           {/* 🔑 AuthModal Global */}
           <AuthModal />
+
+          {/* 🔔 Auth Error Toast */}
+          <Suspense>
+            <AuthErrorToast />
+          </Suspense>
 
           {/* 📄 Main Content */}
           <main>

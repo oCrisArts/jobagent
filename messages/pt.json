@@ -192,6 +192,11 @@
     "updateProfile": "Atualizar perfil",
     "manageSubscription": "Gerenciar assinatura"
   },
+  "AuthErrors": {
+    "oauthCallback": "Erro ao autenticar com o provedor. Tente novamente.",
+    "accessDenied": "Login cancelado pelo utilizador.",
+    "generic": "Ocorreu um erro de autenticação. Tente novamente."
+  },
   "errors": {
     "notFound": "Página não encontrada",
     "unauthorized": "Você precisa estar conectado"

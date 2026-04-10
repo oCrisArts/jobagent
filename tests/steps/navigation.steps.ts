@@ -4,7 +4,7 @@ import { expect } from '@playwright/test';
 const { Given, When, Then } = createBdd();
 
 Given('que sou um visitante na raiz {string}', async ({ page }, path: string) => {
-  await page.goto(path);
+  await page.goto(path, { waitUntil: 'domcontentloaded' });
 });
 
 When('clico no elemento {string}', async ({ page }, selector: string) => {
@@ -20,11 +20,11 @@ Then('o elemento {string} deve estar visível', async ({ page }, selector: strin
 Given('que sou um visitante deslogado', async ({ page }) => {
   // Limpa cookies e storage para garantir estado deslogado
   await page.context().clearCookies();
-  await page.goto('/');
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
 });
 
 When('acesso o caminho {string}', async ({ page }, path: string) => {
-  await page.goto(path);
+  await page.goto(path, { waitUntil: 'domcontentloaded' });
 });
 
 Then('sou redirecionado para a página inicial', async ({ page }) => {

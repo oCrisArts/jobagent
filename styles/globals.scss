@@ -15,6 +15,7 @@ $family-primary: $typography-font-family-sans;
 // 🎨 Modal de auth
 // ─────────────────────────────────────────────────────────────────
 @import "components/auth-modal";
+@import "components/auth-toast";
 
 // ─────────────────────────────────────────────────────────────────
 // 🎯 SMOOTH SCROLL BEHAVIOR (Âncoras da Landing Page)

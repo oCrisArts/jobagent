@@ -100,7 +100,7 @@ Then('resumes_count é {int}', async ({ page }, expectedCount: number) => {
 });
 
 When('a URL contém o parâmetro {string}', async ({ page }, param: string) => {
-  await page.goto(`/${param}`);
+  await page.goto(`/${param}`, { waitUntil: 'domcontentloaded' });
 });
 
 Then('a UI deve exibir o alerta {string}', async ({ page }, selector: string) => {
@@ -159,6 +159,7 @@ Then('o input {string} deve ter type {string}', async ({ page }, selector: strin
 When('clico no link para termos', async ({ page }) => {
   const termsLink = page.locator('a[href="/terms"]').first();
   await termsLink.click({ force: true });
+  await page.waitForURL('**/terms', { waitUntil: 'domcontentloaded' });
 });
 
 Then('o botão {string} deve estar visível', async ({ page }, selector: string) => {

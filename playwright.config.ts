@@ -41,6 +41,9 @@ export default defineConfig({
     
     /* Video on failure */
     video: 'retain-on-failure',
+
+    /* Timeout de navegação maior para compilação inicial do Next.js */
+    navigationTimeout: 60000,
   },
 
   /* Configure projects for major browsers */

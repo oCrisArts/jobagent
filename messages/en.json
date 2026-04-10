@@ -192,6 +192,11 @@
     "updateProfile": "Update profile",
     "manageSubscription": "Manage subscription"
   },
+  "AuthErrors": {
+    "oauthCallback": "Authentication error with provider. Please try again.",
+    "accessDenied": "Login cancelled by user.",
+    "generic": "An authentication error occurred. Please try again."
+  },
   "errors": {
     "notFound": "Page not found",
     "unauthorized": "You need to be logged in"

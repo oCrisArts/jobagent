@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { signIn } from 'next-auth/react';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 interface AuthModalProps {
   isOpen?: boolean;
@@ -279,7 +280,7 @@ export default function AuthModal({
 
           <p className="has-text-centered mt-5 is-size-7 has-text-grey">
             {t('termsText')}{' '}
-            <a href="/terms">{t('termsLink')}</a>
+            <Link href="/terms" onClick={handleClose}>{t('termsLink')}</Link>
           </p>
         </div>
       </div>
