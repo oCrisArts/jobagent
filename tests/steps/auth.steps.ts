@@ -202,7 +202,7 @@ Then('a UI deve exibir mensagem de erro {string}', async ({ page }, message: str
 });
 
 Then('a notificação de erro {string} deve estar visível', async ({ page }, selector: string) => {
-  // Verificar notificação de erro por ID
+  // Verificar notificação de erro por ID (pode ser #email-error, #password-error, etc.)
   const errorNotification = page.locator(selector).first();
   await expect(errorNotification).toBeVisible({ timeout: 5000 });
 });
@@ -253,7 +253,7 @@ Then('o sistema deve exibir uma notificação de sucesso {string}', async ({ pag
 });
 
 Then('a notificação de sucesso {string} deve estar visível', async ({ page }, selector: string) => {
-  // Verificar notificação de sucesso por ID
+  // Verificar notificação de sucesso por ID (pode ser #email-success, #password-success, etc.)
   const successNotification = page.locator(selector).first();
   await expect(successNotification).toBeVisible({ timeout: 5000 });
 });

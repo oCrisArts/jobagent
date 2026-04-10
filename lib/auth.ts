@@ -120,9 +120,9 @@ export const authOptions: NextAuthOptions = {
           }
 
           if (!existingUser) {
-            // Usuário não existe - retornar null para o NextAuth tratar o erro
+            // Usuário não existe - lançar erro para NextAuth tratar
             authLogger.debug("Credentials:UserNotFound", { email });
-            return null;
+            throw new Error("CredentialsSignin");
           }
 
           // Usuário existe - validar senha
@@ -131,7 +131,7 @@ export const authOptions: NextAuthOptions = {
           if (existingUser.password !== password) {
             authLogger.error("Credentials:Password", "Senha incorreta");
             authLogger.debug("Credentials:Login:PasswordMismatch", { userId: existingUser.id });
-            return null;
+            throw new Error("CredentialsSignin");
           }
 
           authLogger.info("Credentials:Login:Success", { email, userId: existingUser.id });

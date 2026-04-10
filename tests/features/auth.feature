@@ -66,7 +66,7 @@ Funcionalidade: Autenticação (OAuth, Credenciais e Recuperação de Senha)
     Quando preencho o campo "#input-email" com "teste@exemplo.com"
     E preencho o campo "#input-password" com "senha_errada"
     E submeto o formulário de login
-    Então a notificação de erro "#notification-error" deve estar visível
+    Então o elemento "#password-error" deve estar visível
 
   # ─────────────────────────────────────────────────────────
   # Navegação e Termos
