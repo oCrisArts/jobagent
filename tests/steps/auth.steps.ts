@@ -15,6 +15,10 @@ Before(({}) => {
   authContext.skipReason = undefined;
 });
 
+Given('que o sistema está sendo preparado para execução', async ({}) => {
+  // Step de contexto - não requer ação específica
+});
+
 When('o OAuth retorna com sucesso simulado para Google', async ({ page, context }) => {
   // Mockar a sessão para simular sucesso OAuth do Google com valores default do schema users
   const mockSession = await page.evaluate(() => {

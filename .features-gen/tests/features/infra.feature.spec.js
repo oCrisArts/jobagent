@@ -1,53 +1,46 @@
 /** Generated from: tests\features\infra.feature */
 import { test } from "playwright-bdd";
 
-test.describe("Validação de Infraestrutura", () => {
+test.describe("Validação de Infraestrutura e Integrações (Health Check)", () => {
 
   test.beforeEach(async ({ Given }) => {
-    await Given("que o sistema está sendo preparado para execução");
+    await Given("que o sistema está carregando as variáveis de ambiente");
   });
 
-  test("Validar variáveis de ambiente obrigatórias do Supabase", async ({ Given, When, Then, And }) => {
-    await Given("que o arquivo .env.local existe");
-    await When("verifico as variáveis de ambiente do Supabase");
-    await Then("a variável \"NEXT_PUBLIC_SUPABASE_URL\" deve estar definida");
-    await And("a variável \"NEXT_PUBLIC_SUPABASE_ANON_KEY\" deve estar definida");
-    await And("a variável \"SUPABASE_SERVICE_ROLE_KEY\" deve estar definida");
+  test("1.1 Validar variáveis e conexão da API do Supabase", async ({ When, And, Then }) => {
+    await When("eu verifico a existência das variáveis \"NEXT_PUBLIC_SUPABASE_URL\" e \"SUPABASE_SERVICE_ROLE_KEY\"");
+    await And("faço um ping na API REST do Supabase");
+    await Then("o status code do Supabase deve ser 200 e o tempo de resposta aceitável");
   });
 
-  test("Validar variáveis de ambiente obrigatórias do Stripe", async ({ Given, When, Then, And }) => {
-    await Given("que o arquivo .env.local existe");
-    await When("verifico as variáveis de ambiente do Stripe");
-    await Then("a variável \"NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY\" deve estar definida");
-    await And("a variável \"STRIPE_SECRET_KEY\" deve estar definida");
-    await And("a variável \"STRIPE_WEBHOOK_SECRET\" deve estar definida");
+  test("1.2 Validar comunicação de Leitura e Escrita no Supabase", async ({ When, Then, And }) => {
+    await When("realizo uma operação de escrita e leitura na tabela \"users\" do Supabase");
+    await Then("a operação deve retornar os dados corretamente");
+    await And("os dados de teste devem ser limpos no final da operação");
   });
 
-  test("Validar variáveis de ambiente obrigatórias do NextAuth", async ({ Given, When, Then, And }) => {
-    await Given("que o arquivo .env.local existe");
-    await When("verifico as variáveis de ambiente do NextAuth");
-    await Then("a variável \"NEXTAUTH_URL\" deve estar definida");
-    await And("a variável \"NEXTAUTH_SECRET\" deve estar definida");
+  test("2.1 Validar variáveis e comunicação com a API do Resend", async ({ When, And, Then }) => {
+    await When("eu verifico a existência da variável \"RESEND_API_KEY\"");
+    await And("disparo um e-mail de teste de infraestrutura para \"cristiano.acosta.m@gmail.com\"");
+    await Then("a API do Resend deve retornar um status de sucesso validando o envio");
   });
 
-  test("Validar conexão com banco de dados Supabase", async ({ Given, When, Then, And }) => {
-    await Given("que as credenciais do Supabase estão configuradas");
-    await When("realizo uma query de teste no banco de dados");
-    await Then("a conexão deve ser estabelecida com sucesso");
-    await And("a resposta deve conter dados válidos");
+  test("3.1 Validar variáveis e endpoint de descoberta do Google", async ({ When, And, Then }) => {
+    await When("eu verifico a existência das variáveis \"GOOGLE_CLIENT_ID\" e \"GOOGLE_CLIENT_SECRET\"");
+    await And("faço um ping no endpoint de configuração do Google OAuth");
+    await Then("o Google deve retornar as configurações válidas com status 200");
   });
 
-  test("Verificar integridade do provedor de e-mail", async ({ Given, When, page, request, Then }) => {
-    await Given("que o serviço de e-mail está configurado");
-    await When("eu disparo um e-mail de teste para \"cristiano.acosta.m@gmail.com\"", null, { page, request });
-    await Then("a API do Resend deve retornar um status de sucesso 200");
+  test("4.1 Validar variáveis e endpoint de descoberta do LinkedIn", async ({ When, And, Then }) => {
+    await When("eu verifico a existência das variáveis \"LINKEDIN_CLIENT_ID\" e \"LINKEDIN_CLIENT_SECRET\"");
+    await And("faço um ping no endpoint de autorização do LinkedIn");
+    await Then("o LinkedIn deve estar acessível e retornar status 200");
   });
 
-  test("Validar disponibilidade da API do Supabase", async ({ Given, When, Then, And }) => {
-    await Given("que a URL do Supabase está configurada");
-    await When("faço um ping na API do Supabase");
-    await Then("o status code deve ser 200");
-    await And("o tempo de resposta deve ser menor que 5 segundos");
+  test("5.1 Validar variáveis e comunicação com a API do Stripe", async ({ When, And, Then }) => {
+    await When("eu verifico a existência das variáveis \"NEXT_PUBLIC_STRIPE_PUBLIC_KEY\", \"STRIPE_SECRET_KEY\" e \"STRIPE_WEBHOOK_SECRET\"");
+    await And("faço uma requisição para a API do Stripe para listar produtos");
+    await Then("o Stripe deve retornar um status de sucesso 200");
   });
 
 });
@@ -62,10 +55,10 @@ test.use({
 });
 
 const bddFileMeta = {
-  "Validar variáveis de ambiente obrigatórias do Supabase": {"pickleLocation":"11:3"},
-  "Validar variáveis de ambiente obrigatórias do Stripe": {"pickleLocation":"18:3"},
-  "Validar variáveis de ambiente obrigatórias do NextAuth": {"pickleLocation":"25:3"},
-  "Validar conexão com banco de dados Supabase": {"pickleLocation":"31:3"},
-  "Verificar integridade do provedor de e-mail": {"pickleLocation":"37:3"},
-  "Validar disponibilidade da API do Supabase": {"pickleLocation":"42:3"},
+  "1.1 Validar variáveis e conexão da API do Supabase": {"pickleLocation":"14:3"},
+  "1.2 Validar comunicação de Leitura e Escrita no Supabase": {"pickleLocation":"19:3"},
+  "2.1 Validar variáveis e comunicação com a API do Resend": {"pickleLocation":"27:3"},
+  "3.1 Validar variáveis e endpoint de descoberta do Google": {"pickleLocation":"35:3"},
+  "4.1 Validar variáveis e endpoint de descoberta do LinkedIn": {"pickleLocation":"43:3"},
+  "5.1 Validar variáveis e comunicação com a API do Stripe": {"pickleLocation":"51:3"},
 };
