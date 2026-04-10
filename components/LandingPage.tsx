@@ -1,23 +1,12 @@
 'use client';
-import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import AuthModal from '@/components/ui/AuthModal';
 
 export default function LandingPage() {
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
-
-  const openLogin = () => {
-    setAuthMode('login');
-    setIsAuthOpen(true);
-  };
-
-  const openSignup = () => {
-    setAuthMode('signup');
-    setIsAuthOpen(true);
-  };
-
   const t = useTranslations();
+
+  const openAuthModal = () => {
+    window.dispatchEvent(new Event('openAuthModal'));
+  };
 
   return (
     <main>
@@ -32,10 +21,10 @@ export default function LandingPage() {
               {t('landing.hero.subtitle')}
             </p>
             <div className="buttons is-centered mt-6">
-              <button className="button is-primary is-large" onClick={openSignup}>
+              <button className="button is-primary is-large" onClick={openAuthModal}>
                 {t('landing.cta.start')}
               </button>
-              <button className="button is-light is-large" onClick={openLogin}>
+              <button className="button is-light is-large" onClick={openAuthModal}>
                 {t('landing.cta.signin')}
               </button>
             </div>
@@ -67,7 +56,7 @@ export default function LandingPage() {
                   </ul>
                 </div>
 
-                <button className="button is-light is-fullwidth" onClick={openSignup}>
+                <button className="button is-light is-fullwidth" onClick={openAuthModal}>
                   {t('landing.cta.start')}
                 </button>
               </div>
@@ -95,7 +84,7 @@ export default function LandingPage() {
                   </ul>
                 </div>
 
-                <button className="button is-light is-fullwidth" onClick={openSignup}>
+                <button className="button is-light is-fullwidth" onClick={openAuthModal}>
                   {t('landing.pricing.subscribe')}
                 </button>
               </div>
@@ -168,12 +157,11 @@ export default function LandingPage() {
           <p className="subtitle is-5 has-text-white-bis mb-6">
             {t('landing.footer.subtitle')}
           </p>
-          <button className="button is-light is-large" onClick={openSignup}>
+          <button className="button is-light is-large" onClick={openAuthModal}>
             {t('landing.cta.start')}
           </button>
         </div>
       </section>
-      <AuthModal isOpen={isAuthOpen} mode={authMode} onClose={() => setIsAuthOpen(false)} />
     </main>
   );
 }

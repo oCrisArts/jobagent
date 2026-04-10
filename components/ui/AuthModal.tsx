@@ -5,20 +5,10 @@ import { signIn } from 'next-auth/react';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-interface AuthModalProps {
-  isOpen?: boolean;
-  mode?: 'login' | 'signup';
-  onClose?: () => void;
-}
-
-export default function AuthModal({
-  isOpen: externalIsOpen = false,
-  mode: _mode = 'login',
-  onClose,
-}: AuthModalProps) {
+export default function AuthModal() {
   const t = useTranslations('AuthModal');
   const [isMounted, setIsMounted] = useState(false);
-  const [isOpen, setIsOpen] = useState(externalIsOpen);
+  const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [view, setView] = useState<'login' | 'forgot-password'>('login');
 
@@ -39,7 +29,6 @@ export default function AuthModal({
 
   const handleClose = () => {
     setIsOpen(false);
-    onClose?.();
   };
 
   const handleGoogleSignIn = async () => {
