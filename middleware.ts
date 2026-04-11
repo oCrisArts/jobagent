@@ -38,6 +38,31 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Rotas protegidas - requer autenticação
+  const protectedRoutes = ['/inicio', '/vagas', '/curriculos', '/network', '/perfil'];
+  const isProtectedRoute = protectedRoutes.some(route => pathname === route || pathname.startsWith(route + '/'));
+
+  if (isProtectedRoute) {
+    // Verificar cookie de sessão do NextAuth
+    const sessionToken = request.cookies.get('next-auth.session-token') || 
+                        request.cookies.get('__Secure-next-auth.session-token');
+    
+    if (!sessionToken) {
+      // Redirecionar para a landing page se não estiver autenticado
+      const locale = getPreferredLocale(request);
+      const url = request.nextUrl.clone();
+      url.pathname = '/';
+      const response = NextResponse.redirect(url);
+      response.cookies.set('NEXT_LOCALE', locale, {
+        maxAge: 365 * 24 * 60 * 60,
+        httpOnly: false,
+        sameSite: 'lax',
+        path: '/',
+      });
+      return response;
+    }
+  }
+
   const locale = getPreferredLocale(request);
   const response = NextResponse.next();
   response.cookies.set('NEXT_LOCALE', locale, {

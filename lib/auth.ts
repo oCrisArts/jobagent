@@ -2,7 +2,6 @@ import { type NextAuthOptions } from "next-auth";
 import LinkedInProvider from "next-auth/providers/linkedin";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { SupabaseAdapter } from "@auth/supabase-adapter";
 import { createClient } from "@supabase/supabase-js";
 import { v4 as uuidv4 } from "uuid";
 
@@ -48,12 +47,6 @@ const authLogger = {
 // 📋 NextAuth Options
 // ─────────────────────────────────────────────────────────
 export const authOptions: NextAuthOptions = {
-  // Adapter com SERVICE_ROLE_KEY para bypass do RLS
-  adapter: SupabaseAdapter({
-    url: supabaseUrl,
-    secret: serviceRoleKey,
-  }),
-
   providers: [
     // ──────── Google OAuth ────────
     GoogleProvider({
@@ -192,6 +185,44 @@ export const authOptions: NextAuthOptions = {
   // 🔄 Callbacks
   // ─────────────────────────────────────────────────────
   callbacks: {
+    async jwt({ token, user, account, profile }) {
+      authLogger.debug("JWT:Callback:Start", { hasUser: !!user, hasAccount: !!account, hasTokenSub: !!token.sub });
+      
+      // Primeiro login OAuth: buscar usuário pelo email e gravar UUID em token.sub
+      if (account && user && !token.sub) {
+        const email = user.email;
+        if (!email) {
+          authLogger.error("JWT:NoEmail", "Email não disponível no profile OAuth");
+          return token;
+        }
+        
+        try {
+          authLogger.debug("JWT:FetchingUserByEmail", { email });
+          const { data: dbUser, error: fetchError } = await supabaseAdmin
+            .from("users")
+            .select("id")
+            .eq("email", email)
+            .single();
+          
+          if (fetchError && fetchError.code !== "PGRST116") {
+            authLogger.error("JWT:FetchUserError", fetchError);
+            return token;
+          }
+          
+          if (dbUser) {
+            token.sub = dbUser.id;
+            authLogger.debug("JWT:TokenSubSet", { userId: dbUser.id });
+          } else {
+            authLogger.error("JWT:UserNotFound", { email });
+          }
+        } catch (error) {
+          authLogger.error("JWT:FetchUserException", error);
+        }
+      }
+      
+      return token;
+    },
+
     async session({ session, token }) {
       authLogger.debug("Session:Callback:Start", { userId: token.sub, hasSession: !!session.user });
       
@@ -251,10 +282,112 @@ export const authOptions: NextAuthOptions = {
         hasCredentials: !!credentials 
       });
       
-      // Permitir login OAuth sempre
+      // Persistência OAuth manual (sem SupabaseAdapter)
       if (account?.provider === "google" || account?.provider === "linkedin") {
-        authLogger.info("OAuth:SignIn", { provider: account.provider, email: user.email });
-        return true;
+        authLogger.info("OAuth:SignIn:ManualPersist", { provider: account.provider, email: user.email });
+        
+        if (!user.email) {
+          authLogger.error("OAuth:NoEmail", "Email não disponível no profile OAuth");
+          return false;
+        }
+        
+        try {
+          // Verificar se o usuário já existe em public.users pelo email
+          const { data: existingUser, error: fetchUserError } = await supabaseAdmin
+            .from("users")
+            .select("id")
+            .eq("email", user.email)
+            .single();
+          
+          if (fetchUserError && fetchUserError.code !== "PGRST116") {
+            authLogger.error("OAuth:FetchUserError", fetchUserError);
+            return false;
+          }
+          
+          let userId: string;
+          
+          if (!existingUser) {
+            // Criar usuário com dados do profile e defaults
+            authLogger.info("OAuth:CreatingUser", { email: user.email, name: user.name });
+            const newUser = {
+              id: uuidv4(),
+              email: user.email,
+              name: user.name,
+              image: user.image,
+              plan_type: 'free',
+              resumes_count: 0,
+              ssi_score: 0,
+              ats_score: 0,
+            };
+            
+            const { data: createdUser, error: insertUserError } = await supabaseAdmin
+              .from("users")
+              .insert(newUser)
+              .select()
+              .single();
+            
+            if (insertUserError || !createdUser) {
+              authLogger.error("OAuth:InsertUserError", insertUserError);
+              return false;
+            }
+            
+            userId = createdUser.id;
+            authLogger.info("OAuth:UserCreated", { userId, email: user.email });
+          } else {
+            userId = existingUser.id;
+            authLogger.debug("OAuth:UserExists", { userId, email: user.email });
+          }
+          
+          // Verificar se a conta já existe em public.accounts
+          const { data: existingAccount, error: fetchAccountError } = await supabaseAdmin
+            .from("accounts")
+            .select("id")
+            .eq("userId", userId)
+            .eq("provider", account.provider)
+            .eq("providerAccountId", account.providerAccountId)
+            .single();
+          
+          if (fetchAccountError && fetchAccountError.code !== "PGRST116") {
+            authLogger.error("OAuth:FetchAccountError", fetchAccountError);
+            return false;
+          }
+          
+          if (!existingAccount) {
+            // Criar registro em accounts
+            authLogger.info("OAuth:CreatingAccount", { userId, provider: account.provider });
+            const newAccount = {
+              id: uuidv4(),
+              userId,
+              type: 'oauth',
+              provider: account.provider,
+              providerAccountId: account.providerAccountId,
+              refresh_token: account.refresh_token,
+              access_token: account.access_token,
+              expires_at: account.expires_at,
+              token_type: account.token_type,
+              scope: account.scope,
+              id_token: account.id_token,
+            };
+            
+            const { error: insertAccountError } = await supabaseAdmin
+              .from("accounts")
+              .insert(newAccount);
+            
+            if (insertAccountError) {
+              authLogger.error("OAuth:InsertAccountError", insertAccountError);
+              return false;
+            }
+            
+            authLogger.info("OAuth:AccountCreated", { userId, provider: account.provider });
+          } else {
+            authLogger.debug("OAuth:AccountExists", { userId, provider: account.provider });
+          }
+          
+          return true;
+        } catch (error) {
+          authLogger.error("OAuth:SignInError", error);
+          return false;
+        }
       }
       
       if (account?.provider === "credentials") {
