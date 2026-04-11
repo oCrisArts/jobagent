@@ -100,7 +100,7 @@ export default function AuthModal() {
         setEmailSuccess(t('loginSuccess'));
         setPasswordSuccess(t('loginSuccess'));
         // Login bem-sucedido, redirecionar manualmente
-        window.location.href = result.url || '/inicio';
+        window.location.href = '/inicio';
       } else {
         console.log('[AuthModal] EmailSignIn: Resultado inesperado', result);
         setPasswordError(t('errorSignIn'));
