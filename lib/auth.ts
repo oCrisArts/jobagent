@@ -120,9 +120,42 @@ export const authOptions: NextAuthOptions = {
           }
 
           if (!existingUser) {
-            // Usuário não existe - lançar erro para NextAuth tratar
+            // Usuário não existe - criar automaticamente (signup implícito)
             authLogger.debug("Credentials:UserNotFound", { email });
-            throw new Error("CredentialsSignin");
+            authLogger.info("Credentials:SignupImplicit", { email });
+            
+            const newUser = {
+              id: uuidv4(),
+              email,
+              password, // TODO: Em produção, usar bcrypt.hash()
+              plan_type: 'free',
+              resumes_count: 0,
+              ssi_score: 0,
+              ats_score: 0,
+            };
+            
+            const { data: createdUser, error: insertError } = await supabaseAdmin
+              .from("users")
+              .insert(newUser)
+              .select()
+              .single();
+            
+            if (insertError || !createdUser) {
+              authLogger.error("Credentials:Signup", insertError);
+              throw new Error("Erro ao criar usuário");
+            }
+            
+            authLogger.info("Credentials:SignupSuccess", { email, userId: createdUser.id });
+            
+            return {
+              id: createdUser.id,
+              email: createdUser.email,
+              name: createdUser.name,
+              plan_type: createdUser.plan_type || "free",
+              resumes_count: createdUser.resumes_count || 0,
+              ssi_score: createdUser.ssi_score || 0,
+              ats_score: createdUser.ats_score || 0,
+            };
           }
 
           // Usuário existe - validar senha

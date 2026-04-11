@@ -119,13 +119,14 @@
     "termsLink": "Termos de Serviço",
     "forgotPassword": "Esqueceu a senha?",
     "sendRecoveryButton": "Enviar Link de Recuperação",
-    "backToLogin": "Voltar para Login"
-  },
-  "AuthError": {
-    "oauthCallbackError": "Erro ao processar o login OAuth. Tente novamente.",
-    "accessDenied": "Login cancelado pelo utilizador.",
-    "configurationError": "Erro de configuração do OAuth. Contacte o suporte.",
-    "defaultError": "Erro ao fazer login. Tente novamente."
+    "backToLogin": "Voltar para Login",
+    "errorInvalidCredentials": "Email ou senha inválidos.",
+    "errorSignIn": "Erro ao fazer login. Tente novamente.",
+    "loginSuccess": "Login realizado com sucesso!",
+    "emailRequired": "O email é obrigatório.",
+    "passwordRequired": "A senha é obrigatória.",
+    "successRecoverySent": "Link de recuperação enviado! Verifique seu email.",
+    "errorSendRecovery": "Erro ao enviar link de recuperação."
   },
   "inicio": {
     "title": "Dashboard",

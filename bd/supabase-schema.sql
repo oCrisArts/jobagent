@@ -16,6 +16,7 @@ CREATE TABLE public.users (
   email text UNIQUE, 
   "emailVerified" timestamp with time zone, 
   image text,
+  password text,
   headline text, 
   bio text, 
   location text, 

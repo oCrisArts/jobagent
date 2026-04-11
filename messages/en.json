@@ -119,13 +119,14 @@
     "termsLink": "Terms of Service",
     "forgotPassword": "Forgot password?",
     "sendRecoveryButton": "Send Recovery Link",
-    "backToLogin": "Back to Login"
-  },
-  "AuthError": {
-    "oauthCallbackError": "Error processing OAuth login. Please try again.",
-    "accessDenied": "Login cancelled by user.",
-    "configurationError": "OAuth configuration error. Please contact support.",
-    "defaultError": "Error logging in. Please try again."
+    "backToLogin": "Back to Login",
+    "errorInvalidCredentials": "Invalid email or password.",
+    "errorSignIn": "Error signing in. Please try again.",
+    "loginSuccess": "Login successful!",
+    "emailRequired": "Email is required.",
+    "passwordRequired": "Password is required.",
+    "successRecoverySent": "Recovery link sent! Check your email.",
+    "errorSendRecovery": "Error sending recovery link."
   },
   "inicio": {
     "title": "Dashboard",
