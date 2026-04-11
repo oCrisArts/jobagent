@@ -107,6 +107,10 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Construir link de reset (usar variável de ambiente ou default)
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const resetLink = `${baseUrl}/reset-password?token=${resetToken}&email=${encodeURIComponent(email)}`;
+
     // Verificar se Resend está configurado
     if (!resend) {
       apiLogger.error("ResendNotConfigured", "RESEND_API_KEY não configurada");
@@ -114,8 +118,8 @@ export async function POST(request: NextRequest) {
       if (process.env.NODE_ENV === "development") {
         apiLogger.info("DevModeSkipEmail", { email });
         return NextResponse.json(
-          { 
-            success: true, 
+          {
+            success: true,
             message: "Email de recuperação enviado com sucesso (modo desenvolvimento)",
             resetLink,
           },
@@ -127,10 +131,6 @@ export async function POST(request: NextRequest) {
         { status: 503 }
       );
     }
-
-    // Construir link de reset (usar variável de ambiente ou default)
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-    const resetLink = `${baseUrl}/reset-password?token=${resetToken}&email=${encodeURIComponent(email)}`;
 
     // Enviar email via Resend
     try {
