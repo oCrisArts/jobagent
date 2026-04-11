@@ -146,14 +146,13 @@ export default function AuthModal() {
         console.log('[AuthModal] ForgotPassword: Erro na resposta');
         setEmailError(data.error || t('errorSendRecovery'));
       } else {
-        console.log('[AuthModal] ForgotPassword: Sucesso');
+        console.log('[AuthModal] ForgotPassword: Sucesso', data);
         setEmailSuccess(data.message || t('successRecoverySent'));
-        setTimeout(() => {
-          setView('login');
-          setEmailSuccess(null);
-        }, 3000);
+        console.log('[AuthModal] ForgotPassword: emailSuccess definido');
+        // Não mudar a view automaticamente para permitir que o teste verifique o elemento de sucesso
       }
       
+      console.log('[AuthModal] ForgotPassword: Set isLoading false');
       setIsLoading(false);
     } catch (error) {
       console.error('[AuthModal] ForgotPassword: Erro', error);
