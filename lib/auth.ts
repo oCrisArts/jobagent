@@ -235,21 +235,12 @@ export const authOptions: NextAuthOptions = {
     },
 
     async redirect({ url, baseUrl }) {
-      authLogger.debug("Redirect:Callback", { url, baseUrl });
-      
-      // Redirecionamento padrão para /inicio após login
       if (url.startsWith("/")) {
-        // Se for /iniciar, redirecionar para /inicio
-        if (url === "/iniciar" || url === "/") {
-          authLogger.debug("Redirect:ToInicio", { from: url });
-          return `${baseUrl}/inicio`;
-        }
         return `${baseUrl}${url}`;
       }
       if (new URL(url).origin === baseUrl) {
         return url;
       }
-      authLogger.debug("Redirect:Fallback", { to: `${baseUrl}/inicio` });
       return `${baseUrl}/inicio`;
     },
 

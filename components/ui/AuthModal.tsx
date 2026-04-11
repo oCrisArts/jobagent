@@ -39,7 +39,7 @@ export default function AuthModal() {
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
     try {
-      await signIn('google', { callbackUrl: '/iniciar' });
+      await signIn('google', { callbackUrl: '/inicio' });
     } catch (error) {
       console.error('Google sign-in error:', error);
       setIsLoading(false);
@@ -49,7 +49,7 @@ export default function AuthModal() {
   const handleLinkedInSignIn = async () => {
     setIsLoading(true);
     try {
-      await signIn('linkedin', { callbackUrl: '/iniciar' });
+      await signIn('linkedin', { callbackUrl: '/inicio' });
     } catch (error) {
       console.error('LinkedIn sign-in error:', error);
       setIsLoading(false);

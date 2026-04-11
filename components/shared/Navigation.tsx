@@ -124,7 +124,7 @@ export default function Navigation() {
         style={{ background: '#1A1D27', borderBottom: '1px solid #2A2D3A' }}
       >
         <div className="navbar-brand">
-          <Link href="/iniciar" className="navbar-item has-text-weight-bold">
+          <Link href="/inicio" className="navbar-item has-text-weight-bold">
             <span className="icon has-text-primary">
               <i className="fas fa-rocket"></i>
             </span>
@@ -136,9 +136,9 @@ export default function Navigation() {
           <div className="navbar-start">
             {/* ✅ Links Principais */}
             <Link
-              href="/iniciar"
+              href="/inicio"
               className={`navbar-item ${
-                pathname === '/iniciar' ? 'is-active' : ''
+                pathname === '/inicio' ? 'is-active' : ''
               }`}
             >
               <span className="icon">
@@ -148,9 +148,9 @@ export default function Navigation() {
             </Link>
 
             <Link
-              href="/buscar"
+              href="/vagas"
               className={`navbar-item ${
-                pathname === '/buscar' ? 'is-active' : ''
+                pathname === '/vagas' ? 'is-active' : ''
               }`}
             >
               <span className="icon">
@@ -160,9 +160,9 @@ export default function Navigation() {
             </Link>
 
             <Link
-              href="/evoluir"
+              href="/curriculos"
               className={`navbar-item ${
-                pathname === '/evoluir' ? 'is-active' : ''
+                pathname === '/curriculos' ? 'is-active' : ''
               }`}
             >
               <span className="icon">
@@ -172,9 +172,9 @@ export default function Navigation() {
             </Link>
 
             <Link
-              href="/conectar"
+              href="/network"
               className={`navbar-item ${
-                pathname === '/conectar' ? 'is-active' : ''
+                pathname === '/network' ? 'is-active' : ''
               }`}
             >
               <span className="icon">
@@ -256,7 +256,7 @@ export default function Navigation() {
               padding: '0 1rem',
             }}
           >
-            <Link href="/iniciar" className="has-text-weight-bold">
+            <Link href="/inicio" className="has-text-weight-bold">
               <span className="icon has-text-primary">
                 <i className="fas fa-rocket"></i>
               </span>
@@ -334,9 +334,9 @@ export default function Navigation() {
         aria-label={t('mobileNav')}
       >
         <Link
-          href="/iniciar"
+          href="/inicio"
           className={`navbar-item ${
-            pathname === '/iniciar' ? 'is-active' : ''
+            pathname === '/inicio' ? 'is-active' : ''
           }`}
         >
           <div className="icon">
@@ -346,8 +346,8 @@ export default function Navigation() {
         </Link>
 
         <Link
-          href="/buscar"
-          className={`navbar-item ${pathname === '/buscar' ? 'is-active' : ''}`}
+          href="/vagas"
+          className={`navbar-item ${pathname === '/vagas' ? 'is-active' : ''}`}
         >
           <div className="icon">
             <i className="fas fa-briefcase"></i>
@@ -356,9 +356,9 @@ export default function Navigation() {
         </Link>
 
         <Link
-          href="/evoluir"
+          href="/curriculos"
           className={`navbar-item ${
-            pathname === '/evoluir' ? 'is-active' : ''
+            pathname === '/curriculos' ? 'is-active' : ''
           }`}
         >
           <div className="icon">
@@ -368,9 +368,9 @@ export default function Navigation() {
         </Link>
 
         <Link
-          href="/conectar"
+          href="/network"
           className={`navbar-item ${
-            pathname === '/conectar' ? 'is-active' : ''
+            pathname === '/network' ? 'is-active' : ''
           }`}
         >
           <div className="icon">
