@@ -1,5 +1,5 @@
 import { type NextAuthOptions } from "next-auth";
-import LinkedInProvider from "next-auth/providers/linkedin";
+import { type OAuthConfig } from "next-auth/providers/oauth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { createClient } from "@supabase/supabase-js";
@@ -56,26 +56,28 @@ export const authOptions: NextAuthOptions = {
     }),
 
     // ──────── LinkedIn OAuth (OIDC) ────────
-    LinkedInProvider({
+    {
+      id: "linkedin",
+      name: "LinkedIn",
+      type: "oauth",
       clientId: process.env.LINKEDIN_CLIENT_ID!,
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET!,
+      wellKnown: "https://www.linkedin.com/oauth/.well-known/openid-configuration",
       authorization: {
         params: { scope: "openid profile email" },
       },
-      issuer: "https://www.linkedin.com",
-      userinfo: {
-        url: "https://api.linkedin.com/v2/userinfo",
-      },
+      idToken: true,
+      checks: ["state"],
       profile(profile) {
         return {
           id: profile.sub,
-          name: profile.name ?? null,
-          email: profile.email ?? null,
-          image: profile.picture ?? null,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
         };
       },
       allowDangerousEmailAccountLinking: true,
-    }),
+    } as OAuthConfig<any>,
 
     // ──────── Credentials (Email/Senha) ────────
     CredentialsProvider({
