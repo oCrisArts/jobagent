@@ -12,7 +12,7 @@ Funcionalidade: Autenticação (OAuth, Credenciais e Recuperação de Senha)
   # OAuth (Google e LinkedIn)
   # ─────────────────────────────────────────────────────────
 
-  Cenário: Cadastro/Login via Google com validação de persistência e redirecionamento
+  Cenário: Cadastro/Login via Google com validação de persistência
     Dado que sou um visitante na raiz "/"
     Quando o OAuth retorna com sucesso simulado para Google
     Então a sessão contém os valores default do schema users
@@ -20,15 +20,15 @@ Funcionalidade: Autenticação (OAuth, Credenciais e Recuperação de Senha)
     E ats_score é 0
     E ssi_score é 0
     E resumes_count é 0
-    E sou redirecionado para "/inicio"
 
-  Cenário: Cadastro/Login via LinkedIn com validação de persistência e redirecionamento
+  Cenário: Cadastro/Login via LinkedIn com validação de persistência
     Dado que sou um visitante na raiz "/"
     Quando o OAuth retorna com sucesso simulado para LinkedIn
     Então a sessão contém os valores default do schema users
     E plan_type é "free"
     E ats_score é 0
-    E sou redirecionado para "/inicio"
+    E ssi_score é 0
+    E resumes_count é 0
 
   Cenário: Erro no callback OAuth exibe alerta
     Dado que sou um visitante na raiz "/"

@@ -41,6 +41,9 @@ When('o OAuth retorna com sucesso simulado para Google', async ({ page, context 
   });
 
   authContext.mockSession = mockSession;
+  
+  // Recarregar a página para que o middleware processe a sessão mockada
+  await page.reload();
 });
 
 When('o OAuth retorna com sucesso simulado para LinkedIn', async ({ page, context }) => {
@@ -65,6 +68,9 @@ When('o OAuth retorna com sucesso simulado para LinkedIn', async ({ page, contex
   });
 
   authContext.mockSession = mockSession;
+  
+  // Recarregar a página para que o middleware processe a sessão mockada
+  await page.reload();
 });
 
 Then('sou redirecionado para {string}', async ({ page }, expectedPath: string) => {
