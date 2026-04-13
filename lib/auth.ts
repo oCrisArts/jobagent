@@ -62,10 +62,17 @@ export const authOptions: NextAuthOptions = {
       type: "oauth",
       clientId: process.env.LINKEDIN_CLIENT_ID!,
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET!,
+      client: {
+        token_endpoint_auth_method: "client_secret_post",
+      },
       wellKnown: "https://www.linkedin.com/oauth/.well-known/openid-configuration",
       authorization: {
         params: { scope: "openid profile email" },
       },
+      token: {
+        url: "https://www.linkedin.com/oauth/v2/accessToken",
+      },
+      issuer: "https://www.linkedin.com/oauth",
       idToken: true,
       checks: ["state"],
       profile(profile) {
