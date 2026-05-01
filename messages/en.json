@@ -172,7 +172,26 @@
     "jobPlaceholder": "e.g. Product Designer",
     "locationLabel": "Location",
     "locationPlaceholder": "e.g. Sao Paulo",
-    "searchButton": "Search"
+    "searchButton": "Search",
+    "noResults": "No jobs found",
+    "viewAnalysis": "View Analysis",
+    "loadCurriculoForMatch": "Upload resume to see compatibility",
+    "loading": "Loading...",
+    "sortedByMatch": "Sorted by compatibility",
+    "sortedByRelevance": "Sorted by relevance",
+    "uploadCurriculoModal": {
+      "title": "Upload Resume",
+      "description": "Upload your resume in PDF to see compatibility analysis with jobs.",
+      "uploadButton": "Upload PDF",
+      "cancel": "Cancel"
+    },
+    "analysis": {
+      "title": "Compatibility Analysis",
+      "matched": "Matching skills",
+      "missing": "Missing skills",
+      "suggestions": "Suggestions",
+      "close": "Close"
+    }
   },
   "curriculos": {
     "title": "Resume evolution",

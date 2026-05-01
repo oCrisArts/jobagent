@@ -172,7 +172,26 @@
     "jobPlaceholder": "Ex.: Product Designer",
     "locationLabel": "Localização",
     "locationPlaceholder": "Ex.: São Paulo",
-    "searchButton": "Buscar"
+    "searchButton": "Buscar",
+    "noResults": "Nenhuma vaga encontrada",
+    "viewAnalysis": "Ver Análise",
+    "loadCurriculoForMatch": "Carregue currículo para ver compatibilidade",
+    "loading": "Carregando...",
+    "sortedByMatch": "Ordenado por compatibilidade",
+    "sortedByRelevance": "Ordenado por relevância",
+    "uploadCurriculoModal": {
+      "title": "Upload de Currículo",
+      "description": "Carregue seu currículo em PDF para ver a análise de compatibilidade com as vagas.",
+      "uploadButton": "Upload PDF",
+      "cancel": "Cancelar"
+    },
+    "analysis": {
+      "title": "Análise de Compatibilidade",
+      "matched": "Skills que batem",
+      "missing": "Skills faltantes",
+      "suggestions": "Sugestões",
+      "close": "Fechar"
+    }
   },
   "curriculos": {
     "title": "Evolução de currículos",
