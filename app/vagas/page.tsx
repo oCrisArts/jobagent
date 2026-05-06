@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -16,6 +16,9 @@ export default function VagasPage() {
   const router = useRouter();
   const { hasResume, loading: resumeLoading, refresh: refreshResume } = useUserResume();
 
+  // Debug: log user ID
+  console.log('[VagasPage] User ID:', session?.user?.id);
+
   // Estados do formulário de busca
   const [searchTerm, setSearchTerm] = useState('');
   const [location, setLocation] = useState('');
@@ -23,6 +26,7 @@ export default function VagasPage() {
   // Estados dos resultados
   const [results, setResults] = useState<Job[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
   
   // Estados dos modais
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
@@ -30,6 +34,17 @@ export default function VagasPage() {
   const [isAnalysisLoading, setIsAnalysisLoading] = useState(false);
   const [showAnalysisModal, setShowAnalysisModal] = useState(false);
   const [showUploadModal, setShowUploadModal] = useState(false);
+  
+  // Estados de geolocalização
+  const [isLocating, setIsLocating] = useState(false);
+  
+  // Estados de notificação
+  const [notification, setNotification] = useState<{type: 'danger' | 'warning' | 'info', message: string} | null>(null);
+  
+  const showNotification = useCallback((type: 'danger' | 'warning' | 'info', message: string) => {
+    setNotification({ type, message });
+    setTimeout(() => setNotification(null), 5000);
+  }, []);
 
   // Redirecionar se não estiver autenticado
   if (status === 'unauthenticated') {
@@ -37,7 +52,7 @@ export default function VagasPage() {
     return null;
   }
 
-  // Handler de busca
+  // Handler de busca com tratamento de erros melhorado
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -45,6 +60,8 @@ export default function VagasPage() {
 
     setIsLoading(true);
     setResults([]);
+    setHasSearched(true);
+    setNotification(null);
 
     try {
       const res = await fetch('/api/vagas/search', {
@@ -52,6 +69,16 @@ export default function VagasPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ searchTerm, location })
       });
+
+      if (res.status === 401) {
+        showNotification('warning', t('sessionExpired'));
+        return;
+      }
+      
+      if (res.status === 500) {
+        showNotification('danger', t('serverError'));
+        return;
+      }
 
       if (!res.ok) {
         throw new Error('Erro na busca');
@@ -61,10 +88,64 @@ export default function VagasPage() {
       setResults(data.jobs || []);
     } catch (error) {
       console.error('[VagasPage] Erro na busca:', error);
+      showNotification('danger', t('searchError'));
     } finally {
       setIsLoading(false);
     }
   };
+  
+  // Handler de geolocalização
+  const handleDetectLocation = useCallback(async () => {
+    if (!navigator.geolocation) {
+      showNotification('warning', t('geolocationNotAvailable'));
+      return;
+    }
+    
+    setIsLocating(true);
+    
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        
+        try {
+          // Reverse geocoding com OpenStreetMap/Nominatim
+          const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`,
+            { headers: { 'Accept-Language': 'pt-BR' } }
+          );
+          
+          if (!res.ok) throw new Error('Erro no geocoding');
+          
+          const data = await res.json();
+          const city = data.address?.city || data.address?.town || data.address?.village || '';
+          const state = data.address?.state || '';
+          
+          if (city && state) {
+            setLocation(`${city}, ${state}`);
+          } else if (city) {
+            setLocation(city);
+          } else {
+            showNotification('warning', t('geolocationCityNotFound'));
+          }
+        } catch (err) {
+          console.error('[VagasPage] Erro no reverse geocoding:', err);
+          showNotification('warning', t('geolocationError'));
+        } finally {
+          setIsLocating(false);
+        }
+      },
+      (err) => {
+        console.error('[VagasPage] Erro ao obter geolocalização:', err);
+        if (err.code === 1) {
+          showNotification('warning', t('geolocationDenied'));
+        } else {
+          showNotification('warning', t('geolocationError'));
+        }
+        setIsLocating(false);
+      },
+      { timeout: 10000, enableHighAccuracy: false }
+    );
+  }, [t, showNotification]);
 
   // Handler para ver análise
   const handleViewAnalysis = async (job: Job) => {
@@ -164,6 +245,14 @@ export default function VagasPage() {
         <h1 className="title">{t('title')}</h1>
         <p className="subtitle">{t('subtitle')}</p>
 
+        {/* Notificação */}
+        {notification && (
+          <div className={`notification is-${notification.type} mb-4`}>
+            <button className="delete" onClick={() => setNotification(null)}></button>
+            {notification.message}
+          </div>
+        )}
+
         {/* Formulário de Busca */}
         <div className="box">
           <form onSubmit={handleSearch}>
@@ -193,18 +282,33 @@ export default function VagasPage() {
                   <label className="label" htmlFor="search-location">
                     {t('locationLabel')}
                   </label>
-                  <div className="control has-icons-left">
-                    <input
-                      id="search-location"
-                      className="input"
-                      type="text"
-                      placeholder={t('locationPlaceholder')}
-                      value={location}
-                      onChange={(e) => setLocation(e.target.value)}
-                    />
-                    <span className="icon is-left">
-                      <i className="fas fa-map-marker-alt"></i>
-                    </span>
+                  <div className="field has-addons">
+                    <div className="control is-expanded has-icons-left">
+                      <input
+                        id="search-location"
+                        className="input"
+                        type="text"
+                        placeholder={t('locationPlaceholder')}
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                      />
+                      <span className="icon is-left">
+                        <i className="fas fa-map-marker-alt"></i>
+                      </span>
+                    </div>
+                    <div className="control">
+                      <button
+                        type="button"
+                        className={`button is-light ${isLocating ? 'is-loading' : ''}`}
+                        onClick={handleDetectLocation}
+                        disabled={isLocating}
+                        title={t('detectLocation')}
+                      >
+                        <span className="icon">
+                          <i className="fas fa-crosshairs"></i>
+                        </span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -259,12 +363,12 @@ export default function VagasPage() {
               ))}
             </div>
           ) : (
-            !isLoading && (
-              <div className="notification is-light has-text-centered">
+            !isLoading && hasSearched && (
+              <div className="notification is-warning is-light has-text-centered">
                 <span className="icon is-large">
-                  <i className="fas fa-search fa-2x"></i>
+                  <i className="fas fa-exclamation-circle fa-2x"></i>
                 </span>
-                <p className="mt-3">{t('noResults')}</p>
+                <p className="mt-3">{t('noResultsForTerm', { term: searchTerm })}</p>
               </div>
             )
           )}
