@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import "@/styles/globals.scss";
+//import "@/styles/globals.scss";
+import "@/styles/globals-wireframe.scss";
 import Providers from "./providers";
 import Navigation from "@/components/shared/Navigation";
 import AuthModal from "@/components/ui/AuthModal";

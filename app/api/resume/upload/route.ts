@@ -6,6 +6,12 @@ import pdfParse from "pdf-parse";
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
 
+  console.log("[Resume Upload] Session:", {
+    userId: session?.user?.id,
+    email: session?.user?.email,
+    idType: typeof session?.user?.id
+  });
+
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
   }
@@ -74,8 +80,33 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (error) {
-      console.error("[Resume Upload] Erro Supabase:", error);
-      return NextResponse.json({ error: "Erro ao salvar resume" }, { status: 500 });
+      console.error("[Resume Upload] Erro Supabase:", {
+        code: error.code,
+        message: error.message,
+        details: error.details,
+        hint: error.hint
+      });
+      
+      // Erros específicos para debugging
+      if (error.code === '23503') {
+        return NextResponse.json({ 
+          error: "Usuário não encontrado no banco de dados. Faça login novamente." 
+        }, { status: 400 });
+      }
+      if (error.code === '22P02') {
+        return NextResponse.json({ 
+          error: "Formato de ID inválido" 
+        }, { status: 400 });
+      }
+      if (error.code === '23502') {
+        return NextResponse.json({ 
+          error: "Campos obrigatórios faltando" 
+        }, { status: 400 });
+      }
+      
+      return NextResponse.json({ 
+        error: "Erro ao salvar resume: " + error.message 
+      }, { status: 500 });
     }
 
     return NextResponse.json({ 

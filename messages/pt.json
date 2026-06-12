@@ -207,7 +207,10 @@
     "subtitle": "Baixe currículos adaptados e veja a análise ATS do último gerado.",
     "lastResume": "Último currículo gerado",
     "download": "Download PDF",
-    "atsAnalysis": "Ver análise ATS"
+    "atsAnalysis": "Ver análise ATS",
+    "noResume": "Você ainda não tem um currículo cadastrado.",
+    "uploadResume": "Enviar currículo",
+    "uploadSuccess": "Currículo enviado com sucesso!"
   },
   "network": {
     "title": "Network",

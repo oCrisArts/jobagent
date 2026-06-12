@@ -347,6 +347,9 @@ export const authOptions: NextAuthOptions = {
             authLogger.debug("OAuth:UserExists", { userId, email: user.email });
           }
           
+          // ⚠️ IMPORTANTE: Atualizar o user.id com o UUID do banco para o JWT usar
+          user.id = userId;
+          
           // Verificar se a conta já existe em public.accounts
           const { data: existingAccount, error: fetchAccountError } = await supabaseAdmin
             .from("accounts")

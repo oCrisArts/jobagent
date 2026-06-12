@@ -1,0 +1,67 @@
+// ============================================
+// WIREFRAME DESIGN TOKENS
+// Estado Wireframe: Preto, Branco e Escala de Cinza
+// Gerado para: Sync.IA — JobAgent
+// Mantém semântica HTML5 | classes Bulma | tokens Figma
+// Para ativar: use globals-wireframe.scss no lugar de globals.scss
+// ============================================
+
+// ── Brand Colors → Grayscale ─────────────────────────────────────
+// Mapeamento perceptual: luminosidade relativa preservada
+$color-brand-50:  #F8F8F8;   // era #f0ebff (lilás tênue → cinza levíssimo)
+$color-brand-100: #F0F0F0;   // era #d9ccff (lilás claro → cinza claro)
+$color-brand-200: #E0E0E0;   // era #b89dfc (violeta médio → cinza médio-claro)
+$color-brand-400: #9E9E9E;   // era #a78bfa (violeta → cinza médio)
+$color-brand-500: #757575;   // era #8b5cf6 (roxo vivo → cinza neutro)
+$color-brand-600: #424242;   // era #7c3aed (primário roxo → carvão escuro)
+$color-brand-700: #212121;   // era #6d28d9 (hover primário → quase preto)
+$color-brand-900: #000000;   // era #2e1065 (deep purple → preto puro)
+
+// ── Surfaces (Dark theme → Light theme wireframe) ─────────────────
+// Inversão: fundo escuro → fundo branco (wireframe padrão)
+$color-surface-base:    #FFFFFF;   // era #0A0A0F (near-black → branco puro)
+$color-surface-default: #F5F5F5;   // era #13141A (dark bg → cinza levíssimo)
+$color-surface-card:    #FAFAFA;   // era #1A1D27 (card dark → branco off)
+
+// ── Text (White on dark → Dark on light) ─────────────────────────
+$color-text-primary:   #111111;   // era #FFFFFF (branco → quase preto)
+$color-text-secondary: #666666;   // era #94A3B8 (slate → cinza médio-escuro)
+
+// ── Semantic aliases (referenciam os tokens acima) ────────────────
+$color-semantic-bg-app:              $color-surface-base;
+$color-semantic-bg-surface:          $color-surface-default;
+$color-semantic-bg-card:             $color-surface-card;
+$color-semantic-fg-primary:          $color-text-primary;
+$color-semantic-fg-muted:            $color-text-secondary;
+$color-semantic-action-primary:      $color-brand-600;
+$color-semantic-action-primary-hover: $color-brand-700;
+$color-semantic-action-accent:       $color-brand-400;
+
+// ── Espaçamento (mantido idêntico ao original) ────────────────────
+$space-space-4:  4px;
+$space-space-8:  8px;
+$space-space-12: 12px;
+$space-space-16: 16px;
+$space-space-20: 20px;
+$space-space-24: 24px;
+$space-space-32: 32px;
+$space-space-40: 40px;
+$space-space-48: 48px;
+
+// ── Raio de borda (mantido idêntico ao original) ──────────────────
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 24px;
+
+// ── Tipografia (mantida idêntica ao original) ─────────────────────
+$typography-font-family-sans: Google Sans,Roboto,ui-sans-serif,system-ui,sans-serif;
+$typography-font-size-xs:   12px;
+$typography-font-size-sm:   14px;
+$typography-font-size-base: 16px;
+$typography-font-size-lg:   18px;
+$typography-font-size-xl:   20px;
+$typography-font-size-2xl:  24px;
+$typography-font-size-3xl:  30px;
+$typography-font-size-4xl:  36px;
+$typography-font-size-5xl:  48px;

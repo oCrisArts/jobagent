@@ -1,0 +1,317 @@
+// ═════════════════════════════════════════════════════════════════
+// 🔲 WIREFRAME THEME — globals-wireframe.scss
+// Sync.IA — JobAgent | Estado visual: Preto, Branco e Escala de Cinza
+// ─────────────────────────────────────────────────────────────────
+// COMO USAR:
+//   Em app/layout.tsx, substitua:
+//     import "@/styles/globals.scss"
+//   por:
+//     import "@/styles/globals-wireframe.scss"
+//
+// Mantém: semântica HTML5 | todas as classes Bulma | tokens Figma
+// ═════════════════════════════════════════════════════════════════
+
+// ── 1. Tokens wireframe (ANTES do Bulma, para override correto) ──
+@import "./_tokens-wireframe.scss";
+
+// ── 2. Variáveis Bulma mapeadas para wireframe ───────────────────
+$primary:              $color-brand-600;        // #424242 (carvão)
+$link:                 $color-brand-500;        // #757575 (cinza médio)
+$text:                 $color-text-primary;     // #111111
+$body-background-color: $color-surface-base;   // #FFFFFF
+$scheme-main:          $color-surface-base;     // #FFFFFF
+$scheme-main-bis:      $color-surface-default;  // #F5F5F5
+$scheme-main-ter:      $color-surface-card;     // #FAFAFA
+$family-primary:       $typography-font-family-sans;
+
+// ── 3. Paleta de tons neutros Bulma (força grayscale total) ──────
+$dark:         #333333;
+$black:        #000000;
+$black-bis:    #0A0A0A;
+$black-ter:    #111111;
+$white:        #FFFFFF;
+$white-bis:    #FAFAFA;
+$white-ter:    #F5F5F5;
+$grey-lighter: #EEEEEE;
+$grey-light:   #CCCCCC;
+$grey:         #999999;
+$grey-dark:    #555555;
+$grey-darker:  #222222;
+$info:         #555555;   // era azul → cinza escuro
+$success:      #333333;   // era verde → carvão
+$warning:      #888888;   // era amarelo → cinza médio
+$danger:       #222222;   // era vermelho → quase preto
+$light:        #F0F0F0;
+
+// ── 4. Importa Bulma (com variáveis wireframe acima) ─────────────
+@import "bulma/bulma";
+
+// ── 5. Componentes de auth (estrutura mantida, cores por cascade) ─
+@import "components/auth-modal";
+@import "components/auth-toast";
+
+// ═════════════════════════════════════════════════════════════════
+// 🔲 WIREFRAME VISUAL OVERRIDES
+// Corrige inline styles e adiciona linguagem visual de wireframe
+// ═════════════════════════════════════════════════════════════════
+
+html { scroll-behavior: smooth; }
+
+// ── Layout responsivo (idêntico ao original) ──────────────────────
+@media screen and (min-width: 769px) {
+  body { padding-top: 70px; }
+}
+@media screen and (max-width: 768px) {
+  body { padding-bottom: 70px; }
+}
+
+// ── Inline styles com cores escuras (override via atributo) ───────
+// Cobre os backgrounds hardcoded em Navigation.tsx
+[style*="#1A1D27"] { background-color: #FFFFFF !important; border-color: #CCCCCC !important; }
+[style*="#13141A"] { background-color: #F5F5F5 !important; }
+[style*="#0A0A0F"] { background-color: #FFFFFF !important; }
+[style*="#2A2D3A"] { border-color: #CCCCCC !important; }
+
+// ── Navbar wireframe ──────────────────────────────────────────────
+nav.navbar.is-fixed-top {
+  background-color: #FFFFFF !important;
+  border-bottom: 2px solid #333333 !important;
+  box-shadow: none !important;
+}
+
+.navbar {
+  .navbar-item,
+  .navbar-link,
+  a.navbar-item { color: #111111 !important; }
+
+  .navbar-item:hover,
+  a.navbar-item:hover {
+    background-color: #F0F0F0 !important;
+    color: #000000 !important;
+  }
+
+  .navbar-brand .icon { color: #333333 !important; }
+
+  .has-text-primary { color: #333333 !important; }
+}
+
+.navbar-dropdown {
+  background-color: #FFFFFF !important;
+  border: 1px solid #CCCCCC !important;
+  box-shadow: none !important;
+
+  .navbar-item { color: #333333 !important; }
+  .navbar-item:hover { background-color: #F0F0F0 !important; }
+  .navbar-divider { background-color: #CCCCCC !important; }
+}
+
+// ── Hero wireframe ────────────────────────────────────────────────
+.hero,
+.hero.is-dark,
+.hero.is-large {
+  background-color: #F5F5F5 !important;
+  border-bottom: 2px solid #CCCCCC;
+  color: #111111 !important;
+}
+
+.hero .title,
+.hero .subtitle {
+  color: #111111 !important;
+}
+
+// ── Sections wireframe ────────────────────────────────────────────
+.section {
+  border-bottom: 1px dashed #CCCCCC;
+  background-color: #FFFFFF;
+}
+
+.section.has-background-dark-ter {
+  background-color: #F0F0F0 !important;
+}
+
+// CTA footer section
+.section.has-background-primary {
+  background-color: #EEEEEE !important;
+  color: #111111 !important;
+  border: 1px solid #AAAAAA;
+
+  .title, .subtitle {
+    color: #111111 !important;
+  }
+}
+
+// ── Box / Card wireframe ──────────────────────────────────────────
+.box {
+  background-color: #FFFFFF !important;
+  border: 1.5px solid #CCCCCC !important;
+  box-shadow: none !important;
+}
+
+.box.has-background-dark {
+  background-color: #F5F5F5 !important;
+  color: #111111 !important;
+}
+
+.box.has-background-primary {
+  background-color: #E8E8E8 !important;
+  border: 2px solid #333333 !important;
+  color: #111111 !important;
+}
+
+// ── Botões wireframe ──────────────────────────────────────────────
+.button {
+  border: 2px solid #333333 !important;
+  box-shadow: none !important;
+  font-weight: 600;
+
+  &.is-primary {
+    background-color: #333333 !important;
+    color: #FFFFFF !important;
+    border-color: #111111 !important;
+    &:hover { background-color: #111111 !important; }
+  }
+
+  &.is-light {
+    background-color: #FFFFFF !important;
+    color: #333333 !important;
+    border-color: #666666 !important;
+    &:hover { background-color: #F0F0F0 !important; }
+  }
+
+  &.is-danger {
+    background-color: #555555 !important;
+    color: #FFFFFF !important;
+    border-color: #333333 !important;
+    &:hover { background-color: #333333 !important; }
+  }
+
+  &.is-warning {
+    background-color: #888888 !important;
+    color: #FFFFFF !important;
+    border-color: #666666 !important;
+  }
+}
+
+// ── Tags wireframe ────────────────────────────────────────────────
+.tag.is-warning {
+  background-color: #AAAAAA !important;
+  color: #FFFFFF !important;
+}
+
+// ── Tipografia wireframe ──────────────────────────────────────────
+.title { color: #111111 !important; }
+.subtitle { color: #444444 !important; }
+
+.title.has-text-primary,
+.title.has-text-white,
+.title.has-text-white-bis { color: #111111 !important; }
+
+.subtitle.has-text-white,
+.subtitle.has-text-white-bis { color: #444444 !important; }
+
+.title.has-text-danger { color: #555555 !important; }
+
+.has-text-white,
+.has-text-white-bis { color: #111111 !important; }
+.has-text-primary   { color: #333333 !important; }
+.has-text-danger    { color: #555555 !important; }
+.has-text-muted     { color: #666666 !important; }
+
+// ── Conteúdo e listas wireframe ───────────────────────────────────
+.content {
+  color: #333333 !important;
+
+  &.has-text-white { color: #333333 !important; }
+
+  ul li { color: #333333 !important; }
+
+  ul li::marker { color: #555555; }
+}
+
+.heading { color: #111111 !important; font-weight: 700; }
+
+// ── Bottom Navigation Bar wireframe ──────────────────────────────
+.navbar-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background-color: #FFFFFF !important;
+  border-top: 2px solid #333333 !important;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .navbar-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #666666 !important;
+    text-decoration: none;
+    padding: 8px 0;
+    transition: color 0.2s ease;
+
+    &:hover, &.is-active { color: #000000 !important; }
+
+    .icon   { margin-bottom: 4px; font-size: 1.2rem; }
+    .label  { font-size: 0.7rem; font-weight: 600; }
+  }
+}
+
+// ── Top Navbar sticky ─────────────────────────────────────────────
+.navbar.is-fixed-top {
+  background-color: #FFFFFF !important;
+  border-bottom: 2px solid #333333 !important;
+  box-shadow: none !important;
+}
+
+// ── Colunas / grid wireframe ──────────────────────────────────────
+.columns { gap: 0; }
+
+// ── Formulários wireframe ─────────────────────────────────────────
+.input, .textarea, .select select {
+  background-color: #FFFFFF !important;
+  border: 1.5px solid #CCCCCC !important;
+  color: #111111 !important;
+  box-shadow: none !important;
+
+  &:focus, &:active {
+    border-color: #333333 !important;
+    box-shadow: none !important;
+  }
+}
+
+.label { color: #333333 !important; font-weight: 600; }
+
+// ── Modal wireframe ───────────────────────────────────────────────
+.modal-card {
+  background-color: #FFFFFF !important;
+  border: 2px solid #333333;
+}
+.modal-card-head, .modal-card-foot {
+  background-color: #F5F5F5 !important;
+  border-color: #CCCCCC !important;
+}
+.modal-card-title { color: #111111 !important; }
+.modal-background { background-color: rgba(0,0,0,0.6) !important; }
+
+// ── Dropdown wireframe ────────────────────────────────────────────
+.dropdown-content {
+  background-color: #FFFFFF !important;
+  border: 1px solid #CCCCCC !important;
+  box-shadow: none !important;
+}
+.dropdown-item { color: #333333 !important; }
+.dropdown-item:hover { background-color: #F0F0F0 !important; }
+
+// ── Notificações / toast wireframe ────────────────────────────────
+.notification {
+  background-color: #F0F0F0 !important;
+  color: #111111 !important;
+  border: 1px solid #CCCCCC !important;
+  box-shadow: none !important;
+}

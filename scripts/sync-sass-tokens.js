@@ -13,7 +13,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.join(__dirname, '..');
 
-const tokensJsonPath = path.join(projectRoot, 'design-tokens', 'dtcg.tokens.json');
+const tokensJsonPath = path.join(projectRoot, 'styles', 'dtcg.tokens.json');
 const outputPath = path.join(projectRoot, 'styles', '_tokens.scss');
 
 console.log('🎨 Sincronizando Design Tokens (JSON → SCSS)...\n');

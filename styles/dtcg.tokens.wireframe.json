@@ -1,0 +1,76 @@
+{
+  "$description": "JobAgent design tokens — WIREFRAME state. Grayscale only (black, white, grays). Use para sincronizar o tema wireframe com o Figma via token sync.",
+  "color": {
+    "brand": {
+      "50":  { "$type": "color", "$value": "#F8F8F8", "$description": "Wireframe: cinza levíssimo (era #f0ebff)" },
+      "100": { "$type": "color", "$value": "#F0F0F0", "$description": "Wireframe: cinza claro (era #d9ccff)" },
+      "200": { "$type": "color", "$value": "#E0E0E0", "$description": "Wireframe: cinza médio-claro (era #b89dfc)" },
+      "400": { "$type": "color", "$value": "#9E9E9E", "$description": "Wireframe: cinza médio (era #a78bfa)" },
+      "500": { "$type": "color", "$value": "#757575", "$description": "Wireframe: cinza neutro (era #8b5cf6)" },
+      "600": { "$type": "color", "$value": "#424242", "$description": "Wireframe: carvão — ação primária (era #7c3aed)" },
+      "700": { "$type": "color", "$value": "#212121", "$description": "Wireframe: quase preto — hover primário (era #6d28d9)" },
+      "900": { "$type": "color", "$value": "#000000", "$description": "Wireframe: preto puro (era #2e1065)" }
+    },
+    "surface": {
+      "base":    { "$type": "color", "$value": "#FFFFFF", "$description": "Wireframe: fundo app — branco (era #0A0A0F)" },
+      "default": { "$type": "color", "$value": "#F5F5F5", "$description": "Wireframe: fundo conteúdo — cinza levíssimo (era #13141A)" },
+      "card":    { "$type": "color", "$value": "#FAFAFA", "$description": "Wireframe: fundo card — branco off (era #1A1D27)" }
+    },
+    "text": {
+      "primary":   { "$type": "color", "$value": "#111111", "$description": "Wireframe: texto principal — quase preto (era #FFFFFF)" },
+      "secondary": { "$type": "color", "$value": "#666666", "$description": "Wireframe: texto secundário — cinza médio (era #94A3B8)" }
+    },
+    "semantic": {
+      "bg": {
+        "app":     { "$type": "color", "$value": "{color.surface.base}" },
+        "surface": { "$type": "color", "$value": "{color.surface.default}" },
+        "card":    { "$type": "color", "$value": "{color.surface.card}" }
+      },
+      "fg": {
+        "primary": { "$type": "color", "$value": "{color.text.primary}" },
+        "muted":   { "$type": "color", "$value": "{color.text.secondary}" }
+      },
+      "action": {
+        "primary":       { "$type": "color", "$value": "{color.brand.600}" },
+        "primary-hover": { "$type": "color", "$value": "{color.brand.700}" },
+        "accent":        { "$type": "color", "$value": "{color.brand.400}" }
+      }
+    }
+  },
+  "space": {
+    "space-4":  { "$type": "dimension", "$value": "4px" },
+    "space-8":  { "$type": "dimension", "$value": "8px" },
+    "space-12": { "$type": "dimension", "$value": "12px" },
+    "space-16": { "$type": "dimension", "$value": "16px" },
+    "space-20": { "$type": "dimension", "$value": "20px" },
+    "space-24": { "$type": "dimension", "$value": "24px" },
+    "space-32": { "$type": "dimension", "$value": "32px" },
+    "space-40": { "$type": "dimension", "$value": "40px" },
+    "space-48": { "$type": "dimension", "$value": "48px" }
+  },
+  "radius": {
+    "sm": { "$type": "dimension", "$value": "8px" },
+    "md": { "$type": "dimension", "$value": "12px" },
+    "lg": { "$type": "dimension", "$value": "16px" },
+    "xl": { "$type": "dimension", "$value": "24px" }
+  },
+  "typography": {
+    "font-family": {
+      "sans": {
+        "$type": "fontFamily",
+        "$value": ["Google Sans", "Roboto", "ui-sans-serif", "system-ui", "sans-serif"]
+      }
+    },
+    "font-size": {
+      "xs":   { "$type": "dimension", "$value": "12px" },
+      "sm":   { "$type": "dimension", "$value": "14px" },
+      "base": { "$type": "dimension", "$value": "16px" },
+      "lg":   { "$type": "dimension", "$value": "18px" },
+      "xl":   { "$type": "dimension", "$value": "20px" },
+      "2xl":  { "$type": "dimension", "$value": "24px" },
+      "3xl":  { "$type": "dimension", "$value": "30px" },
+      "4xl":  { "$type": "dimension", "$value": "36px" },
+      "5xl":  { "$type": "dimension", "$value": "48px" }
+    }
+  }
+}

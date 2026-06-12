@@ -56,7 +56,12 @@ export default function VagasPage() {
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!session?.user?.id) return;
+    console.log('[VagasPage] Iniciando busca:', { searchTerm, location, userId: session?.user?.id });
+    
+    if (!session?.user?.id) {
+      console.error('[VagasPage] Sessão não disponível');
+      return;
+    }
 
     setIsLoading(true);
     setResults([]);
@@ -64,27 +69,34 @@ export default function VagasPage() {
     setNotification(null);
 
     try {
+      console.log('[VagasPage] Fazendo requisição para /api/vagas/search');
       const res = await fetch('/api/vagas/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ searchTerm, location })
       });
 
+      console.log('[VagasPage] Resposta recebida:', { status: res.status, ok: res.ok });
+
       if (res.status === 401) {
+        console.error('[VagasPage] Erro 401 - Não autorizado');
         showNotification('warning', t('sessionExpired'));
         return;
       }
       
       if (res.status === 500) {
+        console.error('[VagasPage] Erro 500 - Erro do servidor');
         showNotification('danger', t('serverError'));
         return;
       }
 
       if (!res.ok) {
+        console.error('[VagasPage] Resposta não OK:', res.status);
         throw new Error('Erro na busca');
       }
 
       const data = await res.json();
+      console.log('[VagasPage] Dados recebidos:', { jobsCount: data.jobs?.length, hasResume: data.hasResume });
       setResults(data.jobs || []);
     } catch (error) {
       console.error('[VagasPage] Erro na busca:', error);

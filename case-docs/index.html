@@ -1,1047 +1,242 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="JobAgent — Design Sprint Completo (5 Dias)">
-    <title>JobAgent — Design Sprint</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <title>JobAgent — Case Docs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: #999;
+            font-style: italic;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .card-link {
+            display: inline-block;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .card-link:hover {
+            color: #0052a3;
+            text-decoration: underline;
+        }
+
+        .status {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .status.active {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        footer {
+            text-align: center;
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-links {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .quick-links h2 {
+            font-size: 1.2rem;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+
+        .link-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .link-item {
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #0066cc;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+
+        .link-item:hover {
+            background: #e8f0ff;
+        }
+
+        .emoji {
+            display: inline-block;
+            margin-right: 8px;
+        }
+    </style>
 </head>
-
 <body>
-    <!-- HEADER -->
-    <nav class="navbar is-white has-shadow" role="navigation" aria-label="Main navigation">
-        <div class="container">
-            <div class="navbar-brand">
-                <a href="#" class="navbar-item" title="JobAgent - Design Sprint">
-                    <span class="brand-icon">JA</span>
-                    <span class="has-text-weight-bold ml-2">JobAgent</span>
-                </a>
+    <div class="container">
+        <header>
+            <div class="status active">MVP in Development</div>
+            <h1>JobAgent</h1>
+            <p class="subtitle">AI-Powered Job Matching Platform</p>
+            <p class="tagline">Intelligent matching + CV adaptation for career relocation</p>
+        </header>
 
-                <div class="navbar-item search">
-                    <input type="search" class="input is-small" placeholder="Search..."
-                        aria-label="Search documentation">
-                </div>
-
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
-
-            <div id="navbarMenu" class="navbar-menu">
-                <div class="navbar-end">
-                    <a href="#intro" class="navbar-item" title="Visão Geral">Visão Geral</a>
-                    <a href="#dia1-pesquisa" class="navbar-item" title="Dia 1: Mapear">Dia 1: Mapear</a>
-                    <a href="#dia2-lightning" class="navbar-item" title="Dia 2: Esboçar">Dia 2: Esboçar</a>
-                    <a href="#dia3-avaliacao" class="navbar-item" title="Dia 3: Decidir">Dia 3: Decidir</a>
-                    <a href="#dia4-stack" class="navbar-item" title="Dia 4: Prototipar">Dia 4: Prototipar</a>
-                    <a href="#dia5-usabilidade" class="navbar-item" title="Dia 5: Testar">Dia 5: Testar</a>
-                </div>
+        <div class="quick-links">
+            <h2><span class="emoji">📚</span>Strategic Documents</h2>
+            <div class="link-list">
+                <a href="Posicionamento.md" class="link-item"><span class="emoji">🎯</span>Posicionamento (Core)</a>
+                <a href="Product Strategy.md" class="link-item"><span class="emoji">🚀</span>Product Strategy</a>
+                <a href="Project.md" class="link-item"><span class="emoji">📋</span>Project Model Canvas</a>
+                <a href="Business.md" class="link-item"><span class="emoji">💰</span>Business Model Canvas</a>
+                <a href="Brand.md" class="link-item"><span class="emoji">✨</span>Brand Book & Identity</a>
             </div>
         </div>
-    </nav>
 
-    <!-- MAIN CONTAINER -->
-    <main class="container is-fullhd main-layout">
-        <div class="columns">
-            <!-- LEFT SIDEBAR -->
-            <aside class="column is-3 sidebar-menu menu" role="complementary" aria-label="Documentation menu">
-                <nav aria-label="Documentation navigation">
-                    <p class="menu-label">📖 Visão Geral</p>
-                    <ul class="menu-list">
-                        <li><a href="#intro" data-section="intro" aria-current="true">Resumo Executivo</a></li>
-                        <li><a href="#problema" data-section="problema">Definição do Problema</a></li>
-                    </ul>
-
-                    <p class="menu-label mt-4"><span class="tag is-primary is-small">1</span> Mapear</p>
-                    <ul class="menu-list">
-                        <li><a href="#dia1-pesquisa" data-section="dia1-pesquisa">Pesquisa de Mercado</a></li>
-                        <li><a href="#dia1-benchmark" data-section="dia1-benchmark">Business Model</a></li>
-                        <li><a href="#dia1-entrevistas" data-section="dia1-entrevistas">Entrevistas</a></li>
-                        <li><a href="#dia1-personas" data-section="dia1-personas">Personas</a></li>
-                        <li><a href="#dia1-jtbd" data-section="dia1-jtbd">Jobs to be Done</a></li>
-                        <li><a href="#dia1-stories" data-section="dia1-stories">User Stories</a></li>
-                    </ul>
-
-                    <p class="menu-label mt-4"><span class="tag is-primary is-small">2</span> Esboçar</p>
-                    <ul class="menu-list">
-                        <li><a href="#dia2-lightning" data-section="dia2-lightning">Lightning Demos</a></li>
-                        <li><a href="#dia2-crazy8" data-section="dia2-crazy8">Crazy 8s</a></li>
-                        <li><a href="#dia2-solution" data-section="dia2-solution">Solution Sketch</a></li>
-                        <li><a href="#dia2-storyboard" data-section="dia2-storyboard">Storyboard</a></li>
-                    </ul>
-
-                    <p class="menu-label mt-4"><span class="tag is-primary is-small">3</span> Decidir</p>
-                    <ul class="menu-list">
-                        <li><a href="#dia3-avaliacao" data-section="dia3-avaliacao">Avaliação</a></li>
-                        <li><a href="#dia3-prototipo" data-section="dia3-prototipo">Prototipagem</a></li>
-                        <li><a href="#dia3-fluxo" data-section="dia3-fluxo">Fluxo Anotado</a></li>
-                    </ul>
-
-                    <p class="menu-label mt-4"><span class="tag is-primary is-small">4</span> Prototipar</p>
-                    <ul class="menu-list">
-                        <li><a href="#dia4-stack" data-section="dia4-stack">Stack Tecnológico</a></li>
-                        <li><a href="#dia4-estrutura" data-section="dia4-estrutura">Estrutura do Projeto</a></li>
-                        <li><a href="#dia4-componentes" data-section="dia4-componentes">Componentes React</a></li>
-                        <li><a href="#dia4-infraestrutura" data-section="dia4-infraestrutura">Infraestrutura</a></li>
-                    </ul>
-
-                    <p class="menu-label mt-4"><span class="tag is-primary is-small">5</span> Testar</p>
-                    <ul class="menu-list">
-                        <li><a href="#dia5-usabilidade" data-section="dia5-usabilidade">Teste de Usabilidade</a></li>
-                        <li><a href="#dia5-metricas" data-section="dia5-metricas">Framework HEART</a></li>
-                        <li><a href="#dia5-feedback" data-section="dia5-feedback">Feedback Qualitativo</a></li>
-                        <li><a href="#dia5-relatorio" data-section="dia5-relatorio">Relatório</a></li>
-                        <li><a href="#dia5-proximos" data-section="dia5-proximos">Próximos Passos</a></li>
-                    </ul>
-                </nav>
-            </aside>
-
-            <!-- CONTENT AREA -->
-            <article class="column is-9" role="main">
-
-                <!-- INTRO -->
-                <section id="intro" class="content-section" data-section="intro">
-                    <h1 class="title is-2 has-text-primary">JobAgent — Design Sprint Completo</h1>
-                    <h2 class="subtitle is-4 has-text-info">Case de Produto: Plataforma SaaS com IA para Recolocação
-                        Profissional</h2>
-                    <div class="tags mb-5">
-                        <span class="tag is-warning">Google Design Sprint — 5 Dias</span>
-                    </div>
-
-                    <div class="quote-block">
-                        <strong>Resumo executivo:</strong> Este documento apresenta um Google Design Sprint de 5 dias
-                        aplicado ao JobAgent, uma plataforma SaaS que utiliza inteligência artificial para transformar a
-                        experiência de busca de emprego. O produto resolve um problema concreto: candidatos gastam em
-                        média 11 horas por semana em tarefas repetitivas de candidatura, com taxa de retorno inferior a
-                        3%. O JobAgent automatiza a análise de compatibilidade, adapta currículos com IA e utiliza
-                        gamificação leve para manter o engajamento ao longo da jornada.
-                    </div>
-
-                    <h3 class="title is-3 has-text-primary mt-6">O que é um Design Sprint?</h3>
-                    <p>Um Google Design Sprint é um processo de 5 dias estruturado para resolver problemas complexos
-                        através de prototipagem e testes com usuários. Cada dia tem um objetivo claro:</p>
-
-                    <ol class="ml-5">
-                        <li><strong>Dia 1 — Mapear (Understand):</strong> Pesquisa, análise de mercado, entrevistas,
-                            personas</li>
-                        <li><strong>Dia 2 — Esboçar (Diverge):</strong> Ideação, sketches, solução principal</li>
-                        <li><strong>Dia 3 — Decidir (Decide):</strong> Avaliação e prototipagem em alta fidelidade</li>
-                        <li><strong>Dia 4 — Prototipar (Prototype):</strong> Desenvolvimento do protótipo funcional</li>
-                        <li><strong>Dia 5 — Testar (Validate):</strong> Teste com usuários e coleta de feedback</li>
-                    </ol>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Estrutura deste Documento</h3>
-                    <p>Cada seção corresponde a um dia do sprint e detalha as atividades, descobertas e decisões
-                        tomadas. Use a navegação lateral para acessar tópicos específicos.</p>
-                </section>
-
-                <!-- PROBLEMA -->
-                <section id="problema" class="content-section" data-section="problema">
-                    <h1 class="title is-2 has-text-primary">Definição do Problema</h1>
-                    <h2 class="subtitle is-4 has-text-info">O que o JobAgent Resolve</h2>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Problem Statement</h3>
-                    <div class="highlight-box">
-                        <strong>Profissionais em transição de carreira perdem oportunidades reais porque o processo de
-                            candidatura é manual, genérico e desprovido de inteligência.</strong>
-                    </div>
-
-                    <p>O candidato envia o mesmo currículo para dezenas de vagas sem saber se tem 30% ou 80% de
-                        compatibilidade. Sistemas ATS filtram currículos por palavras-chave que o candidato não sabe
-                        quais são. O resultado: rejeição silenciosa, frustração acumulada e abandono do processo.</p>
-
-                    <p>Não é um problema de falta de vagas. É um problema de <strong>eficiência de matching</strong> —
-                        conectar a pessoa certa com a vaga certa, com o currículo certo.</p>
-
-                    <h3 class="title is-3 has-text-primary mt-6">O Problema em Números</h3>
-                    <ul>
-                        <li>Candidatos gastam em média <strong>11h/semana</strong> em tarefas de candidatura repetitivas
-                        </li>
-                        <li>Taxa de retorno de candidaturas genéricas: <strong>inferior a 3%</strong></li>
-                        <li>Recrutadores gastam <strong>6 segundos</strong> na primeira triagem de currículo</li>
-                        <li><strong>75% dos currículos</strong> são descartados por ATS antes de chegar a um humano</li>
-                        <li>Profissionais em busca ativa abandonam o processo em média após <strong>3 semanas</strong>
-                            sem retorno</li>
-                    </ul>
-
-                    <h3 class="title is-3 has-text-primary mt-6">O que o JobAgent Resolve</h3>
-                    <p>O JobAgent ataca os 3 pontos de maior atrito na jornada do candidato:</p>
-                    <ol class="ml-5">
-                        <li><strong>Busca inteligente:</strong> Agregar vagas de múltiplas fontes e ordenar por
-                            compatibilidade real com o perfil do candidato, usando análise semântica por IA.</li>
-                        <li><strong>Raio-X de match:</strong> Mostrar ao candidato exatamente onde seu perfil bate com a
-                            vaga, onde há lacunas, e o que fazer para melhorar — feedback acionável em vez de rejeição
-                            silenciosa.</li>
-                        <li><strong>Adaptação automática de currículo:</strong> Reescrever bullet points com as
-                            palavras-chave e o tom corretos para cada vaga específica, aumentando a chance de passar
-                            pelo ATS e impressionar o recrutador nos primeiros 6 segundos.</li>
-                    </ol>
-                </section>
-
-                <!-- DIA 1 -->
-                <section id="dia1-pesquisa" class="content-section" data-section="dia1-pesquisa">
-                    <h1 class="title is-2 has-text-primary"><span class="tag is-warning mr-2">DIA 1</span> Pesquisa de
-                        Mercado</h1>
-                    <h2 class="subtitle is-4 has-text-info">Mapear: Contexto, Benchmark e Oportunidades</h2>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Contexto</h3>
-                    <p>O JobAgent nasce de uma observação direta: profissionais em transição de carreira gastam em média
-                        11 horas por semana em tarefas repetitivas de candidatura — buscar vagas, adaptar currículos,
-                        enviar aplicações — com uma taxa de retorno inferior a 3%. Existe uma desconexão entre o esforço
-                        investido e o resultado obtido.</p>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Oportunidades Identificadas</h3>
-                    <ol class="ml-5">
-                        <li><strong>Gap de inteligência:</strong> Nenhuma plataforma mainstream oferece análise real de
-                            compatibilidade currículo-vaga com feedback acionável.</li>
-                        <li><strong>Gap de ação:</strong> O candidato descobre a vaga mas não recebe suporte para agir —
-                            adaptar currículo, identificar lacunas, priorizar.</li>
-                        <li><strong>Gap de engajamento:</strong> A busca de emprego é solitária e desmotivante. Não
-                            existe mecanismo de progresso visível.</li>
-                        <li><strong>Gap de dados:</strong> O candidato não sabe onde está errando. Zero feedback sobre
-                            por que foi rejeitado.</li>
-                    </ol>
-                </section>
-
-                <section id="dia1-benchmark" class="content-section is-visible" data-section="dia1-benchmark">
-                    <h3 class="title is-3 has-text-primary">Business Model Canvas</h3>
-                    <article class="bmc grid has-2-cols-mobile has-5-cols-desktop">
-                        <section class="cell key-partners">
-                            <h5 class="title is-6">Parceiros</h5>
-                            <p>Job boards (APIs), provedores de IA, Stripe, Supabase</p>
-                        </section>
-                        <section class="cell key-activities">
-                            <h5 class="title is-6">Atividades-Chave</h5>
-                            <p>Desenvolvimento, agregação de vagas, processamento de match por IA</p>
-                        </section>
-                        <section class="cell value-propositions">
-                            <h5 class="title is-6">Proposta de Valor</h5>
-                            <p>Reduzir o tempo e aumentar a eficácia da candidatura com IA que analisa compatibilidade e
-                                adapta currículos automaticamente</p>
-                        </section>
-                        <section class="cell customer-relationships">
-                            <h5 class="title is-6">Canais</h5>
-                            <p>Web app (PWA), integração com LinkedIn, marketing de conteúdo</p>
-                        </section>
-                        <section class="cell customer-segments">
-                            <h5 class="title is-6">Segmento</h5>
-                            <p>Profissionais em transição (25–45 anos), tech e áreas corporativas, mercado global</p>
-                        </section>
-                        <section class="cell key-resources">
-                            <h5 class="title is-6">Recursos-Chave</h5>
-                            <p>Motor de IA (NLP), base de vagas agregada, UX gamificada</p>
-                        </section>
-                        <section class="cell channels">
-                            <h5 class="title is-6">Relacionamento</h5>
-                            <p>Self-service, suporte via chat, onboarding guiado, comunidade</p>
-                        </section>
-                        <section class="cell cost-structure">
-                            <h5 class="title is-6">Estrutura de Custo</h5>
-                            <p>Custos fixos: infra + APIs. Custos variáveis: Stripe por transação</p>
-                            <p>Infraestrutura cloud ($45/mês), APIs de IA (~$50/mês), Stripe (2.9% + $0.30)</p>
-                        </section>
-                        <section class="cell revenue-streams">
-                            <h5 class="title is-6">Receita</h5>
-                            <p>Freemium — gratuito com limite → Pro a $14.90/mês com IA ilimitada</p>
-                        </section>
-                    </article>
-
-
-
-
-                    <h4 class="title is-4 has-text-primary mt-6">Viabilidade Financeira</h4>
-                    <p>O modelo serverless permite <strong>breakeven com apenas 12 usuários Pro</strong> ($14.90 × 12 =
-                        $178.80 vs custo fixo ~$168).</p>
-                    <ul>
-                        <li>Margem com 100 Pro users: <strong>88%</strong></li>
-                        <li>Margem com 500 Pro users: <strong>92%</strong></li>
-                        <li>Profitabilidade projetada: <strong>a partir do mês 4</strong></li>
-                    </ul>
-                </section>
-
-                <section id="dia1-entrevistas" class="content-section is-visible" data-section="dia1-entrevistas">
-                    <h3 class="title is-3 has-text-primary">Entrevistas com Especialistas</h3>
-                    <h4 class="title is-4 has-text-info">Objetivo</h4>
-                    <p>Validar hipóteses sobre dores reais do processo de candidatura e entender onde a tecnologia pode
-                        gerar impacto mensurável.</p>
-
-                    <h4 class="title is-4 has-text-info mt-6">Hipóteses Validadas</h4>
-                    <ul>
-                        <li><strong>H1:</strong> Candidatos gastam mais tempo adaptando currículos do que buscando vagas
-                        </li>
-                        <li><strong>H2:</strong> A falta de feedback sobre compatibilidade gera candidaturas
-                            indiscriminadas</li>
-                        <li><strong>H3:</strong> O abandono do processo acontece por desmotivação, não por falta de
-                            vagas</li>
-                        <li><strong>H4:</strong> Recrutadores descartam currículos nos primeiros 6 segundos por falta de
-                            palavras-chave</li>
-                    </ul>
-
-                    <h4 class="title is-4 has-text-info mt-6">Método de Coleta</h4>
-                    <p>Entrevistas semi-estruturadas de 30 minutos via videochamada, gravadas com consentimento.
-                        Anotações em tempo real com transcrição assistida por IA.</p>
-                </section>
-
-                <section id="dia1-personas" class="content-section is-visible" data-section="dia1-personas">
-                    <h3 class="title is-3 has-text-primary">Personas</h3>
-
-                    <div class="columns is-multiline mt-6">
-                        <div class="column is-half">
-                            <div class="card">
-                                <div class="card-image">
-                                    <figure class="image is-64x64">
-                                        <img class="is-rounded" src="https://via.placeholder.com/64/2E7D32/ffffff?text=L" alt="Lucas">
-                                    </figure>
-                                </div>
-                                <div class="card-content">
-                                    <h4 class="title is-4 has-text-primary">Lucas</h4>
-                                    <p class="subtitle is-6 has-text-grey">Desenvolvedor Front-end, 27 anos, São Paulo</p>
-                                    <div class="content">
-                                        <p><span class="tag is-info">Experiência:</span> 3 anos</p>
-                                        <p><span class="tag is-info">Objetivo:</span> Primeira oportunidade internacional ou remote-first</p>
-                                        <p><span class="tag is-info">Salário:</span> R$6.000</p>
-                                        <p><span class="tag is-info">Budget:</span> R$50-100/mês</p>
-                                        <p><strong>Dores:</strong> Envia o mesmo currículo para todas as vagas, não sabe palavras-chave ATS, perde horas pesquisando, desmotivado após semanas sem retorno.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="column is-half">
-                            <div class="card">
-                                <div class="card-image">
-                                    <figure class="image is-64x64">
-                                        <img class="is-rounded" src="https://via.placeholder.com/64/1976D2/ffffff?text=S" alt="Sofia">
-                                    </figure>
-                                </div>
-                                <div class="card-content">
-                                    <h4 class="title is-4 has-text-primary">Sofia</h4>
-                                    <p class="subtitle is-6 has-text-grey">Product Manager Sênior, 32 anos, Berlim</p>
-                                    <div class="content">
-                                        <p><span class="tag is-info">Experiência:</span> 8 anos</p>
-                                        <p><span class="tag is-info">Objetivo:</span> Posições de liderança em startups Series A-C</p>
-                                        <p><span class="tag is-info">Salário:</span> €90k</p>
-                                        <p><span class="tag is-info">Budget:</span> $30-50/mês</p>
-                                        <p><strong>Dores:</strong> Experiência PM não traduz em bullets, precisa posicionar métricas, gasta tempo pesquisando cultura, rede espalhada.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="dia1-jtbd" class="content-section is-visible" data-section="dia1-jtbd">
-                    <h3 class="title is-3 has-text-primary">Jobs to be Done</h3>
-                    <p>Necessidades dos usuários-alvo baseadas em pesquisa.</p>
-
-                    <div class="columns is-multiline mt-4">
-                        <div class="column is-half">
-                            <div class="box card-item">
-                                <h5 class="title is-5 has-text-primary">JTBD 1 (Lucas): Avaliar Compatibilidade</h5>
-                                <p><strong>Quando</strong> estou buscando uma vaga de front-end, <strong>quero</strong>
-                                    saber rapidamente se meu perfil é compatível, <strong>para que</strong> eu não perca
-                                    tempo me candidatando a vagas onde não tenho chance.</p>
-                            </div>
-                        </div>
-                        <div class="column is-half">
-                            <div class="box card-item">
-                                <h5 class="title is-5 has-text-primary">JTBD 2 (Lucas): Passar pelo ATS</h5>
-                                <p><strong>Quando</strong> encontro uma vaga com boa compatibilidade,
-                                    <strong>quero</strong> que meu currículo seja adaptado automaticamente, <strong>para
-                                        que</strong> eu passe pelo filtro ATS.</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="dia1-stories" class="content-section is-visible" data-section="dia1-stories">
-                    <h3 class="title is-3 has-text-primary">User Stories (BDD)</h3>
-
-                    <h4 class="title is-4 has-text-info mt-6">Busca de Vagas</h4>
-                    <div class="highlight-box">
-                        <strong>Dado</strong> que Lucas está logado com um currículo cadastrado,<br>
-                        <strong>Quando</strong> ele busca vagas para "Frontend Developer" em "Remote",<br>
-                        <strong>Então</strong> o sistema exibe uma lista de vagas ordenadas por % de compatibilidade com
-                        seu perfil.
-                    </div>
-
-                    <h4 class="title is-4 has-text-info mt-6">Análise de Match (IA)</h4>
-                    <div class="highlight-box">
-                        <strong>Dado</strong> que Lucas visualiza uma vaga com 78% de match,<br>
-                        <strong>Quando</strong> ele clica em "Ver Análise",<br>
-                        <strong>Então</strong> o sistema exibe um breakdown das skills que batem, as que faltam, e
-                        sugestões.
-                    </div>
-
-                    <h4 class="title is-4 has-text-info mt-6">Adaptação de Currículo (IA)</h4>
-                    <div class="highlight-box">
-                        <strong>Dado</strong> que Sofia decidiu se candidatar a uma vaga de Staff PM,<br>
-                        <strong>Quando</strong> ela clica em "Adaptar Currículo",<br>
-                        <strong>Então</strong> o sistema gera uma versão do CV com bullets reposicionados e keywords.
-                    </div>
-                </section>
-
-                <!-- DIA 2 -->
-                <section id="dia2-lightning" class="content-section is-visible" data-section="dia2-lightning">
-                    <h1 class="title is-2 has-text-primary"><span class="tag is-warning mr-2">DIA 2</span> Lightning
-                        Demos</h1>
-                    <h2 class="subtitle is-4 has-text-info">Referências que Inspiram a Solução</h2>
-
-                    <p>Referências de mercado analisadas para inspirar soluções. O objetivo não é copiar, mas extrair
-                        padrões de UX que funcionam.</p>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Duolingo — Gamificação que Cria Hábito</h3>
-                    <p><strong>O que funciona:</strong> Streaks diários, barra de progresso visível, recompensas por
-                        consistência.</p>
-                    <p><strong>Aplicação no JobAgent:</strong> Barra de progresso de candidatura + indicador visual de
-                        completude do perfil. Sem complexidade de XP/levels.</p>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Tinder — Decisão Binária com Feedback Instantâneo</h3>
-                    <p><strong>O que funciona:</strong> Swipe como modelo de decisão rápida. Match gera dopamina.</p>
-                    <p><strong>Aplicação no JobAgent:</strong> Card de vaga com % de match visível. Decisão rápida:
-                        "Adaptar CV" ou "Pular".</p>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Notion AI — Assistente Contextual no Fluxo</h3>
-                    <p><strong>O que funciona:</strong> IA integrada ao workspace, não como feature separada.</p>
-                    <p><strong>Aplicação no JobAgent:</strong> Análise de match aparece dentro do card da vaga. Zero
-                        fricção entre "ver vaga" e "agir".</p>
-                </section>
-
-                <section id="dia2-crazy8" class="content-section is-visible" data-section="dia2-crazy8">
-                    <h3 class="title is-3 has-text-primary">Crazy 8s — Ideação Rápida</h3>
-                    <p>8 Ideias em 8 Minutos</p>
-
-                    <h4 class="title is-4 has-text-info mt-6">Foco: Gamificação</h4>
-                    <ol class="ml-5">
-                        <li>Barra de completude de perfil — "Seu perfil está 65% otimizado"</li>
-                        <li>Streak de candidatura — "3 dias consecutivos aplicando"</li>
-                        <li>Score de match acumulado — Média de compatibilidade das candidaturas</li>
-                    </ol>
-
-                    <h4 class="title is-4 has-text-info mt-6">Foco: IA</h4>
-                    <ol class="ml-5" start="4">
-                        <li>Raio-X de match — Análise visual: skills batem (verde), lacunas (vermelho), sugestões
-                            (amarelo)</li>
-                        <li>IA Copywriter de currículo — Botão "Adaptar para esta vaga"</li>
-                        <li>Recomendação de ações — "Você tem 3 vagas com match acima de 80%"</li>
-                    </ol>
-
-                    <h4 class="title is-4 has-text-info mt-6">Foco: Eficiência</h4>
-                    <ol class="ml-5" start="7">
-                        <li>Busca unificada — Agregar LinkedIn, Indeed, Glassdoor numa interface</li>
-                        <li>One-click apply — Candidatura em 1 clique</li>
-                    </ol>
-                </section>
-
-                <section id="dia2-solution" class="content-section is-visible" data-section="dia2-solution">
-                    <h3 class="title is-3 has-text-primary">Solution Sketch — Solução Principal</h3>
-
-                    <h4 class="title is-4 has-text-info mt-6">Conceito Central</h4>
-                    <p>O JobAgent é um <strong>cockpit de carreira</strong>: o candidato entra, vê seu panorama
-                        (dashboard), identifica oportunidades (busca com match), e age com precisão (adaptação por IA).
-                        A gamificação é o combustível que mantém o motor funcionando — não o motor em si.</p>
-
-                    <h4 class="title is-4 has-text-info mt-6">Fluxo de Busca + Ação</h4>
-                    <p><strong>Buscar → Analisar → Adaptar → Aplicar</strong></p>
-
-                    <p>Cada vaga aparece em card com:</p>
-                    <ul>
-                        <li>Título, empresa, salário</li>
-                        <li>% de match com barra visual</li>
-                        <li>Tech stack principais</li>
-                        <li>Botões: [Ver Análise] [Adaptar CV]</li>
-                    </ul>
-                </section>
-
-                <section id="dia2-storyboard" class="content-section is-visible" data-section="dia2-storyboard">
-                    <h3 class="title is-3 has-text-primary">Storyboard — Jornada do Usuário</h3>
-
-                    <ol class="ml-5">
-                        <li><strong>Frame 1:</strong> Lucas abre o JobAgent de manhã no café</li>
-                        <li><strong>Frame 2:</strong> Vê seu streak de candidatura ("3 dias seguidos"). Sente-se
-                            motivado</li>
-                        <li><strong>Frame 3:</strong> Digita "Frontend Developer Remote" na barra de busca</li>
-                        <li><strong>Frame 4:</strong> Aparece uma vaga da Empresa X com 85% de match</li>
-                        <li><strong>Frame 5:</strong> Clica "Ver Análise". Aparecem skills que batem (verde), faltam
-                            (vermelho)</li>
-                        <li><strong>Frame 6:</strong> Clica "Adaptar Currículo". Espera 3 segundos</li>
-                        <li><strong>Frame 7:</strong> CV aparece lado a lado (antes/depois). Lucas aprova</li>
-                        <li><strong>Frame 8:</strong> Candidatura é registrada. Dashboard atualiza</li>
-                    </ol>
-                </section>
-
-                <!-- DIA 3 -->
-                <section id="dia3-avaliacao" class="content-section is-visible" data-section="dia3-avaliacao">
-                    <h1 class="title is-2 has-text-primary"><span class="tag is-warning mr-2">DIA 3</span> Avaliação das
-                        Opções de Design</h1>
-                    <h2 class="subtitle is-4 has-text-info">Decidir: Qual Caminho Seguir?</h2>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Opção 1: Match + Análise (Vencedora)</h3>
-                    <p><strong>Foco:</strong> Mostrar compatibilidade primeiro, análise detalhada depois.</p>
-                    <p><strong>Vantagem:</strong> Decisão binária rápida (sim/não) com dados concretos. Reduz fricção.
-                    </p>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Opção 2: Recomendação Pura</h3>
-                    <p><strong>Foco:</strong> Sistema recomenda vagas só se match > 80%.</p>
-                    <p><strong>Vantagem:</strong> Qualidade alta.</p>
-                    <p><strong>Desvantagem:</strong> Usuário tem menos controle.</p>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Opção 3: Manual + Assistência</h3>
-                    <p><strong>Foco:</strong> Usuário busca, IA assiste na adaptação de CV.</p>
-                    <p><strong>Vantagem:</strong> Mais controle do usuário.</p>
-                    <p><strong>Desvantagem:</strong> Mais passos, maior fricção.</p>
-
-                    <h4 class="title is-4 has-text-info mt-6">Decisão</h4>
-                    <p><strong>Opção 1 foi escolhida</strong> por balancear inteligência da IA com controle do usuário.
-                    </p>
-                </section>
-
-                <section id="dia3-prototipo" class="content-section is-visible" data-section="dia3-prototipo">
-                    <h3 class="title is-3 has-text-primary">Prototipagem em Alta Fidelidade</h3>
-
-                    <h4 class="title is-4 has-text-info mt-6">Componentes-Chave</h4>
-                    <ul>
-                        <li><strong>JobCard:</strong> Vaga com match %, empresa, título, salary, tech stack</li>
-                        <li><strong>MatchScoreBadge:</strong> Percentual com color coding (red <50%, yellow 50-75%,
-                                green>75%)</li>
-                        <li><strong>CurriculumComparison:</strong> Before/after side-by-side com highlights</li>
-                        <li><strong>GamificationBar:</strong> Progresso diário, streak counter</li>
-                    </ul>
-
-                    <h4 class="title is-4 has-text-info mt-6">Design System</h4>
-                    <ul>
-                        <li><strong>Primary:</strong> #2E7D32 (verde sucesso)</li>
-                        <li><strong>Secondary:</strong> #FFA500 (laranja ação)</li>
-                        <li><strong>Accent:</strong> #1976D2 (azul info)</li>
-                        <li><strong>Tipografia:</strong> Inter Bold (headlines), Inter Regular (body)</li>
-                    </ul>
-                </section>
-
-                <section id="dia3-fluxo" class="content-section is-visible" data-section="dia3-fluxo">
-                    <h3 class="title is-3 has-text-primary">Fluxo de Protótipo Anotado</h3>
-
-                    <h4 class="title is-4 has-text-info mt-6">Tela 1: Dashboard (HUD)</h4>
-                    <p>Primeira coisa que Lucas vê ao fazer login. Três cards de status + seção de ações recomendadas.
-                    </p>
-
-                    <h4 class="title is-4 has-text-info mt-6">Tela 2: Busca de Vagas</h4>
-                    <p>Input de título e localização. Lista de cards com vagas ordenadas por match %.</p>
-
-                    <h4 class="title is-4 has-text-info mt-6">Tela 3: Raio-X de Match</h4>
-                    <p>Modal com breakdown: Skills batem (lista verde), Skills faltam (lista vermelha), Sugestões
-                        (amarelo).</p>
-
-                    <h4 class="title is-4 has-text-info mt-6">Tela 4: CV Adaptado</h4>
-                    <p>Side-by-side comparison. Original à esquerda, adaptado à direita com highlights em verde.</p>
-
-                    <h4 class="title is-4 has-text-info mt-6">Tela 5: Confirmação</h4>
-                    <p>Toast notification: "✓ Candidatura registrada". Dashboard atualiza automaticamente.</p>
-                </section>
-
-                <!-- DIA 4 -->
-                <section id="dia4-stack" class="content-section is-visible" data-section="dia4-stack">
-                    <h1 class="title is-2 has-text-primary"><span class="tag is-warning mr-2">DIA 4</span> Stack
-                        Tecnológico</h1>
-                    <h2 class="subtitle is-4 has-text-info">Ferramentas Selecionadas para Produção</h2>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Frontend</h3>
-                    <ul>
-                        <li>Next.js 14 + React 18 + TypeScript</li>
-                        <li>Tailwind CSS para styling</li>
-                        <li>SWR para data fetching e cache</li>
-                    </ul>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Backend</h3>
-                    <ul>
-                        <li>Vercel serverless (API Routes)</li>
-                        <li>Node.js com TypeScript</li>
-                    </ul>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Database</h3>
-                    <ul>
-                        <li>PostgreSQL (Supabase)</li>
-                        <li>RLS (Row Level Security) habilitado</li>
-                    </ul>
-
-                    <h3 class="title is-3 has-text-primary mt-6">IA</h3>
-                    <ul>
-                        <li>Google Gemini API para análise de match</li>
-                        <li>Claude API (fallback) para adaptação de CV</li>
-                    </ul>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Analytics</h3>
-                    <ul>
-                        <li>Google Analytics 4 para funis e eventos</li>
-                        <li>Hotjar para heatmaps e session replay</li>
-                    </ul>
-                </section>
-
-                <section id="dia4-estrutura" class="content-section is-visible" data-section="dia4-estrutura">
-                    <h3 class="title is-3 has-text-primary">Estrutura do Projeto</h3>
-
-                    <h4 class="title is-4 has-text-info mt-6">Estrutura de Rotas Next.js</h4>
-
-                    <p>O projeto JobAgent segue a arquitetura modular do Next.js 15 App Router com internacionalização
-                        (EN + PT), autenticação via NextAuth, e integração com APIs de IA (Gemini + Claude).</p>
-
-                    <pre class="block"><code>app/
-├── [locale]/
-│   ├── page.tsx              → Landing Page
-│   ├── pricing/page.tsx      → Planos (Free vs Pro)
-│   ├── auth/page.tsx         → Login/Signup com Google OAuth
-│   └── dashboard/
-│       ├── page.tsx          → HUD Principal (Cockpit)
-│       ├── buscar/page.tsx   → Busca de Vagas (agregada)
-│       ├── curriculo/page.tsx → Gestão e upload de CV
-│       └── historico/page.tsx → Histórico de candidaturas
-│
-├── api/
-│   ├── ai/match/route.ts    → Análise de compatibilidade (Gemini)
-│   ├── ai/adapt/route.ts    → Adaptação automática de CV (Claude)
-│   ├── jobs/search/route.ts → Busca agregada de vagas
-│   ├── resume/parse/route.ts → Parser de PDF para currículo
-│   ├── auth/[...nextauth]/route.ts → Rotas de autenticação
-│   └── stripe/webhook/route.ts → Webhooks de pagamento
-│
-├── components/
-│   ├── Buscador.tsx         → Widget de busca de vagas
-│   ├── LandingPage.tsx      → Página inicial
-│   ├── LoginButton.tsx      → Botão de login
-│   └── shared/
-│       └── Navigation.tsx    → Navbar responsiva
-│
-├── lib/
-│   ├── ai-utils.ts          → Funções de chamada à IA (Gemini/Claude)
-│   └── auth.ts              → Configuração NextAuth
-│
-├── types/
-│   └── next-auth.d.ts       → Tipagem de autenticação
-│
-└── middleware.ts            → Middleware para i18n e autenticação</code></pre>
-
-                    <h4 class="title is-4 has-text-info mt-6">Stack Tecnológico do MVP</h4>
-                    <table class="table is-fullwidth is-striped is-hoverable">
-                        <thead>
-                            <tr>
-                                <th>Camada</th>
-                                <th>Tecnologia</th>
-                                <th>Versão</th>
-                                <th>Uso</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Frontend</strong></td>
-                                <td>Next.js + React</td>
-                                <td>15.x / 19.x</td>
-                                <td>App Router, SSR, componentes reativos</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Estilo</strong></td>
-                                <td>Tailwind CSS + SCSS</td>
-                                <td>Último</td>
-                                <td>Design system, variáveis de tokens</td>
-                            </tr>
-                            <tr>
-                                <td><strong>I18n</strong></td>
-                                <td>next-intl</td>
-                                <td>3.26.x</td>
-                                <td>Internacionalização (EN + PT)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Auth</strong></td>
-                                <td>NextAuth + Google OAuth</td>
-                                <td>4.24.x</td>
-                                <td>Autenticação segura, SSO</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Database</strong></td>
-                                <td>PostgreSQL (Supabase)</td>
-                                <td>-</td>
-                                <td>Dados de usuários, CVs, histórico</td>
-                            </tr>
-                            <tr>
-                                <td><strong>IA</strong></td>
-                                <td>Google Gemini + Claude</td>
-                                <td>Latest</td>
-                                <td>Match analysis, CV adaptation</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Pagamentos</strong></td>
-                                <td>Stripe</td>
-                                <td>15.8.0</td>
-                                <td>Checkout, webhooks, subscriptions</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Deploy</strong></td>
-                                <td>Vercel</td>
-                                <td>-</td>
-                                <td>Serverless, CI/CD automático</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h4 class="title is-4 has-text-info mt-6">Banco de Dados — Tabelas Principais</h4>
-                    <ul>
-                        <li><strong>profiles:</strong> Dados do usuário, preferências, locale, timezone</li>
-                        <li><strong>resumes:</strong> Currículos do usuário (versionamento de CVs)</li>
-                        <li><strong>job_applications:</strong> Histórico de candidaturas (vaga, data, status)</li>
-                        <li><strong>job_matches:</strong> Cache de análises de match (currículo vs vaga)</li>
-                        <li><strong>subscriptions:</strong> Dados de assinatura Stripe, status Pro/Free</li>
-                        <li><strong>pricing_plans:</strong> SKUs (Free, Pro) — facilita alteração de preços</li>
-                        <li><strong>gamification_progress:</strong> Streaks, barras de progresso, badges</li>
-                    </ul>
-
-                    <h4 class="title is-4 has-text-info mt-6">Infraestrutura e Custos Mensais</h4>
-                    <table class="table is-fullwidth is-striped is-hoverable">
-                        <thead>
-                            <tr>
-                                <th>Serviço</th>
-                                <th>Custo</th>
-                                <th>Escala</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Supabase (PostgreSQL + Auth)</td>
-                                <td>$25/mês</td>
-                                <td>Até 500k registros</td>
-                            </tr>
-                            <tr>
-                                <td>Vercel (Serverless)</td>
-                                <td>$20/mês</td>
-                                <td>Unlimited requests</td>
-                            </tr>
-                            <tr>
-                                <td>Google Gemini API</td>
-                                <td>~$20/mês (Free tier inicial)</td>
-                                <td>Por 100 users</td>
-                            </tr>
-                            <tr>
-                                <td>Claude API (Pro)</td>
-                                <td>~$30/mês</td>
-                                <td>Análise profunda para 100+ users</td>
-                            </tr>
-                            <tr>
-                                <td>Stripe (2.9% + $0.30)</td>
-                                <td>~$73/mês</td>
-                                <td>100 Pro users @ $14.90/mês</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Total MVP</strong></td>
-                                <td><strong>~$168/mês</strong></td>
-                                <td><strong>100 Pro users</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <p><strong>Viabilidade:</strong> Breakeven com apenas 12 usuários Pro. Margem com 100 users: 88%.
-                        Com 500 users: 92%.</p>
-                </section>
-
-                <section id="dia4-componentes" class="content-section is-visible" data-section="dia4-componentes">
-                    <h3 class="title is-3 has-text-primary">Componentes React Principais</h3>
-
-                    <div class="columns is-multiline mt-4">
-                        <div class="column is-half">
-                            <div class="box card-item">
-                                <h5 class="title is-5 has-text-primary">JobCard</h5>
-                                <p>Componente para exibir cada vaga na lista. Props: job, matchScore, onAnalyze</p>
-                            </div>
-                        </div>
-                        <div class="column is-half">
-                            <div class="box card-item">
-                                <h5 class="title is-5 has-text-primary">MatchAnalysis</h5>
-                                <p>Breakdown visual de skills. Props: skills, gaps, suggestions</p>
-                            </div>
-                        </div>
-                        <div class="column is-half">
-                            <div class="box card-item">
-                                <h5 class="title is-5 has-text-primary">CVComparison</h5>
-                                <p>Before/after do CV com highlights. Props: originalCV, adaptedCV</p>
-                            </div>
-                        </div>
-                        <div class="column is-half">
-                            <div class="box card-item">
-                                <h5 class="title is-5 has-text-primary">GamificationProgress</h5>
-                                <p>Barra de progresso + streak counter. Props: profileCompleteness, streak</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="dia4-infraestrutura" class="content-section is-visible" data-section="dia4-infraestrutura">
-                    <h3 class="title is-3 has-text-primary">Infraestrutura e Banco de Dados</h3>
-
-                    <h4 class="title is-4 has-text-info mt-6">Tabelas Principais</h4>
-                    <ul>
-                        <li><strong>profiles:</strong> Dados do usuário, preferências</li>
-                        <li><strong>resumes:</strong> Currículos do usuário (múltiplas versões)</li>
-                        <li><strong>job_applications:</strong> Histórico de candidaturas</li>
-                        <li><strong>job_matches:</strong> Análises de match cacheadas</li>
-                        <li><strong>subscriptions_audit:</strong> Log de eventos de pagamento</li>
-                        <li><strong>gamification_progress:</strong> Streaks, badges</li>
-                    </ul>
-
-                    <h4 class="title is-4 has-text-info mt-6">Custos Mensais (100 Pro users)</h4>
-                    <table class="table is-fullwidth is-striped is-hoverable">
-                        <tbody>
-                            <tr>
-                                <td>Supabase Pro</td>
-                                <td><strong>$25</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Vercel Pro</td>
-                                <td><strong>$20</strong></td>
-                            </tr>
-                            <tr>
-                                <td>APIs de IA</td>
-                                <td><strong>~$50</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Stripe</td>
-                                <td><strong>~$73</strong></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Total</strong></td>
-                                <td><strong>~$168/mês</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
-
-                <!-- DIA 5 -->
-                <section id="dia5-usabilidade" class="content-section is-visible" data-section="dia5-usabilidade">
-                    <h1 class="title is-2 has-text-primary"><span class="tag is-warning mr-2">DIA 5</span> Teste de
-                        Usabilidade</h1>
-                    <h2 class="subtitle is-4 has-text-info">Validação com Usuários Reais</h2>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Cenário de Teste</h3>
-                    <p>Lucas (persona primária) acessa o JobAgent pela primeira vez com um currículo em PDF buscando
-                        vagas de Frontend Developer remoto. O teste avalia se ele consegue completar a jornada central
-                        sem fricção: cadastro → upload → busca → análise de match → adaptação.</p>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Participantes</h3>
-                    <p>5 profissionais de tecnologia em transição de carreira (perfil similar a Lucas). Testes remotos
-                        de 20 minutos via Maze + videochamada.</p>
-
-                    <h3 class="title is-3 has-text-primary mt-6">Tarefas do Usuário</h3>
-                    <table class="table is-fullwidth is-striped is-hoverable">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Tarefa</th>
-                                <th>Critério de Sucesso</th>
-                                <th>Tempo Máximo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>T1</td>
-                                <td>Fazer cadastro usando Google OAuth</td>
-                                <td>Chega ao dashboard</td>
-                                <td>60s</td>
-                            </tr>
-                            <tr>
-                                <td>T2</td>
-                                <td>Fazer upload do currículo em PDF</td>
-                                <td>CV parseado com sucesso</td>
-                                <td>90s</td>
-                            </tr>
-                            <tr>
-                                <td>T3</td>
-                                <td>Buscar vagas para "Frontend Developer Remote"</td>
-                                <td>Lista de vagas exibida</td>
-                                <td>60s</td>
-                            </tr>
-                            <tr>
-                                <td>T4</td>
-                                <td>Abrir o Raio-X de Match</td>
-                                <td>Tela de análise visível</td>
-                                <td>30s</td>
-                            </tr>
-                            <tr>
-                                <td>T5</td>
-                                <td>Adaptar currículo</td>
-                                <td>CV adaptado gerado</td>
-                                <td>120s</td>
-                            </tr>
-                            <tr>
-                                <td>T6</td>
-                                <td>Baixar currículo adaptado em PDF</td>
-                                <td>Download completo</td>
-                                <td>30s</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
-
-                <section id="dia5-metricas" class="content-section is-visible" data-section="dia5-metricas">
-                    <h3 class="title is-3 has-text-primary">Framework HEART — Métricas de Sucesso</h3>
-
-                    <h4 class="title is-4 has-text-info mt-6">Happiness (Satisfação)</h4>
-                    <table class="table is-fullwidth is-striped is-hoverable">
-                        <thead>
-                            <tr>
-                                <th>Métrica</th>
-                                <th>Target</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>NPS (recomendação)</td>
-                                <td>≥ 7</td>
-                            </tr>
-                            <tr>
-                                <td>Satisfação com adaptação</td>
-                                <td>≥ 4/5</td>
-                            </tr>
-                            <tr>
-                                <td>Percepção de valor (economizou tempo)</td>
-                                <td>≥ 70%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h4 class="title is-4 has-text-info mt-6">Engagement (Uso)</h4>
-                    <ul>
-                        <li><strong>DAU/MAU:</strong> DAU = 20% dos signups</li>
-                        <li><strong>Buscas/semana:</strong> ≥ 5 por usuário ativo</li>
-                        <li><strong>Adaptações/mês:</strong> ≥ 4 (Pro users)</li>
-                    </ul>
-
-                    <h4 class="title is-4 has-text-info mt-6">Adoption (Adoção)</h4>
-                    <ul>
-                        <li><strong>Taxa de signup:</strong> ≥ 15% visitantes</li>
-                        <li><strong>Onboarding completo:</strong> ≥ 70%</li>
-                        <li><strong>Primeira adaptação:</strong> ≥ 60% pós-onboarding</li>
-                    </ul>
-
-                    <h4 class="title is-4 has-text-info mt-6">Retention (Retenção)</h4>
-                    <ul>
-                        <li><strong>D1 Retention:</strong> ≥ 70%</li>
-                        <li><strong>D7 Retention:</strong> ≥ 40%</li>
-                        <li><strong>D30 Retention:</strong> ≥ 20%</li>
-                        <li><strong>Churn Pro:</strong>
-                            < 5%/mês</li>
-                    </ul>
-
-                    <h4 class="title is-4 has-text-info mt-6">Task Success (Eficácia)</h4>
-                    <ul>
-                        <li><strong>Tempo até aplicação:</strong>
-                            < 15 min</li>
-                        <li><strong>Taxa de sucesso adaptação:</strong> ≥ 90%</li>
-                        <li><strong>Conversão Free→Pro:</strong> 5-8%</li>
-                    </ul>
-                </section>
-
-                <section id="dia5-feedback" class="content-section is-visible" data-section="dia5-feedback">
-                    <h3 class="title is-3 has-text-primary">Coleta de Feedback — Insights Qualitativos</h3>
-
-                    <h4 class="title is-4 has-text-info mt-6">Perguntas Pós-Teste</h4>
-                    <ol class="ml-5">
-                        <li>O que você achou da experiência geral? O que chamou mais atenção?</li>
-                        <li>Em algum momento você ficou confuso ou não sabia o que fazer?</li>
-                        <li>A análise de match (Raio-X) fez sentido para você? Foi útil?</li>
-                        <li>O currículo adaptado ficou melhor que o original? Você usaria?</li>
-                        <li>Você pagaria $14.90/mês por adaptações ilimitadas? Por quê?</li>
-                        <li>O que está faltando no produto para você usar no dia a dia?</li>
-                    </ol>
-
-                    <h4 class="title is-4 has-text-info mt-6">Método de Análise</h4>
-                    <p>Gravar todas as sessões. Transcrever insights-chave. Agrupar por temas: usabilidade, valor
-                        percebido, objeções de preço, features desejadas. Priorizar os 3 achados mais impactantes para
-                        iteração.</p>
-                </section>
-
-                <section id="dia5-relatorio" class="content-section is-visible" data-section="dia5-relatorio">
-                    <h3 class="title is-3 has-text-primary">Relatório de Validação</h3>
-
-                    <h4 class="title is-4 has-text-info mt-6">Comparação Antes vs Depois</h4>
-                    <table class="table is-fullwidth is-striped is-hoverable">
-                        <thead>
-                            <tr>
-                                <th>Dimensão</th>
-                                <th>Antes (sem JobAgent)</th>
-                                <th>Depois (com JobAgent)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Tempo por candidatura</td>
-                                <td>2-3 horas</td>
-                                <td>&lt; 15 minutos</td>
-                            </tr>
-                            <tr>
-                                <td>Qualidade do currículo</td>
-                                <td>Genérico, sem palavras-chave</td>
-                                <td>Adaptado com keywords</td>
-                            </tr>
-                            <tr>
-                                <td>Decisão de candidatura</td>
-                                <td>Intuição</td>
-                                <td>Dados concretos (% match)</td>
-                            </tr>
-                            <tr>
-                                <td>Feedback do processo</td>
-                                <td>Zero — rejeição silenciosa</td>
-                                <td>Raio-X mostra gaps</td>
-                            </tr>
-                            <tr>
-                                <td>Engajamento</td>
-                                <td>Abandona em ~3 semanas</td>
-                                <td>Progresso visível</td>
-                            </tr>
-                            <tr>
-                                <td>Taxa de retorno</td>
-                                <td>&lt; 3%</td>
-                                <td>15%+</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
-
-                <section id="dia5-proximos" class="content-section is-visible" data-section="dia5-proximos">
-                    <h3 class="title is-3 has-text-primary">Principais Aprendizados e Próximos Passos</h3>
-
-                    <h4 class="title is-4 has-text-info mt-6">Principais Aprendizados</h4>
-                    <ol class="ml-5">
-                        <li><strong>O momento "aha" é a adaptação:</strong> A funcionalidade que mais gera valor é ver o
-                            currículo transformado lado a lado.</li>
-                        <li><strong>Match % é o gancho:</strong> Compatibilidade numérica cria urgência e curiosidade.
-                        </li>
-                        <li><strong>Gamificação leve funciona:</strong> Barra de progresso e streak mantêm engajamento.
-                            XP/levels distraem.</li>
-                        <li><strong>O upgrade precisa ser contextual:</strong> Paywall funciona no momento de
-                            necessidade, não como pop-up genérico.</li>
-                        <li><strong>Onboarding tem que ser rápido:</strong> 5 minutos até resultado tangível é crítico.
-                        </li>
-                    </ol>
-
-                    <h4 class="title is-4 has-text-info mt-6">Próximos Passos pós-Sprint</h4>
-                    <ol class="ml-5">
-                        <li>Iterar protótipo com base nos achados do teste</li>
-                        <li>Desenvolver MVP funcional (Sprint de engenharia)</li>
-                        <li>Closed beta com 10-20 usuários reais</li>
-                        <li>Instrumentar analytics (GA4 + Hotjar + Clarity)</li>
-                        <li>Soft launch em comunidades de tecnologia</li>
-                    </ol>
-
-                    <div class="content mt-6 has-text-centered has-text-grey">
-                        <p>Documento consolidado como case de portfólio — Design Sprint completo (5 dias) para o
-                            JobAgent.</p>
-                    </div>
-                </section>
-            </article>
+        <div class="grid">
+            <div class="card" style="border-left: 4px solid #FF9500;">
+                <div class="card-icon">🎯</div>
+                <h2>Posicionamento (Core)</h2>
+                <p><strong>START HERE.</strong> JobAgent como substituto do "GPT de Visibilidade". Os 8 passos comprovados para 2 entrevistas em 30 dias (não é aplicando para 200 vagas).</p>
+                <a href="Posicionamento.md" class="card-link">Read →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🚀</div>
+                <h2>Product Strategy</h2>
+                <p>Competitive analysis, core features, MVP prioritization, and go-to-market strategy for solving PROBLEMA B: alignment over volume.</p>
+                <a href="Product Strategy.md" class="card-link">Read →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h2>Project Model Canvas</h2>
+                <p>Agile project planning with 13-block visual canvas. Defines Why, What, Who, How, Risks, and Timeline for 8-week MVP development.</p>
+                <a href="Project.md" class="card-link">Read →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">💰</div>
+                <h2>Business Model Canvas</h2>
+                <p>Complete business strategy: freemium pricing, unit economics, value proposition, and product-market fit validation plan for R$ 6k/month goal.</p>
+                <a href="Business.md" class="card-link">Read →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">✨</div>
+                <h2>Brand Book & Identity</h2>
+                <p>Complete brand identity system with 9-block brand canvas, color palette, typography guidelines, tone of voice, and visual application examples.</p>
+                <a href="Brand.md" class="card-link">Read →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🔌</div>
+                <h2>Tech Stack</h2>
+                <p><strong>Frontend:</strong> Next.js 15.5, React 19, TypeScript<br><strong>Backend:</strong> Node.js, Supabase PostgreSQL<br><strong>AI:</strong> Claude API + Google Gemini<br><strong>Hosting:</strong> Vercel</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🎓</div>
+                <h2>Core Features</h2>
+                <p><strong>MVP:</strong> Job search, ATS analyzer, match score (0-100), CV adapter, SSI tracker, dashboard<br><strong>Phase 2:</strong> Interview prep, salary negotiation coach<br><strong>Phase 3:</strong> LinkedIn profile audit, referral program</p>
+            </div>
         </div>
-    </main>
 
-    <script src="js/script.js"></script>
+        <footer>
+            <p>Last updated: Junho 2026 | Status: Ready for MVP Execution</p>
+            <p>Project Owner: <strong>Cristiano Acosta</strong> | Email: cristiano.acosta.m@gmail.com</p>
+        </footer>
+    </div>
 </body>
-
 </html>

@@ -207,7 +207,10 @@
     "subtitle": "Download adapted resumes and see ATS analysis for the latest one.",
     "lastResume": "Latest generated resume",
     "download": "Download PDF",
-    "atsAnalysis": "View ATS analysis"
+    "atsAnalysis": "View ATS analysis",
+    "noResume": "You don't have a resume yet.",
+    "uploadResume": "Upload resume",
+    "uploadSuccess": "Resume uploaded successfully!"
   },
   "network": {
     "title": "Network",
