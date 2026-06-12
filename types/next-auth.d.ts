@@ -9,6 +9,7 @@ declare module "next-auth" {
       ssi_score: number;
       ats_score: number;
       is_pro: boolean;
+      provider?: string;
     } & DefaultSession["user"]
   }
 
@@ -19,6 +20,7 @@ declare module "next-auth" {
     ssi_score?: number;
     ats_score?: number;
     is_pro?: boolean;
+    provider?: string;
   }
 }
 
