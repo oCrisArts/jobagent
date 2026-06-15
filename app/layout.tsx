@@ -39,6 +39,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
+      data-theme="light"
       // ✅ BDD: Prevenção de Hydration Error
       suppressHydrationWarning
     >
@@ -53,8 +54,9 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className="has-background-dark"
+        className="has-background-light bd-theme-library"
         suppressHydrationWarning
+        data-theme="light"
       >
         <Providers locale={locale} messages={messages}>
           {/* 🧭 Navegação Híbrida Global */}
